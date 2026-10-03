@@ -6,21 +6,25 @@
     <title>the.madness.chamber — MC Rivera IDT Portfolio</title>
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-canvas: #111113;        
+            /* 60 - 30 - 10 Curated Gallery Formula Variables */
+            --bg-canvas: #111113;        /* 60% Dominant Matte Gallery Onyx */
             --bg-card: #18181B;          
-            --bg-sepia-surface: #EDE8DC; 
+            --bg-sepia-surface: #EDE8DC; /* 30% Secondary Weathered Louvre Stone Paper */
             --border-muted: #2E2E33;     
             --text-primary: #F4F4F6;     
             --text-secondary: #91919E;   
-            --accent-rustic: #A48B76;    
+            --accent-rustic: #A48B76;    /* 10% Accent Layer: Earthy Renaissance Sepia Gold */
+            
             --text-cream-dark: #1A1A1C;  
             --text-cream-muted: #5D5D66; 
+            
             --font-serif: 'Cormorant Garamond', Georgia, serif;
             --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
         }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             background-color: var(--bg-canvas);
@@ -30,6 +34,7 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
+
         .app-view {
             display: none;
             min-height: 100vh;
@@ -37,14 +42,18 @@
             max-width: 1300px;
             margin: 0 auto;
         }
+
         .app-view.active-view {
             display: block;
             animation: fadeInView 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+
         @keyframes fadeInView {
             from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* --- THE TWO-LINE ASYMMETRIC GATEWAY HERO --- */
         #gateway-view {
             display: none;
             flex-direction: column;
@@ -54,9 +63,11 @@
             text-align: center;
             padding: 2rem;
             position: relative;
-            background-color: #09090B;
+            background-color: #09090B; 
         }
+
         #gateway-view.active-view { display: flex; }
+
         .owner-branding {
             position: absolute;
             top: 4rem;
@@ -67,6 +78,7 @@
             text-transform: uppercase;
             color: var(--text-secondary);
         }
+
         .gateway-brand {
             font-family: var(--font-sans);
             font-size: 0.8rem;
@@ -75,6 +87,7 @@
             color: var(--accent-rustic);
             margin-bottom: 4rem;
         }
+
         .gateway-quote-container {
             display: flex;
             flex-direction: column;
@@ -82,12 +95,14 @@
             margin-bottom: 6rem;
             max-width: 900px;
         }
+
         .madness-line {
             font-family: var(--font-serif);
             font-size: 3.6rem;
             font-weight: 300;
             color: var(--text-primary);
         }
+
         .method-line {
             font-family: var(--font-serif);
             font-size: 3.8rem;
@@ -95,6 +110,7 @@
             font-style: italic;
             color: var(--accent-rustic);
         }
+
         .gateway-options {
             display: flex;
             gap: 4rem;
@@ -102,6 +118,7 @@
             max-width: 800px;
             justify-content: center;
         }
+
         .gateway-btn {
             background: none;
             border: none;
@@ -112,10 +129,12 @@
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             width: 320px;
         }
+
         .gateway-btn:hover {
             border-color: var(--accent-rustic);
             transform: translateY(-4px);
         }
+
         .gateway-btn h3 {
             font-family: var(--font-serif);
             font-size: 2rem;
@@ -123,6 +142,7 @@
             color: var(--text-primary);
             margin-bottom: 0.6rem;
         }
+
         .gateway-btn span {
             font-family: var(--font-sans);
             font-size: 0.7rem;
@@ -133,6 +153,7 @@
     </style>
 </head>
     <style>
+        /* --- 60-30-10 ILLUMINATED PHYSICAL GALLERY ARCHITECTURE --- */
         .dashboard-header {
             border-bottom: 2px solid var(--accent-rustic);
             padding-bottom: 3rem;
@@ -171,7 +192,6 @@
             font-weight: 300;
             line-height: 1.1;
             color: var(--bg-sepia-surface);
-            text-transform: capitalize;
         }
         .course-title p {
             font-size: 0.85rem;
@@ -235,7 +255,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: sepia(40%) contrast(105%) brightness(75%);
+            filter: sepia(30%) contrast(105%) brightness(75%);
             transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .flip-card:hover .front-visual-core img { transform: scale(1.06); }
@@ -284,6 +304,7 @@
         }
         .card-locked { opacity: 0.15; pointer-events: none; filter: grayscale(100%); }
 
+        /* --- THE COGNITIVE LOUVRE LEAF SHEET OVERLAY --- */
         .portal-modal {
             display: none;
             position: fixed;
@@ -457,7 +478,7 @@
         </header>
 
         <div class="artifact-grid">
-            <!-- Module 1: Active -->
+            <!-- Module 1: Active Slot -->
             <div class="flip-card" onclick="openPortal('idt121-m1')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
@@ -475,34 +496,34 @@
                 </div>
             </div>
 
-            <!-- Module 2: Locked -->
+            <!-- Module 2: Locked Slot -->
             <div class="flip-card card-locked">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
                         <div class="card-meta-line"><span>Module 02</span><span>Encrypted</span></div>
-                        <div class="front-visual-core"></div>
+                        <div class="front-visual-core" id="front-visual-idt121-m2"></div>
                         <h2 class="card-core-heading">Systems Thinking in Context Analysis</h2>
                     </div>
                 </div>
             </div>
 
-            <!-- Module 3: Locked -->
+            <!-- Module 3: Locked Slot -->
             <div class="flip-card card-locked">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
                         <div class="card-meta-line"><span>Module 03</span><span>Encrypted</span></div>
-                        <div class="front-visual-core"></div>
+                        <div class="front-visual-core" id="front-visual-idt121-m3"></div>
                         <h2 class="card-core-heading">Models and Processes of Context Analysis</h2>
                     </div>
                 </div>
             </div>
 
-            <!-- Module 4: Locked -->
+            <!-- Module 4: Locked Slot -->
             <div class="flip-card card-locked">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
                         <div class="card-meta-line"><span>Module 04</span><span>Encrypted</span></div>
-                        <div class="front-visual-core"></div>
+                        <div class="front-visual-core" id="front-visual-idt121-m4"></div>
                         <h2 class="card-core-heading">Writing Context Analysis Report and Wrap-Up</h2>
                     </div>
                 </div>
@@ -510,7 +531,7 @@
         </div>
     </section>
 
-    <!-- ================= VIEW 4: IMMERSIVE FULL-PAGE PRESENTATION ZONE ================= -->
+    <!-- ================= VIEW 4: IMMERSIVE FULL-PAGE PRESENTATION CANVAS ================= -->
     <div id="portal-modal-sheath" class="portal-modal">
         <button class="close-modal-btn" onclick="closePortal()">← Go back to modules</button>
         <main class="modal-content-wrapper">
@@ -518,7 +539,6 @@
             <article class="modal-essay-body" id="modal-dynamic-target"></article>
         </main>
     </div>
-
     <script>
         function navigateTo(viewId) {
             document.querySelectorAll('.app-view').forEach(view => {
@@ -532,14 +552,16 @@
         }
 
         // =========================================================================
-        // 🏛️ CENTRAL LOUVRE ARTWORK & TEXT REGISTRY DATABASE (YOUR MASTER CONTROL ZONE)
-        // =========================================================================
-        // Whaller, paste your public internet painting links inside the image quotes below!
-        // Leaving an image empty strings '' automatically hides the top placeholder block!
+        // 🏛️ CENTRAL DYNAMIC MUSEUM CATALOG DATABASE REGISTRY (YOUR MASTER CONTROLLER)
         // =========================================================================
         const journalDatabase = {
             'idt111-m1': {
-                image: '', // e.g., 'https://unsplash.com'
+                image: 'monalisa.JPG',
+                artist: 'Leonardo da Vinci',
+                title: 'Mona Lisa',
+                year: 'c. 1503–1519',
+                museum: 'Musée du Louvre, Paris.',
+                designCaption: 'The ultimate paradigm of subtle visual balance and sfumato technique. Represents user-centric mystery, soft cognitive scaffolding, and the enduring complexity of intuitive human-computer interaction (HCI).',
                 html: `
                     <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Overview of <i>Instructional Design</i></h1>
                     <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 111 — Module 01 Reflection</p>
@@ -551,7 +573,12 @@
                 `
             },
             'idt121-m1': {
-                image: '', // e.g., 'https://unsplash.com'
+                image: 'medusa.jpg',
+                artist: 'Théodore Géricault',
+                title: 'The Raft of the Medusa',
+                year: '1818–1819',
+                museum: 'Musée du Louvre, Paris.',
+                designCaption: 'A monumental Romantic masterpiece depicting human desperation and systemic chaos. Perfect as a metaphor for structural breakdown, project volatility, or the frantic search for a navigation framework in systemic instructional spaces.',
                 html: `
                     <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Introduction to <i>Context Analysis</i></h1>
                     <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 121 — Module 01 Reflection</p>
@@ -564,12 +591,27 @@
             }
         };
 
-        // Automated loop runner that draws cover paintings directly onto the front card frames if available!
+        const lockedPreviews = {
+            'idt111-m2': 'salvator.JPG',
+            'idt111-m3': 'battle.jpg',
+            'idt111-m4': 'cupid.jpg',
+            'idt111-m5': 'flowers.jpg',
+            'idt121-m2': 'peacock.JPG',
+            'idt121-m3': 'charles.JPG',
+            'idt121-m4': 'greatwave.jpg'
+        };
+
         document.addEventListener("DOMContentLoaded", () => {
             Object.keys(journalDatabase).forEach(key => {
-                const targetVisualFrame = document.getElementById(`front-visual-\${key}`);
+                const targetVisualFrame = document.getElementById('front-visual-' + key);
                 if (targetVisualFrame && journalDatabase[key].image !== '') {
-                    targetVisualFrame.innerHTML = `<img src="\${journalDatabase[key].image}" alt="Louvre Cover Masterwork Thumbnail">`;
+                    targetVisualFrame.innerHTML = '<img src="' + journalDatabase[key].image + '" alt="Exhibition Masterwork Thumbnail">';
+                }
+            });
+            Object.keys(lockedPreviews).forEach(key => {
+                const targetVisualFrame = document.getElementById('front-visual-' + key);
+                if (targetVisualFrame) {
+                    targetVisualFrame.innerHTML = '<img src="' + lockedPreviews[key]" + '" alt="Locked Exhibition Thumbnail">';
                 }
             });
         });
@@ -581,7 +623,14 @@
             if (journalDatabase[entryId]) {
                 contentZone.innerHTML = journalDatabase[entryId].html;
                 if (journalDatabase[entryId].image !== '') {
-                    heroZone.innerHTML = `<img src="\${journalDatabase[entryId].image}" alt="Exhibition Artpiece Masterwork">`;
+                    heroZone.innerHTML = `
+                        <img src="${journalDatabase[entryId].image}" alt="Exhibition Masterwork Leaf Header">
+                        <div style="font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-cream-dark); line-height: 1.6; margin-top: 1.5rem; text-align: left; padding: 1.5rem; background-color: rgba(0,0,0,0.02); border-left: 3px solid var(--accent-rustic);">
+                            <span style="font-weight: 700; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.1em; display: block; margin-bottom: 0.25rem; color: var(--accent-rustic);">${journalDatabase[entryId].artist}</span>
+                            <span style="font-family: var(--font-serif); font-size: 1.1rem; font-style: italic; font-weight: 600;">${journalDatabase[entryId].title}</span>, ${journalDatabase[entryId].year}. ${journalDatabase[entryId].museum}
+                            <p style="margin-top: 1rem; margin-bottom: 0; font-size: 0.9rem; line-height: 1.5; color: var(--text-cream-muted); font-style: normal; font-weight: 400; text-align: justify;">${journalDatabase[entryId].designCaption}</p>
+                        </div>
+                    `;
                     heroZone.classList.add('has-art');
                 } else {
                     heroZone.innerHTML = '';
