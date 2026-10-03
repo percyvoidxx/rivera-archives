@@ -10,10 +10,11 @@
     <style>
         :root {
             /* 60 - 30 - 10 Curated Museum Balance Elements */
-            --bg-canvas: #111113;        
-            --bg-card: #18181B;          
+            --bg-canvas: #09090B;        
+            --bg-card: #121215;          
+            --bg-card-hover: #16161A;    
             --bg-sepia-surface: #EDE8DC; 
-            --border-muted: #2E2E33;     
+            --border-muted: rgba(164, 139, 118, 0.15);     
             --text-primary: #F4F4F6;     
             --text-secondary: #91919E;   
             --accent-rustic: #A48B76;    
@@ -55,7 +56,7 @@
             text-align: center;
             padding: 2rem;
             position: relative;
-            background-color: #09090B; 
+            background-color: #050507; 
         }
         #gateway-view.active-view { display: flex; }
         .owner-branding {
@@ -217,14 +218,17 @@
         .flip-card-front {
             background-color: var(--bg-card);
             justify-content: space-between;
-            border-color: rgba(164, 139, 118, 0.2);
+            transition: background-color 0.3s ease;
+        }
+        .flip-card:hover .flip-card-front {
+            background-color: var(--bg-card-hover);
         }
         .front-visual-core {
             width: 100%;
             height: 230px;
-            background-color: #0b0b0c;
+            background-color: #050507;
             position: relative;
-            border: 1px solid rgba(164, 139, 118, 0.12);
+            border: 1px solid rgba(164, 139, 118, 0.08);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -234,10 +238,10 @@
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-            filter: sepia(25%) contrast(105%) brightness(85%);
+            filter: sepia(20%) contrast(105%) brightness(80%);
             transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .flip-card:hover .front-visual-core img { transform: scale(1.05); }
+        .flip-card:hover .front-visual-core img { transform: scale(1.04); }
         .card-meta-line {
             display: flex;
             justify-content: space-between;
@@ -255,7 +259,7 @@
             color: var(--text-primary);
         }
         .flip-card-back {
-            background-color: #131316;
+            background-color: #0e0e11;
             transform: rotateY(180deg);
             justify-content: space-between;
             border-color: var(--accent-rustic);
@@ -281,8 +285,8 @@
             width: 100%;
             font-weight: 500;
         }
-        .card-locked { opacity: 0.15; pointer-events: none; filter: grayscale(100%); }
-
+    </style>
+    <style>
         .portal-modal {
             display: none;
             position: fixed;
@@ -295,7 +299,11 @@
             animation: fadeInView 0.5s ease forwards;
         }
         .portal-modal.modal-open { display: block; }
-        .modal-content-wrapper { max-width: 850px; margin: 0 auto; position: relative; }
+        .modal-content-wrapper { 
+            max-width: 850px; 
+            margin: 0 auto; 
+            position: relative; 
+        }
         .close-modal-btn {
             position: fixed;
             top: 4rem;
@@ -313,27 +321,65 @@
         }
         .close-modal-btn:hover { color: var(--text-cream-dark); }
         
+        /* Anti-Squish Universal Frame Configuration */
         .modal-hero-artwork-frame {
             display: none;
             width: 100%;
-            height: 460px;
-            background-color: #0b0b0c;
-            margin-bottom: 4.5rem;
+            height: auto;
+            max-height: 520px;
+            background-color: #050507;
+            margin-bottom: 3.5rem;
             border: 1px solid rgba(0, 0, 0, 0.15);
             overflow: hidden;
             box-shadow: 0 30px 60px rgba(0,0,0,0.12);
-            display: flex;
             align-items: center;
             justify-content: center;
         }
         .modal-hero-artwork-frame.has-art { display: flex; }
         .modal-hero-artwork-frame img { 
             max-width: 100%; 
-            max-height: 100%; 
+            max-height: 520px; 
             object-fit: contain; 
-            filter: sepia(10%) contrast(102%) brightness(95%);
+            filter: sepia(8%) contrast(102%) brightness(92%);
         }
         
+        /* New Flexible Bottom Plaque Block Layout */
+        .modal-plaque-block {
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            color: var(--text-cream-dark);
+            line-height: 1.6;
+            margin-bottom: 4.5rem;
+            text-align: left;
+            padding: 2rem;
+            background-color: rgba(0, 0, 0, 0.03);
+            border-left: 3px solid var(--accent-rustic);
+            width: 100%;
+        }
+        .modal-plaque-artist {
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            display: block;
+            margin-bottom: 0.35rem;
+            color: var(--accent-rustic);
+        }
+        .modal-plaque-specs {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            font-style: italic;
+            font-weight: 600;
+        }
+        .modal-plaque-caption {
+            margin-top: 1.2rem;
+            margin-bottom: 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-cream-muted);
+            text-align: justify;
+        }
+
         .modal-essay-body {
             font-family: var(--font-sans);
             font-size: 1.1rem;
@@ -342,8 +388,8 @@
         }
         .modal-essay-body p { margin-bottom: 2.2rem; text-align: justify; }
         .artifact-embed-box {
-            background-color: rgba(0, 0, 0, 0.03);
-            border: 1px dashed rgba(0, 0, 0, 0.12);
+            background-color: rgba(0, 0, 0, 0.04);
+            border: 1px dashed rgba(0, 0, 0, 0.15);
             padding: 3rem;
             margin: 4rem 0;
             border-radius: 2px;
@@ -380,14 +426,12 @@
             </div>
         </header>
         <div class="artifact-grid">
-            <!-- Module 1: Active -->
+            <!-- Module 1 -->
             <div class="flip-card" onclick="openPortal('idt111-m1')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
                         <div class="card-meta-line"><span>Module 01</span><span>Active</span></div>
-                        <div class="front-visual-core" id="front-visual-idt111-m1">
-                            <span style="color: var(--accent-rustic); font-family: var(--font-serif); font-style: italic;">Exhibition No. 01</span>
-                        </div>
+                        <div class="front-visual-core" id="front-visual-idt111-m1"></div>
                         <h2 class="card-core-heading">Overview of Instructional Design</h2>
                     </div>
                     <div class="flip-card-back">
@@ -397,16 +441,69 @@
                     </div>
                 </div>
             </div>
-            <!-- Module 2: Locked -->
-            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 02</span><span>Encrypted</span></div><div class="front-visual-core" id="front-visual-idt111-m2"></div><h2 class="card-core-heading">Learning Theory, Instructional Theory, & ID Model</h2></div></div></div>
-            <!-- Module 3: Locked -->
-            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 03</span><span>Encrypted</span></div><div class="front-visual-core" id="front-visual-idt111-m3"></div><h2 class="card-core-heading">Learning Theories and Instructional Design</h2></div></div></div>
-            <!-- Module 4: Locked -->
-            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 04</span><span>Encrypted</span></div><div class="front-visual-core" id="front-visual-idt111-m4"></div><h2 class="card-core-heading">Instructional Theories and Instructional Design</h2></div></div></div>
-            <!-- Module 5: Locked -->
-            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 05</span><span>Encrypted</span></div><div class="front-visual-core" id="front-visual-idt111-m5"></div><h2 class="card-core-heading">Instructional Design Models</h2></div></div></div>
+            <!-- Module 2 -->
+            <div class="flip-card" onclick="openPortal('idt111-m2')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="card-meta-line"><span>Module 02</span><span>Active</span></div>
+                        <div class="front-visual-core" id="front-visual-idt111-m2"></div>
+                        <h2 class="card-core-heading">Learning Theory, Instructional Theory, & ID Model</h2>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="card-meta-line"><span>Theory Base</span><span>02 / 05</span></div>
+                        <p class="back-summary-text">An examination of structural ordering frameworks and macro-views of instructional system design.</p>
+                        <button class="explore-trigger-btn">Explore Exhibition Page →</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Module 3 -->
+            <div class="flip-card" onclick="openPortal('idt111-m3')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="card-meta-line"><span>Module 03</span><span>Active</span></div>
+                        <div class="front-visual-core" id="front-visual-idt111-m3"></div>
+                        <h2 class="card-core-heading">Learning Theories and Instructional Design</h2>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="card-meta-line"><span>Pedagogy</span><span>03 / 05</span></div>
+                        <p class="back-summary-text">Managing friction, pedagogical paradigm shifts, and configurations inside modern curriculum structures.</p>
+                        <button class="explore-trigger-btn">Explore Exhibition Page →</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Module 4 -->
+            <div class="flip-card" onclick="openPortal('idt111-m4')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="card-meta-line"><span>Module 04</span><span>Active</span></div>
+                        <div class="front-visual-core" id="front-visual-idt111-m4"></div>
+                        <h2 class="card-core-heading">Instructional Theories and Instructional Design</h2>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="card-meta-line"><span>Intervention</span><span>04 / 05</span></div>
+                        <p class="back-summary-text">Stark tensions, behavioral feedback matrices, and critical tracking models.</p>
+                        <button class="explore-trigger-btn">Explore Exhibition Page →</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Module 5 -->
+            <div class="flip-card" onclick="openPortal('idt111-m5')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="card-meta-line"><span>Module 05</span><span>Active</span></div>
+                        <div class="front-visual-core" id="front-visual-idt111-m5"></div>
+                        <h2 class="card-core-heading">Instructional Design Models</h2>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="card-meta-line"><span>Curation</span><span>05 / 05</span></div>
+                        <p class="back-summary-text">Thoughtful compilation of modular multimedia objects, beautiful typography layouts, and balanced instructional message design.</p>
+                        <button class="explore-trigger-btn">Explore Exhibition Page →</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
+
     <!-- ================= VIEW 3: IDT 121 EXHIBITION DASHBOARD (4 MODULES) ================= -->
     <section id="idt121-view" class="app-view">
         <header class="dashboard-header">
@@ -417,29 +514,66 @@
             </div>
         </header>
         <div class="artifact-grid">
-            <!-- Module 1: Active -->
+            <!-- Module 1 -->
             <div class="flip-card" onclick="openPortal('idt121-m1')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
                         <div class="card-meta-line"><span>Module 01</span><span>Active</span></div>
-                        <div class="front-visual-core" id="front-visual-idt121-m1">
-                            <span style="color: var(--accent-rustic); font-family: var(--font-serif); font-style: italic;">Exhibition No. 01</span>
-                        </div>
+                        <div class="front-visual-core" id="front-visual-idt121-m1"></div>
                         <h2 class="card-core-heading">Introduction to Context Analysis</h2>
                     </div>
                     <div class="flip-card-back">
                         <div class="card-meta-line"><span>Overview</span><span>01 / 04</span></div>
-                        <p class="back-summary-text">A multi-perspective critical evaluation introducing target learner profiles and physical/digital learning ecosystems.</p>
+                        <p class="back-summary-text">A multi-perspective evaluation introducing target learner parameters and digital ecosystems.</p>
                         <button class="explore-trigger-btn">Explore Exhibition Page →</button>
                     </div>
                 </div>
             </div>
-            <!-- Module 2: Locked -->
-            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 02</span><span>Encrypted</span></div><div class="front-visual-core" id="front-visual-idt121-m2"></div><h2 class="card-core-heading">Systems Thinking in Context Analysis</h2></div></div></div>
-            <!-- Module 3: Locked -->
-            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 03</span><span>Encrypted</span></div><div class="front-visual-core" id="front-visual-idt121-m3"></div><h2 class="card-core-heading">Models and Processes of Context Analysis</h2></div></div></div>
-            <!-- Module 4: Locked -->
-            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 04</span><span>Encrypted</span></div><div class="front-visual-core" id="front-visual-idt121-m4"></div><h2 class="card-core-heading">Writing Context Analysis Report and Wrap-Up</h2></div></div></div>
+            <!-- Module 2 -->
+            <div class="flip-card" onclick="openPortal('idt121-m2')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="card-meta-line"><span>Module 02</span><span>Active</span></div>
+                        <div class="front-visual-core" id="front-visual-idt121-m2"></div>
+                        <h2 class="card-core-heading">Systems Thinking in Context Analysis</h2>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="card-meta-line"><span>Ecosystems</span><span>02 / 04</span></div>
+                        <p class="back-summary-text">Examining environmental operational criteria, system thresholds, and organic user feedback matrices.</p>
+                        <button class="explore-trigger-btn">Explore Exhibition Page →</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Module 3 -->
+            <div class="flip-card" onclick="openPortal('idt121-m3')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="card-meta-line"><span>Module 03</span><span>Active</span></div>
+                        <div class="front-visual-core" id="front-visual-idt121-m3"></div>
+                        <h2 class="card-core-heading">Models and Processes of Context Analysis</h2>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="card-meta-line"><span>Protocols</span><span>03 / 04</span></div>
+                        <p class="back-summary-text">Navigating institutional boundaries, stakeholder requirements, and structural policy constraints.</p>
+                        <button class="explore-trigger-btn">Explore Exhibition Page →</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Module 4 -->
+            <div class="flip-card" onclick="openPortal('idt121-m4')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="card-meta-line"><span>Module 04</span><span>Active</span></div>
+                        <div class="front-visual-core" id="front-visual-idt121-m4"></div>
+                        <h2 class="card-core-heading">Writing Context Analysis Report and Wrap-Up</h2>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="card-meta-line"><span>Resilience</span><span>04 / 04</span></div>
+                        <p class="back-summary-text">Scaling technological solutions across massive administrative structures with extreme precision.</p>
+                        <button class="explore-trigger-btn">Explore Exhibition Page →</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -451,6 +585,7 @@
             <article class="modal-essay-body" id="modal-dynamic-target"></article>
         </main>
     </div>
+
     <script>
         function navigateTo(viewId) {
             document.querySelectorAll('.app-view').forEach(view => {
@@ -462,7 +597,6 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
-
         // =========================================================================
         // 🏛️ CENTRAL DYNAMIC MUSEUM CATALOG DATABASE REGISTRY (MASTER ARCHIVE CONTROL)
         // =========================================================================
@@ -478,10 +612,68 @@
                     <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Overview of <i>Instructional Design</i></h1>
                     <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 111 — Module 01 Reflection</p>
                     
+                    <p>Instructional design is not merely the mechanical compilation of technological delivery nodes; rather, it functions as a highly deliberate configuration of intentional design judgments. As evaluated by Lachheb & Boling (2021), the core identity of the designer dictates structural learning outcomes.</p>
+                    
                     <div class="artifact-embed-box">
                         <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark); font-style: italic;">Official Assignment Output Storage</h3>
-                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Once your assignments are graded, you can cleanly embed your actual instructional architecture schemas, workflow flowcharts, or system diagrams directly into this dedicated exhibition block.</p>
+                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Drop assignment maps or custom workflow schematics seamlessly within this immersive container element block once your grades are ready.</p>
                     </div>
+                `
+            },
+            'idt111-m2': {
+                image: 'salvator.JPG',
+                artist: 'Leonardo da Vinci (Attributed)',
+                title: 'Salvator Mundi',
+                year: 'c. 1500',
+                museum: 'Private Collection.',
+                designCaption: 'An iconic image of order holding a crystal orb representing the cosmos. Ideal for sections addressing high-level project governance, comprehensive needs assessment, or the macro-view of instructional systems design.',
+                html: `
+                    <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Learning & <i>Instructional Theories</i></h1>
+                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 111 — Module 02 Reflection</p>
+                    
+                    <p>Your structured analysis of learning systems, macro frameworks, and instructional architectures will sit here. Replace this sentence with your completed Module 02 e-journal submission text over the trimester.</p>
+                `
+            },
+            'idt111-m3': {
+                image: 'battle.jpg',
+                artist: 'Joachim Wtewael',
+                title: 'The Battle between the Gods and the Giants',
+                year: 'c. 1592',
+                museum: 'Musée du Louvre, Paris.',
+                designCaption: 'An intensely fluid, chaotic Mannerist portrayal of dynamic forces colliding. Represents systemic friction, pedagogical paradigm shifts, and managing overwhelming cognitive load in complex educational interventions.',
+                html: `
+                    <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Learning Theories and <i>Instructional Design</i></h1>
+                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 111 — Module 03 Reflection</p>
+                    
+                    <p>Your critical assessment on managing cognitive load paradigms, behaviorist vs. cognitivist structures, and theory conflicts goes here.</p>
+                `
+            },
+            'idt111-m4': {
+                image: 'cupid.jpg',
+                artist: 'Bartolomeo Manfredi',
+                title: 'Cupid Chastised',
+                year: 'c. 1613',
+                museum: 'Musée du Louvre, Paris.',
+                designCaption: 'A dramatic, high-contrast Caravaggites execution showing stark tension and behavioral correction. Serves as a raw artistic metaphor for formative assessment, behaviorist feedback loops, or disruptive interventions in instructional tracking.',
+                html: `
+                    <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Instructional Theories in <i>Practice</i></h1>
+                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 111 — Module 04 Reflection</p>
+                    
+                    <p>Your analysis of behaviorist feedback mechanisms, formative assessment tracking nodes, and corrective pedagogical frameworks goes here.</p>
+                `
+            },
+            'idt111-m5': {
+                image: 'flowers.jpg',
+                artist: 'Henri Fantin-Latour',
+                title: 'Still Life with Flowers',
+                year: '1864',
+                museum: 'Musée du Louvre, Paris.',
+                designCaption: 'A beautifully grouped, organic floral composition utilizing soft illumination. Mirrors the thoughtful curation of modular multimedia objects, beautiful typography layouts, and balanced instructional message design.',
+                html: `
+                    <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Systemic <i>Design Models</i></h1>
+                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 111 — Module 05 Reflection</p>
+                    
+                    <p>Your structural breakdown of systematic instructional systems, ADDIE/Dick and Carey evaluations, and curation layouts goes here.</p>
                 `
             },
             'idt121-m1': {
@@ -495,33 +687,58 @@
                     <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Introduction to <i>Context Analysis</i></h1>
                     <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 121 — Module 01 Reflection</p>
                     
+                    <p>Context analysis acts as the stabilization map when navigating systemic architectural friction. Understanding environmental constraints ensures learning design functions reliably in natural wild environments.</p>
+                    
                     <div class="artifact-embed-box">
                         <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark); font-style: italic;">Official Context Artifact Storage</h3>
                         <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Your systemic context audits, physical learning environment matrices, and target audience data fields will sit inside this dedicated presentation module area.</p>
                     </div>
                 `
+            },
+            'idt121-m2': {
+                image: 'peacock.JPG',
+                artist: 'Jan Weenix',
+                title: 'Still-Life with a Peacock and a Dog',
+                year: '1696',
+                museum: 'Musée du Louvre, Paris.',
+                designCaption: 'A grand, dramatic Baroque showcase of lavish status textures contrasted with instinctual elements. A great analog for examining competing environmental variables, deep contextual analysis, or the raw complexity of learner ecosystems.',
+                html: `
+                    <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Systems Thinking in <i>Ecosystem Audits</i></h1>
+                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 121 — Module 02 Reflection</p>
+                    
+                    <p>Your breakdown of systemic variables, institutional limits, performance requirements, and organic user feedback matrices goes here. Replace this boilerplate text as the trimester moves forward.</p>
+                `
+            },
+            'idt121-m3': {
+                image: 'charles.JPG',
+                artist: 'Jean-Auguste-Dominique Ingres',
+                title: 'Charles V Received by Francis I at the Louvre',
+                year: '1843',
+                museum: 'Musée du Louvre, Paris.',
+                designCaption: 'A highly dense historical staging showing diplomatic protocols and architecture. Use this to illustrate complex institutional protocols, stakeholder alignment, or navigating socio-political boundaries in learning systems.',
+                html: `
+                    <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Models and Processes of <i>Context Analysis</i></h1>
+                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 121 — Module 03 Reflection</p>
+                    
+                    <p>Your strategic documentation on navigating socio-political stakeholder boundaries, administrative constraints, and structural policy frameworks inside corporate or academic architectures goes here.</p>
+                `
+            },
+            'idt121-m4': {
+                image: 'greatwave.jpg',
+                artist: 'Katsushika Hokusai',
+                title: 'The Great Wave off Kanagawa',
+                year: 'c. 1831',
+                museum: 'Musée du Louvre, Paris.',
+                designCaption: 'An immortal ukiyo-e woodblock print showcasing immense natural scale and graphic line movement. The ultimate visual metaphor for scaling educational technology, facing overwhelming administrative waves, or designing modular content for systemic resilience.',
+                html: `
+                    <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Writing Context Analysis <i>Reports</i></h1>
+                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 121 — Module 04 Reflection</p>
+                    
+                    <p>Your final capstone wrap-up detailing context-resilient systemic instruction implementations, final context reporting schemas, and design arguments goes here.</p>
+                `
             }
         };
-
-        const lockedPreviews = {
-            'idt111-m2': 'salvator.JPG',
-            'idt111-m3': 'battle.jpg',
-            'idt111-m4': 'cupid.jpg',
-            'idt111-m5': 'flowers.jpg',
-            'idt121-m2': 'peacock.JPG',
-            'idt121-m3': 'charles.JPG',
-            'idt121-m4': 'greatwave.jpg'
-        };
-
-        const lockedMetadata = {
-            'idt111-m2': { artist: 'Leonardo da Vinci (Attributed)', title: 'Salvator Mundi', year: 'c. 1500', museum: 'Private Collection.', caption: 'An iconic image of order holding a crystal orb representing the cosmos. Ideal for sections addressing high-level project governance, comprehensive needs assessment, or the macro-view of instructional systems design.' },
-            'idt111-m3': { artist: 'Joachim Wtewael', title: 'The Battle between the Gods and the Giants', year: 'c. 1592', museum: 'Musée du Louvre, Paris.', caption: 'An intensely fluid, chaotic Mannerist portrayal of dynamic forces colliding. Represents systemic friction, pedagogical paradigm shifts, and managing overwhelming cognitive load in complex educational interventions.' },
-            'idt111-m4': { artist: 'Bartolomeo Manfredi', title: 'Cupid Chastised', year: 'c. 1613', museum: 'Musée du Louvre, Paris.', caption: 'A dramatic, high-contrast Caravaggites execution showing stark tension and behavioral correction. Serves as a raw artistic metaphor for formative assessment, behaviorist feedback loops, or disruptive interventions in instructional tracking.' },
-            'idt111-m5': { artist: 'Henri Fantin-Latour', title: 'Still Life with Flowers', year: '1864', museum: 'Musée du Louvre, Paris.', caption: 'A beautifully grouped, organic floral composition utilizing soft illumination. Mirrors the thoughtful curation of modular multimedia objects, beautiful typography layouts, and balanced instructional message design.' },
-            'idt121-m2': { artist: 'Jan Weenix', title: 'Still-Life with a Peacock and a Dog', year: '1696', museum: 'Musée du Louvre, Paris.', caption: 'A grand, dramatic Baroque showcase of lavish status textures contrasted with instinctual elements. A great analog for examining competing environmental variables, deep contextual analysis, or the raw complexity of learner ecosystems.' },
-            'idt121-m3': { artist: 'Jean-Auguste-Dominique Ingres', title: 'Charles V Received by Francis I at the Louvre', year: '1843', museum: 'Musée du Louvre, Paris.', caption: 'A highly dense historical staging showing diplomatic protocols and architecture. Use this to illustrate complex institutional protocols, stakeholder alignment, or navigating socio-political boundaries in learning systems.' },
-            'idt121-m4': { artist: 'Katsushika Hokusai', title: 'The Great Wave off Kanagawa', year: 'c. 1831', museum: 'Musée du Louvre, Paris.', caption: 'An immortal ukiyo-e woodblock print showcasing immense natural scale and graphic line movement. The ultimate visual metaphor for scaling educational technology, facing overwhelming administrative waves, or designing modular content for systemic resilience.' }
-        };
+        // Initialize thumbnails across all grids on document load
         document.addEventListener("DOMContentLoaded", () => {
             Object.keys(journalDatabase).forEach(key => {
                 const targetVisualFrame = document.getElementById('front-visual-' + key);
@@ -529,27 +746,25 @@
                     targetVisualFrame.innerHTML = '<img src="' + journalDatabase[key].image + '" alt="Exhibition Thumbnail">';
                 }
             });
-            Object.keys(lockedPreviews).forEach(key => {
-                const targetVisualFrame = document.getElementById('front-visual-' + key);
-                if (targetVisualFrame) {
-                    targetVisualFrame.innerHTML = '<img src="' + lockedPreviews[key] + '" alt="Locked Thumbnail">';
-                }
-            });
         });
 
+        // Immersive Portal Engine: Renders clean bottom plaque layout dynamically
         function openPortal(entryId) {
             const contentZone = document.getElementById('modal-dynamic-target');
             const heroZone = document.getElementById('modal-dynamic-hero');
             
             if (journalDatabase[entryId]) {
+                // Injects the pure, unboxed e-journal essay layout
                 contentZone.innerHTML = journalDatabase[entryId].html;
+                
                 if (journalDatabase[entryId].image !== '') {
+                    // Renders the image on top and appends the unboxed plaque block below it
                     heroZone.innerHTML = `
                         <img src="${journalDatabase[entryId].image}" alt="Exhibition Masterwork Leaf Header">
-                        <div style="font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-cream-dark); line-height: 1.6; margin-top: 1.5rem; text-align: left; padding: 1.5rem; background-color: rgba(0,0,0,0.02); border-left: 3px solid var(--accent-rustic); width: 100%;">
-                            <span style="font-weight: 700; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.15em; display: block; margin-bottom: 0.25rem; color: var(--accent-rustic);">${journalDatabase[entryId].artist}</span>
-                            <span style="font-family: var(--font-serif); font-size: 1.1rem; font-style: italic; font-weight: 600;">${journalDatabase[entryId].title}</span>, ${journalDatabase[entryId].year}. ${journalDatabase[entryId].museum}
-                            <p style="margin-top: 1rem; margin-bottom: 0; font-size: 0.9rem; line-height: 1.5; color: var(--text-cream-muted); font-style: normal; font-weight: 400; text-align: justify;">${journalDatabase[entryId].designCaption}</p>
+                        <div class="modal-plaque-block">
+                            <span class="modal-plaque-artist">${journalDatabase[entryId].artist}</span>
+                            <span class="modal-plaque-specs">${journalDatabase[entryId].title}</span>, ${journalDatabase[entryId].year}. ${journalDatabase[entryId].museum}
+                            <p class="modal-plaque-caption">${journalDatabase[entryId].designCaption}</p>
                         </div>
                     `;
                     heroZone.classList.add('has-art');
