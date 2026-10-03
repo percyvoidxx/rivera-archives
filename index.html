@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rivera Archives — IDT Portfolio</title>
+    <title>the.madness.chamber — Rivera IDT Portfolio</title>
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -54,6 +54,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* --- EXQUISITE GATEWAY INTERFACE --- */
         #gateway-view {
             display: none;
             flex-direction: column;
@@ -71,7 +72,7 @@
         .gateway-brand {
             font-family: var(--font-sans);
             font-size: 0.85rem;
-            letter-spacing: 0.3em;
+            letter-spacing: 0.4em;
             text-transform: uppercase;
             color: var(--accent-rustic);
             margin-bottom: 4rem;
@@ -79,11 +80,11 @@
 
         .gateway-quote {
             font-family: var(--font-serif);
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             font-weight: 300;
             font-style: italic;
             line-height: 1.2;
-            max-width: 800px;
+            max-width: 850px;
             margin-bottom: 5rem;
             color: var(--text-primary);
         }
@@ -104,7 +105,7 @@
             padding: 1.5rem;
             border-bottom: 1px solid var(--border-muted);
             transition: all 0.3s ease;
-            width: 250px;
+            width: 280px;
         }
 
         .gateway-btn:hover {
@@ -122,12 +123,13 @@
 
         .gateway-btn span {
             font-family: var(--font-sans);
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             letter-spacing: 0.15em;
             text-transform: uppercase;
             color: var(--text-secondary);
         }
 
+        /* --- DASHBOARD HEADER --- */
         .dashboard-header {
             border-bottom: 1px solid var(--border-muted);
             padding-bottom: 2.5rem;
@@ -169,143 +171,184 @@
             margin-top: 0.5rem;
         }
 
+        /* --- PREMIUM 3D FLIP CONTAINER ENGINE --- */
         .artifact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
             gap: 3rem;
         }
 
-        .card {
-            background-color: var(--bg-card);
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 380px;
+            perspective: 1200px;
+            cursor: pointer;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: left;
+            transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
             border: 1px solid var(--border-muted);
-            padding: 1.5rem;
+            padding: 2rem;
             display: flex;
             flex-direction: column;
-            position: relative;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+            border-radius: 4px;
         }
 
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent-rustic);
+        /* Front Cover: Selections Rustic Image Area */
+        .flip-card-front {
+            background-color: var(--bg-card);
+            justify-content: space-between;
         }
 
-        .card-visual-placeholder {
+        .front-visual-core {
             width: 100%;
-            height: 240px;
-            background-color: #1A1A1D;
-            margin-bottom: 1.5rem;
+            height: 180px;
+            background-color: #16161A;
             position: relative;
-            overflow: hidden;
+            border: 1px dashed rgba(163, 138, 117, 0.15);
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid var(--border-muted);
+            overflow: hidden;
         }
 
-        .card-visual-placeholder::before {
+        /* Abstract structural overlay crosshairs */
+        .front-visual-core::before {
             content: '';
             position: absolute;
-            width: 80%;
-            height: 80%;
-            border: 1px dashed rgba(163, 138, 117, 0.15);
+            width: 90%;
+            height: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.02);
         }
 
-        .card-meta {
+        .card-meta-line {
             display: flex;
             justify-content: space-between;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.15em;
             color: var(--text-secondary);
-            margin-bottom: 0.75rem;
         }
 
-        .card-title {
+        .card-core-heading {
             font-family: var(--font-serif);
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 400;
-            line-height: 1.3;
-            margin-bottom: 1rem;
+            line-height: 1.2;
+            color: var(--text-primary);
         }
 
+        /* Back Cover: Clean High-Readability Editorial Sheet */
+        .flip-card-back {
+            background-color: #161619;
+            transform: rotateY(180deg);
+            justify-content: space-between;
+            border-color: var(--accent-rustic);
+        }
+
+        .back-summary-text {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-top: 1rem;
+        }
+
+        .explore-trigger-btn {
+            background: none;
+            border: none;
+            color: var(--accent-rustic);
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            cursor: pointer;
+            text-align: left;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-muted);
+            width: 100%;
+            transition: color 0.2s ease;
+        }
+
+        .flip-card-back:hover .explore-trigger-btn {
+            color: var(--text-primary);
+        }
+
+        /* Locked/Encrypted Styling Modifiers */
         .card-locked {
-            opacity: 0.4;
+            opacity: 0.25;
             pointer-events: none;
         }
 
-        .card-locked .card-visual-placeholder::after {
-            content: 'ENCRYPTED / LOCKED';
-            font-size: 0.7rem;
-            letter-spacing: 0.2em;
+        /* --- THE SELECTIONS MODAL DISPLAY SHEATH --- */
+        .portal-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background-color: rgba(13, 13, 14, 0.98);
+            overflow-y: auto;
+            padding: 6rem 2rem;
+        }
+
+        .portal-modal.modal-open {
+            display: block;
+        }
+
+        .modal-content-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .close-modal-btn {
+            position: fixed;
+            top: 3rem;
+            right: 4rem;
+            background: none;
+            border: none;
             color: var(--text-secondary);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .close-modal-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .modal-essay-body {
+            font-family: var(--font-sans);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+
+        .modal-essay-body p {
+            margin-bottom: 2rem;
         }
     </style>
 </head>
 <body>
 
     <!-- ================= VIEW 1: THE SHAKESPEAREAN LANDING GATEWAY ================= -->
-    <main id="gateway-view" class="app-view active-view">
-        <div class="gateway-brand">Rivera Academic Archives</div>
-        <h2 class="gateway-quote">“Though this be madness, yet there is method in’t.”</h2>
-        <nav class="gateway-options" aria-label="Course selection">
-            <button class="gateway-btn" onclick="navigateTo('idt111-view')">
-                <h3>IDT 111</h3>
-                <span>Instructional Models</span>
-            </button>
-            <button class="gateway-btn" onclick="navigateTo('idt121-view')">
-                <h3>IDT 121</h3>
-                <span>Context Analysis</span>
-            </button>
-        </nav>
-    </main>
-
-    <!-- ================= VIEW 2: IDT 111 EXHIBITION DASHBOARD ================= -->
-    <section id="idt111-view" class="app-view">
-        <header class="dashboard-header">
-            <div class="course-title">
-                <button class="back-nav" onclick="navigateTo('gateway-view')">← Return to Gateway</button>
-                <h1>Selections from IDT 111</h1>
-                <p>Instructional Design Models & Applications</p>
-            </div>
-        </header>
-
-        <div class="artifact-grid">
-            <article class="card">
-                <div class="card-visual-placeholder">
-                    <span style="color: var(--accent-rustic); font-family: var(--font-serif); font-style: italic;">Artifact No. 01</span>
-                </div>
-                <div class="card-meta">
-                    <span>Module 01</span>
-                    <span>Active</span>
-                </div>
-                <h2 class="card-title">Foundations of Design Reflection</h2>
-            </article>
-
-            <article class="card card-locked">
-                <div class="card-visual-placeholder"></div>
-                <div class="card-meta"><span>Module 02</span><span>Locked</span></div>
-                <h2 class="card-title">Systemic Model Interpretations</h2>
-            </article>
-
-            <article class="card card-locked">
-                <div class="card-visual-placeholder"></div>
-                <div class="card-meta"><span>Module 03</span><span>Locked</span></div>
-                <h2 class="card-title">Prototyping Frameworks</h2>
-            </article>
-        </div>
-    </section>
-
-    <!-- ================= VIEW 3: IDT 121 EXHIBITION DASHBOARD ================= -->
-    <section id="idt121-view" class="app-view">
-        <header class="dashboard-header">
-            <div class="course-title">
-                <button class="back-nav" onclick="navigateTo('gateway-view')">← Return to Gateway</button>
-                <h1>Selections from IDT 121</h1>
-                <p>Context Analysis in Instructional Systems</p>
-            </div>
-        </header>
-
-        <div class="artifact-grid">
-            <article class="card">
-                <div class="card-visual-placeholder">
