@@ -6,21 +6,25 @@
     <title>the.madness.chamber — MC Rivera IDT Portfolio</title>
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-canvas: #09090B;        
-            --bg-card: #141417;          
-            --border-muted: #242427;     
-            --text-primary: #F4F4F6;     
-            --text-secondary: #91919E;   
-            --accent-rustic: #A48B76;    
-            --bg-cream-leaf: #EDE8DC;    
-            --text-cream-dark: #1A1A1C;  
-            --text-cream-muted: #5D5D66; 
+            /* 60 - 30 - 10 Louvre Curated Palette Design */
+            --bg-canvas: #111113;        /* 60% Dominant Deep Charcoal Gallery Wall */
+            --bg-card: #18181B;          /* Structural Card Core Canvas */
+            --bg-sepia-surface: #EDE8DC; /* 30% Secondary Weathered Louvre Surface Sheet */
+            --border-muted: #2E2E33;     /* Architectural layout divider lines */
+            --text-primary: #F4F4F6;     /* Off-white crisp typography label */
+            --text-secondary: #91919E;   /* Muted structural museum marker grey */
+            --accent-rustic: #A48B76;    /* 10% Accent Layer: Earthy Renaissance Sepia Gold */
+            
+            --text-cream-dark: #1A1A1C;  /* Immersive leaf reading dark typography text */
+            --text-cream-muted: #5D5D66; /* Immersive leaf reading muted typography description */
+            
             --font-serif: 'Cormorant Garamond', Georgia, serif;
             --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
         }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             background-color: var(--bg-canvas);
@@ -30,6 +34,7 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
+
         .app-view {
             display: none;
             min-height: 100vh;
@@ -37,14 +42,18 @@
             max-width: 1300px;
             margin: 0 auto;
         }
+
         .app-view.active-view {
             display: block;
             animation: fadeInView 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+
         @keyframes fadeInView {
             from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* --- THE DUAL-LINE EMBEDDED SHAKESPEARE HERO --- */
         #gateway-view {
             display: none;
             flex-direction: column;
@@ -54,8 +63,11 @@
             text-align: center;
             padding: 2rem;
             position: relative;
+            background-color: #09090B; /* Deep cinematic anchor for gateway entry zone */
         }
+
         #gateway-view.active-view { display: flex; }
+
         .owner-branding {
             position: absolute;
             top: 4rem;
@@ -66,6 +78,7 @@
             text-transform: uppercase;
             color: var(--text-secondary);
         }
+
         .gateway-brand {
             font-family: var(--font-sans);
             font-size: 0.8rem;
@@ -74,16 +87,30 @@
             color: var(--accent-rustic);
             margin-bottom: 4rem;
         }
-        .gateway-quote {
-            font-family: var(--font-serif);
-            font-size: 3.8rem;
-            font-weight: 300;
-            font-style: italic;
-            line-height: 1.25;
-            max-width: 900px;
+
+        .gateway-quote-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
             margin-bottom: 6rem;
+            max-width: 900px;
+        }
+
+        .madness-line {
+            font-family: var(--font-serif);
+            font-size: 3.6rem;
+            font-weight: 300;
             color: var(--text-primary);
         }
+
+        .method-line {
+            font-family: var(--font-serif);
+            font-size: 3.8rem;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--accent-rustic);
+        }
+
         .gateway-options {
             display: flex;
             gap: 4rem;
@@ -91,6 +118,7 @@
             max-width: 800px;
             justify-content: center;
         }
+
         .gateway-btn {
             background: none;
             border: none;
@@ -101,10 +129,12 @@
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             width: 320px;
         }
+
         .gateway-btn:hover {
             border-color: var(--accent-rustic);
             transform: translateY(-4px);
         }
+
         .gateway-btn h3 {
             font-family: var(--font-serif);
             font-size: 2rem;
@@ -112,6 +142,7 @@
             color: var(--text-primary);
             margin-bottom: 0.6rem;
         }
+
         .gateway-btn span {
             font-family: var(--font-sans);
             font-size: 0.7rem;
@@ -120,9 +151,11 @@
             color: var(--text-secondary);
         }
     </style>
+</head>
     <style>
+        /* --- 60-30-10 ADVANCED EXHIBITION DASHBOARD STYLES --- */
         .dashboard-header {
-            border-bottom: 1px solid var(--border-muted);
+            border-bottom: 2px solid var(--accent-rustic);
             padding-bottom: 3rem;
             margin-bottom: 5rem;
             display: flex;
@@ -138,6 +171,7 @@
             letter-spacing: 0.2em;
             text-transform: uppercase;
             color: var(--accent-rustic);
+            font-weight: 600;
         }
         .back-nav {
             background: none;
@@ -151,19 +185,22 @@
             display: block;
             transition: color 0.2s ease;
         }
-        .back-nav:hover { color: var(--text-primary); }
+        .back-nav:hover { color: var(--accent-rustic); }
         .course-title h1 {
             font-family: var(--font-serif);
-            font-size: 3.8rem;
+            font-size: 4rem;
             font-weight: 300;
             line-height: 1.1;
+            color: var(--bg-sepia-surface); /* Premium Illuminated Header */
+            text-transform: capitalize;
         }
         .course-title p {
             font-size: 0.85rem;
-            color: var(--text-secondary);
+            color: var(--accent-rustic);
             text-transform: uppercase;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.2em;
             margin-top: 0.6rem;
+            font-weight: 500;
         }
         .artifact-grid {
             display: grid;
@@ -173,7 +210,7 @@
         .flip-card {
             background-color: transparent;
             width: 100%;
-            height: 420px;
+            height: 440px;
             perspective: 1500px;
             cursor: pointer;
         }
@@ -194,22 +231,22 @@
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
             border: 1px solid var(--border-muted);
-            padding: 2rem;
+            padding: 2.2rem;
             display: flex;
             flex-direction: column;
-            border-radius: 2px;
+            border-radius: 4px;
         }
         .flip-card-front {
             background-color: var(--bg-card);
             justify-content: space-between;
-            border-color: rgba(164, 139, 118, 0.15);
+            border-color: rgba(164, 139, 118, 0.2);
         }
         .front-visual-core {
             width: 100%;
-            height: 220px;
+            height: 230px;
             background-color: #111113;
             position: relative;
-            border: 1px solid rgba(164, 139, 118, 0.08);
+            border: 1px solid rgba(164, 139, 118, 0.12);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -219,7 +256,11 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: sepia(40%) contrast(110%) brightness(75%);
+            filter: sepia(50%) contrast(105%) brightness(70%);
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .flip-card:hover .front-visual-core img {
+            transform: scale(1.06);
         }
         .card-meta-line {
             display: flex;
@@ -227,17 +268,18 @@
             font-size: 0.72rem;
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            color: var(--text-secondary);
+            color: var(--accent-rustic);
+            font-weight: 500;
         }
         .card-core-heading {
             font-family: var(--font-serif);
-            font-size: 1.9rem;
-            font-weight: 400;
+            font-size: 2rem;
+            font-weight: 300;
             line-height: 1.25;
             color: var(--text-primary);
         }
         .flip-card-back {
-            background-color: #111114;
+            background-color: #131316;
             transform: rotateY(180deg);
             justify-content: space-between;
             border-color: var(--accent-rustic);
@@ -261,21 +303,24 @@
             padding-top: 1.2rem;
             border-top: 1px solid var(--border-muted);
             width: 100%;
+            font-weight: 500;
         }
-        .card-locked { opacity: 0.2; pointer-events: none; }
+        .card-locked { opacity: 0.15; pointer-events: none; filter: grayscale(100%); }
+
+        /* --- THE COGNITIVE LOUVRE LEAF SHEET LAYOUT --- */
         .portal-modal {
             display: none;
             position: fixed;
             inset: 0;
             z-index: 1000;
-            background-color: var(--bg-cream-leaf);
+            background-color: var(--bg-sepia-surface);
             overflow-y: auto;
             padding: 8rem 4rem;
             color: var(--text-cream-dark);
             animation: fadeInView 0.5s ease forwards;
         }
         .portal-modal.modal-open { display: block; }
-        .modal-content-wrapper { max-width: 900px; margin: 0 auto; position: relative; }
+        .modal-content-wrapper { max-width: 850px; margin: 0 auto; position: relative; }
         .close-modal-btn {
             position: fixed;
             top: 4rem;
@@ -288,22 +333,29 @@
             text-transform: uppercase;
             letter-spacing: 0.2em;
             cursor: pointer;
-            transition: color 0.2s ease;
             font-weight: 600;
+            transition: color 0.2s;
         }
         .close-modal-btn:hover { color: var(--text-cream-dark); }
+        
         .modal-hero-artwork-frame {
             display: none;
             width: 100%;
             height: 440px;
             background-color: rgba(0, 0, 0, 0.05);
-            margin-bottom: 4rem;
-            border: 1px solid rgba(0, 0, 0, 0.08);
+            margin-bottom: 4.5rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.06);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
         }
         .modal-hero-artwork-frame.has-art { display: block; }
-        .modal-hero-artwork-frame img { width: 100%; height: 100%; object-fit: cover; }
+        .modal-hero-artwork-frame img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            filter: sepia(15%) contrast(102%) brightness(95%);
+        }
+        
         .modal-essay-body {
             font-family: var(--font-sans);
             font-size: 1.1rem;
@@ -312,11 +364,11 @@
         }
         .modal-essay-body p { margin-bottom: 2.2rem; text-align: justify; }
         .artifact-embed-box {
-            background-color: rgba(0, 0, 0, 0.02);
-            border: 1px dashed rgba(0, 0, 0, 0.12);
+            background-color: rgba(0, 0, 0, 0.03);
+            border: 1px dashed rgba(0, 0, 0, 0.15);
             padding: 3rem;
             margin: 4rem 0;
-            border-radius: 2px;
+            border-radius: 4px;
             color: var(--text-cream-dark);
         }
     </style>
@@ -326,13 +378,18 @@
     <main id="gateway-view" class="app-view active-view">
         <div class="owner-branding">MC Rivera — E-Journal Site</div>
         <div class="gateway-brand">the.madness.chamber</div>
-        <h2 class="gateway-quote">“Though this be madness, yet there is method in’t.”</h2>
+        <div class="gateway-quote-container">
+            <span class="madness-line">“Though this be madness, yet</span>
+            <span class="method-line">there is method in’t.”</span>
+        </div>
         <nav class="gateway-options" aria-label="Course selection">
             <button class="gateway-btn" onclick="navigateTo('idt111-view')">
-                <h3>IDT 111</h3><span>Instructional Models</span>
+                <h3>IDT 111</h3>
+                <span>Instructional Models</span>
             </button>
             <button class="gateway-btn" onclick="navigateTo('idt121-view')">
-                <h3>IDT 121</h3><span>Context Analysis</span>
+                <h3>IDT 121</h3>
+                <span>Context Analysis</span>
             </button>
         </nav>
     </main>
@@ -349,11 +406,14 @@
         </header>
 
         <div class="artifact-grid">
+            <!-- Module 1: Active -->
             <div class="flip-card" onclick="openPortal('idt111-m1')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
                         <div class="card-meta-line"><span>Module 01</span><span>Active</span></div>
-                        <div class="front-visual-core"><span style="color: var(--accent-rustic); font-family: var(--font-serif); font-style: italic;">Exhibition No. 01</span></div>
+                        <div class="front-visual-core">
+                            <span style="color: var(--accent-rustic); font-family: var(--font-serif); font-style: italic;">Exhibition No. 01</span>
+                        </div>
                         <h2 class="card-core-heading">Overview of Instructional Design</h2>
                     </div>
                     <div class="flip-card-back">
@@ -363,10 +423,50 @@
                     </div>
                 </div>
             </div>
-            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 02</span><span>Encrypted</span></div><div class="front-visual-core"></div><h2 class="card-core-heading">Learning Theory, Instructional Theory, & ID Model</h2></div></div></div>
-            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 03</span><span>Encrypted</span></div><div class="front-visual-core"></div><h2 class="card-core-heading">Learning Theories and Instructional Design</h2></div></div></div>
-            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 04</span><span>Encrypted</span></div><div class="front-visual-core"></div><h2 class="card-core-heading">Instructional Theories and Instructional Design</h2></div></div></div>
-            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 05</span><span>Encrypted</span></div><div class="front-visual-core"></div><h2 class="card-core-heading">Instructional Design Models</h2></div></div></div>
+
+            <!-- Module 2: Locked -->
+            <div class="flip-card card-locked">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="card-meta-line"><span>Module 02</span><span>Encrypted</span></div>
+                        <div class="front-visual-core"></div>
+                        <h2 class="card-core-heading">Learning Theory, Instructional Theory, & ID Model</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 3: Locked -->
+            <div class="flip-card card-locked">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="card-meta-line"><span>Module 03</span><span>Encrypted</span></div>
+                        <div class="front-visual-core"></div>
+                        <h2 class="card-core-heading">Learning Theories and Instructional Design</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 4: Locked -->
+            <div class="flip-card card-locked">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="card-meta-line"><span>Module 04</span><span>Encrypted</span></div>
+                        <div class="front-visual-core"></div>
+                        <h2 class="card-core-heading">Instructional Theories and Instructional Design</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 5: Locked -->
+            <div class="flip-card card-locked">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="card-meta-line"><span>Module 05</span><span>Encrypted</span></div>
+                        <div class="front-visual-core"></div>
+                        <h2 class="card-core-heading">Instructional Design Models</h2>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     <!-- ================= VIEW 3: IDT 121 EXHIBITION DASHBOARD (4 MODULES) ================= -->
@@ -381,6 +481,7 @@
         </header>
 
         <div class="artifact-grid">
+            <!-- Module 1: Active -->
             <div class="flip-card" onclick="openPortal('idt121-m1')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
@@ -395,13 +496,43 @@
                     </div>
                 </div>
             </div>
-            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 02</span><span>Encrypted</span></div><div class="front-visual-core"></div><h2 class="card-core-heading">Systems Thinking in Context Analysis</h2></div></div></div>
-            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 03</span><span>Encrypted</span></div><div class="front-visual-core"></div><h2 class="card-core-heading">Models and Processes of Context Analysis</h2></div></div></div>
-            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 04</span><span>Encrypted</span></div><div class="front-visual-core"></div><h2 class="card-core-heading">Writing Context Analysis Report and Wrap-Up</h2></div></div></div>
+
+            <!-- Module 2: Locked -->
+            <div class="flip-card card-locked">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="card-meta-line"><span>Module 02</span><span>Encrypted</span></div>
+                        <div class="front-visual-core"></div>
+                        <h2 class="card-core-heading">Systems Thinking in Context Analysis</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 3: Locked -->
+            <div class="flip-card card-locked">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="card-meta-line"><span>Module 03</span><span>Encrypted</span></div>
+                        <div class="front-visual-core"></div>
+                        <h2 class="card-core-heading">Models and Processes of Context Analysis</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 4: Locked -->
+            <div class="flip-card card-locked">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="card-meta-line"><span>Module 04</span><span>Encrypted</span></div>
+                        <div class="front-visual-core"></div>
+                        <h2 class="card-core-heading">Writing Context Analysis Report and Wrap-Up</h2>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- ================= VIEW 4: IMMERSIVE FULL-PAGE ART PRESENTATION ZONE ================= -->
+    <!-- ================= VIEW 4: IMMERSIVE FULL-PAGE PRESENTATION zone ================= -->
     <div id="portal-modal-sheath" class="portal-modal">
         <button class="close-modal-btn" onclick="closePortal()">← Go back to modules</button>
         <main class="modal-content-wrapper">
@@ -422,27 +553,28 @@
             }
         }
 
+        // Centralized Testing Database for Masterworks & Academic Content
         const journalDatabase = {
             'idt111-m1': {
-                image: '', 
+                image: 'https://unsplash.com', 
                 html: `
                     <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Overview of <i>Instructional Design</i></h1>
                     <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 111 — Module 01 Reflection</p>
                     
                     <div class="artifact-embed-box">
-                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark);">Official Assignment Output Storage</h3>
+                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark); font-style: italic;">Official Assignment Output Storage</h3>
                         <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Once your assignments are graded, you can cleanly embed your actual instructional architecture schemas, workflow flowcharts, or system diagrams directly into this dedicated exhibition block.</p>
                     </div>
                 `
             },
             'idt121-m1': {
-                image: '', 
+                image: 'https://unsplash.com', 
                 html: `
                     <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Introduction to <i>Context Analysis</i></h1>
                     <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 121 — Module 01 Reflection</p>
                     
                     <div class="artifact-embed-box">
-                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark);">Official Context Artifact Storage</h3>
+                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark); font-style: italic;">Official Context Artifact Storage</h3>
                         <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Your systemic context audits, physical learning environment matrices, and target audience data fields will sit inside this dedicated presentation module area.</p>
                     </div>
                 `
