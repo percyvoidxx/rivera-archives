@@ -10,14 +10,14 @@
     <style>
         :root {
             /* 60 - 30 - 10 Curated Museum Balance Elements */
-            --bg-canvas: #09090B;        
-            --bg-card: #131316;          
-            --bg-card-hover: #19191D;    
-            --bg-sepia-surface: #EDE8DC; 
-            --border-muted: rgba(164, 139, 118, 0.15);     
+            --bg-canvas: #141416;          /* 60% Dominant: Elegant charcoal gallery wall */
+            --bg-card: #202024;            /* 30% Structural: Visible grey surface frames */
+            --bg-card-hover: #29292F;      /* Interactive elevated depth layer */
+            --bg-sepia-surface: #EDE8DC;   /* Pure luxury sand cream pop-up layout canvas */
+            --border-muted: rgba(164, 139, 118, 0.25); /* Defined vintage metallic trim */
             --text-primary: #F4F4F6;     
-            --text-secondary: #91919E;   
-            --accent-rustic: #A48B76;    
+            --text-secondary: #A6A6B2;     
+            --accent-rustic: #C5A880;      /* 10% Accent: Vivid gold placard typography */
             --text-cream-dark: #1A1A1C;  
             --text-cream-muted: #5D5D66; 
             --font-serif: 'Cormorant Garamond', Georgia, serif;
@@ -47,15 +47,8 @@
             from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
-        /* Premium Layered Dashboard Canvas Gradient */
-        #idt111-view, #idt121-view {
-            background: radial-gradient(circle at top center, #161619 0%, #09090B 70%);
-            max-width: 100%;
-            padding-left: 4rem;
-            padding-right: 4rem;
-        }
-        
+    </style>
+    <style>
         #gateway-view {
             display: none;
             flex-direction: column;
@@ -65,7 +58,7 @@
             text-align: center;
             padding: 2rem;
             position: relative;
-            background-color: #050507; 
+            background-color: #0B0B0D; 
         }
         #gateway-view.active-view { display: flex; }
         .owner-branding {
@@ -141,8 +134,6 @@
             text-transform: uppercase;
             color: var(--text-secondary);
         }
-    </style>
-    <style>
         .dashboard-header {
             border-bottom: 2px solid var(--accent-rustic);
             padding-bottom: 3rem;
@@ -151,9 +142,6 @@
             justify-content: space-between;
             align-items: flex-end;
             position: relative;
-            max-width: 1300px;
-            margin-left: auto;
-            margin-right: auto;
         }
         .dashboard-owner {
             position: absolute;
@@ -165,6 +153,8 @@
             color: var(--accent-rustic);
             font-weight: 600;
         }
+    </style>
+    <style>
         .back-nav {
             background: none;
             border: none;
@@ -197,8 +187,6 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
             gap: 4rem 3rem;
-            max-width: 1300px;
-            margin: 0 auto;
         }
         .flip-card {
             background-color: transparent;
@@ -216,8 +204,6 @@
             transform-style: preserve-3d;
         }
         .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
-        
-        /* Fixed Dashboard Card Colors & Image Containers */
         .flip-card-front, .flip-card-back {
             position: absolute;
             inset: 0;
@@ -229,43 +215,38 @@
             padding: 2.2rem;
             display: flex;
             flex-direction: column;
-            border-radius: 4px;
+            border-radius: 6px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
         .flip-card-front {
             background-color: var(--bg-card);
             justify-content: space-between;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         .flip-card:hover .flip-card-front {
             background-color: var(--bg-card-hover);
+            border-color: var(--accent-rustic);
         }
         .front-visual-core {
             width: 100%;
             height: 230px;
-            background-color: #050507;
+            background-color: #101012;
             position: relative;
-            border: 1px solid rgba(164, 139, 118, 0.08);
+            border: 1px solid rgba(164, 139, 118, 0.15);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            border-radius: 2px;
         }
         .front-visual-core img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-            filter: sepia(20%) contrast(105%) brightness(80%);
+            filter: sepia(10%) contrast(102%) brightness(90%);
             transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .flip-card:hover .front-visual-core img { transform: scale(1.04); }
-        
-        /* Exhibition Security System Architecture Rules */
-        .card-locked { 
-            opacity: 0.25; 
-            pointer-events: none !important; 
-            filter: grayscale(100%) brightness(70%); 
-        }
-        
         .card-meta-line {
             display: flex;
             justify-content: space-between;
@@ -273,7 +254,7 @@
             text-transform: uppercase;
             letter-spacing: 0.15em;
             color: var(--accent-rustic);
-            font-weight: 500;
+            font-weight: 600;
         }
         .card-core-heading {
             font-family: var(--font-serif);
@@ -283,7 +264,7 @@
             color: var(--text-primary);
         }
         .flip-card-back {
-            background-color: #0e0e11;
+            background-color: #1A1A1F;
             transform: rotateY(180deg);
             justify-content: space-between;
             border-color: var(--accent-rustic);
@@ -291,7 +272,7 @@
         .back-summary-text {
             font-size: 0.9rem;
             line-height: 1.6;
-            color: var(--text-secondary);
+            color: #C0C0CB;
             margin-top: 1rem;
         }
         .explore-trigger-btn {
@@ -309,29 +290,39 @@
             width: 100%;
             font-weight: 500;
         }
+        .card-locked { 
+            opacity: 0.35; 
+            pointer-events: none !important; 
+            filter: grayscale(100%) brightness(80%); 
+        }
     </style>
     <style>
+        /* =========================================================================
+           🏛️ IMMERSIVE PRESENTATION PORTAL CANVAS ARCHITECTURE (BOX-FREE SEPIA VIEW)
+           ========================================================================= */
         .portal-modal {
             display: none;
             position: fixed;
             inset: 0;
             z-index: 1000;
-            background-color: var(--bg-sepia-surface);
+            background-color: var(--bg-sepia-surface) !important; 
             overflow-y: auto;
-            padding: 8rem 4rem;
+            padding: 6rem 2rem;
             color: var(--text-cream-dark);
             animation: fadeInView 0.5s ease forwards;
         }
         .portal-modal.modal-open { display: block; }
         .modal-content-wrapper { 
-            max-width: 850px; 
+            max-width: 800px; 
             margin: 0 auto; 
             position: relative; 
+            display: flex;
+            flex-direction: column !important; 
         }
         .close-modal-btn {
             position: fixed;
-            top: 4rem;
-            right: 5rem;
+            top: 3rem;
+            right: 4rem;
             background: none;
             border: none;
             color: var(--text-cream-muted);
@@ -342,82 +333,122 @@
             cursor: pointer;
             font-weight: 600;
             transition: color 0.2s;
+            z-index: 1100;
         }
         .close-modal-btn:hover { color: var(--text-cream-dark); }
         
-        /* Anti-Squish Framed Container Calculations */
+        /* Universal Anti-Squish Linear Block Frame Layout */
         .modal-hero-artwork-frame {
             display: none;
-            width: 100%;
+            width: 100% !important;
+            max-width: 100% !important;
             height: auto;
-            max-height: 520px;
+            max-height: 500px;
             background-color: #050507;
             margin-bottom: 2.5rem;
             border: 1px solid rgba(0, 0, 0, 0.15);
             overflow: hidden;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
             align-items: center;
             justify-content: center;
+            float: none !important;
         }
         .modal-hero-artwork-frame.has-art { display: flex; }
         .modal-hero-artwork-frame img { 
-            max-width: 100%; 
-            max-height: 520px; 
-            object-fit: contain; 
-            filter: sepia(8%) contrast(102%) brightness(92%);
+            width: auto !important;
+            max-width: 100% !important; 
+            height: auto !important;
+            max-height: 500px !important; 
+            object-fit: contain !important; 
+            display: block !important;
         }
         
-        /* Clean Unboxed Bottom Plaque Typography Layout */
+        /* Premium Open-Air Placard Component Architecture (No Dark Boxes) */
         .modal-plaque-block {
-            font-family: var(--font-sans);
-            font-size: 0.9rem;
-            color: var(--text-cream-dark);
-            line-height: 1.6;
-            margin-bottom: 4.5rem;
-            text-align: left;
-            padding: 2rem 0;
-            border-top: 1px solid rgba(0, 0, 0, 0.08);
-            width: 100%;
+            display: block !important;
+            width: 100% !important;
+            background-color: transparent !important; 
+            background: none !important;
+            padding: 2rem 0 !important;
+            margin: 0 0 3.5rem 0 !important;
+            border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+            border-left: none !important;
+            float: none !important;
         }
         .modal-plaque-artist {
+            display: block;
+            font-family: var(--font-sans);
             font-weight: 700;
             text-transform: uppercase;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             letter-spacing: 0.15em;
-            display: block;
-            margin-bottom: 0.35rem;
-            color: var(--accent-rustic);
+            color: #9C7F68;
+            margin-bottom: 0.4rem;
         }
         .modal-plaque-specs {
+            display: block;
             font-family: var(--font-serif);
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-style: italic;
             font-weight: 600;
+            color: var(--text-cream-dark);
+            margin-bottom: 1rem;
         }
         .modal-plaque-caption {
-            margin-top: 1rem;
-            margin-bottom: 0;
+            font-family: var(--font-sans);
             font-size: 0.95rem;
-            line-height: 1.6;
+            line-height: 1.65;
             color: var(--text-cream-muted);
             text-align: justify;
         }
 
+        /* Standardized Essay Body Interfaces */
         .modal-essay-body {
-            width: 100%;
+            width: 100% !important;
+            display: block !important;
+        }
+        .modal-essay-body h1 {
+            font-family: var(--font-serif);
+            font-size: 3.6rem;
+            font-weight: 300;
+            margin-bottom: 0.8rem;
+            line-height: 1.15;
+            color: var(--text-cream-dark);
+        }
+        .modal-essay-body p.module-subtitle-meta {
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.8rem;
+            color: #9C7F68;
+            margin-bottom: 3.5rem;
+            font-weight: 600;
         }
         .artifact-embed-box {
-            background-color: rgba(0, 0, 0, 0.03);
-            border: 1px dashed rgba(0, 0, 0, 0.12);
-            padding: 3rem;
-            margin: 1.5rem 0 4rem 0;
-            border-radius: 2px;
+            background-color: rgba(0, 0, 0, 0.03) !important;
+            border: 1px dashed rgba(0, 0, 0, 0.15) !important;
+            padding: 3rem !important;
+            margin: 2rem 0 4rem 0 !important;
+            border-radius: 3px;
+            color: var(--text-cream-dark) !important;
+            width: 100% !important;
+        }
+        .artifact-embed-box h3 {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
             color: var(--text-cream-dark);
+            font-style: italic;
+        }
+        .artifact-embed-box p {
+            font-size: 0.95rem;
+            color: var(--text-cream-muted);
+            line-height: 1.6;
         }
     </style>
 </head>
 <body>
-
     <!-- ================= VIEW 1: THE SHAKESPEAREAN LANDING GATEWAY ================= -->
     <main id="gateway-view" class="app-view active-view">
         <div class="owner-branding">MC Rivera — E-Journal Site</div>
@@ -435,19 +466,6 @@
             </button>
         </nav>
     </main>
-    <script>
-        // Central Core View Management Engine
-        function navigateTo(viewId) {
-            document.querySelectorAll('.app-view').forEach(view => {
-                view.classList.remove('active-view');
-            });
-            const targetView = document.getElementById(viewId);
-            if (targetView) {
-                targetView.classList.add('active-view');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
-    </script>
 
     <!-- ================= VIEW 2: IDT 111 EXHIBITION DASHBOARD (5 MODULES) ================= -->
     <section id="idt111-view" class="app-view">
@@ -459,7 +477,7 @@
             </div>
         </header>
         <div class="artifact-grid">
-            <!-- Module 01 -->
+            <!-- Module 01: Active Entry -->
             <div class="flip-card" onclick="openPortal('idt111-m1')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
@@ -474,7 +492,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Module 02 -->
+            <!-- Module 02: Secure Locked Entry -->
             <div class="flip-card card-locked" onclick="openPortal('idt111-m2')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
@@ -489,7 +507,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Module 03 -->
+            <!-- Module 03: Secure Locked Entry -->
             <div class="flip-card card-locked" onclick="openPortal('idt111-m3')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
@@ -504,7 +522,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Module 04 -->
+            <!-- Module 04: Secure Locked Entry -->
             <div class="flip-card card-locked" onclick="openPortal('idt111-m4')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
@@ -519,7 +537,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Module 05 -->
+            <!-- Module 05: Secure Locked Entry -->
             <div class="flip-card card-locked" onclick="openPortal('idt111-m5')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
@@ -546,7 +564,7 @@
             </div>
         </header>
         <div class="artifact-grid">
-            <!-- Module 01 -->
+            <!-- Module 01: Active Entry -->
             <div class="flip-card" onclick="openPortal('idt121-m1')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
@@ -561,7 +579,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Module 02 -->
+            <!-- Module 02: Secure Locked Entry -->
             <div class="flip-card card-locked" onclick="openPortal('idt121-m2')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
@@ -576,7 +594,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Module 03 -->
+            <!-- Module 03: Secure Locked Entry -->
             <div class="flip-card card-locked" onclick="openPortal('idt121-m3')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
@@ -591,7 +609,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Module 04 -->
+            <!-- Module 04: Secure Locked Entry -->
             <div class="flip-card card-locked" onclick="openPortal('idt121-m4')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
@@ -619,6 +637,17 @@
     </div>
 
     <script>
+        // Central Core View Routing Engine
+        function navigateTo(viewId) {
+            document.querySelectorAll('.app-view').forEach(view => {
+                view.classList.remove('active-view');
+            });
+            const targetView = document.getElementById(viewId);
+            if (targetView) {
+                targetView.classList.add('active-view');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
         // =========================================================================
         // 🏛️ CENTRAL DYNAMIC MUSEUM CATALOG DATABASE REGISTRY (MASTER ARCHIVE CONTROL)
         // =========================================================================
@@ -631,11 +660,11 @@
                 museum: 'Musée du Louvre, Paris.',
                 designCaption: 'The ultimate paradigm of subtle visual balance and sfumato technique. Represents user-centric mystery, soft cognitive scaffolding, and the enduring complexity of intuitive human-computer interaction (HCI).',
                 html: `
-                    <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Overview of <i>Instructional Design</i></h1>
-                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 111 — Module 01 Reflection</p>
+                    <h1 style="font-family: var(--font-serif); font-size: 3.6rem; font-weight: 300; margin-bottom: 0.8rem; line-height: 1.15; color: var(--text-cream-dark);">Overview of <i>Instructional Design</i></h1>
+                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: #9C7F68; margin-bottom: 3.5rem; font-weight: 600;">IDT 111 — Module 01 Reflection</p>
                     
                     <div class="artifact-embed-box">
-                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark); font-style: italic;">Official Assignment Output Storage</h3>
+                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1rem; color: var(--text-cream-dark); font-style: italic;">Official Assignment Output Storage</h3>
                         <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Drop assignment maps or custom workflow schematics seamlessly within this immersive container element block once your grades are ready.</p>
                     </div>
                 `
@@ -648,12 +677,12 @@
                 museum: 'Private Collection.',
                 designCaption: 'An iconic image of order holding a crystal orb representing the cosmos. Ideal for sections addressing high-level project governance, comprehensive needs assessment, or the macro-view of instructional systems design.',
                 html: `
-                    <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Learning & <i>Instructional Theories</i></h1>
-                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 111 — Module 02 Reflection</p>
+                    <h1 style="font-family: var(--font-serif); font-size: 3.6rem; font-weight: 300; margin-bottom: 0.8rem; line-height: 1.15; color: var(--text-cream-dark);">Learning & <i>Instructional Theories</i></h1>
+                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: #9C7F68; margin-bottom: 3.5rem; font-weight: 600;">IDT 111 — Module 02 Reflection</p>
                     
                     <div class="artifact-embed-box">
-                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark); font-style: italic;">Official Assignment Output Storage</h3>
-                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Replace this text with your completed Module 02 macro-systems analysis submission text over the trimester.</p>
+                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1rem; color: var(--text-cream-dark); font-style: italic;">Official Assignment Output Storage</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Your macro-systems analysis submission elements, systematic evaluation charts, or grading framework feedback variables will sit cleanly within this container box.</p>
                     </div>
                 `
             },
@@ -665,12 +694,12 @@
                 museum: 'Musée du Louvre, Paris.',
                 designCaption: 'An intensely fluid, chaotic Mannerist portrayal of dynamic forces colliding. Represents systemic friction, pedagogical paradigm shifts, and managing overwhelming cognitive load in complex educational interventions.',
                 html: `
-                    <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Learning Theories and <i>Instructional Design</i></h1>
-                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 111 — Module 03 Reflection</p>
+                    <h1 style="font-family: var(--font-serif); font-size: 3.6rem; font-weight: 300; margin-bottom: 0.8rem; line-height: 1.15; color: var(--text-cream-dark);">Learning Theories and <i>Instructional Design</i></h1>
+                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: #9C7F68; margin-bottom: 3.5rem; font-weight: 600;">IDT 111 — Module 03 Reflection</p>
                     
                     <div class="artifact-embed-box">
-                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark); font-style: italic;">Official Assignment Output Storage</h3>
-                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Your critical assessment on managing cognitive load paradigms and theory conflicts goes here.</p>
+                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1rem; color: var(--text-cream-dark); font-style: italic;">Official Assignment Output Storage</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Your critical assessment on managing cognitive load paradigms, cognitive flexibility workflows, and academic structural data goes here.</p>
                     </div>
                 `
             },
@@ -682,12 +711,12 @@
                 museum: 'Musée du Louvre, Paris.',
                 designCaption: 'A dramatic, high-contrast Caravaggites execution showing stark tension and behavioral correction. Serves as a raw artistic metaphor for formative assessment, behaviorist feedback loops, or disruptive interventions in instructional tracking.',
                 html: `
-                    <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Instructional Theories in <i>Practice</i></h1>
-                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 111 — Module 04 Reflection</p>
+                    <h1 style="font-family: var(--font-serif); font-size: 3.6rem; font-weight: 300; margin-bottom: 0.8rem; line-height: 1.15; color: var(--text-cream-dark);">Instructional Theories in <i>Practice</i></h1>
+                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: #9C7F68; margin-bottom: 3.5rem; font-weight: 600;">IDT 111 — Module 04 Reflection</p>
                     
                     <div class="artifact-embed-box">
-                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark); font-style: italic;">Official Assignment Output Storage</h3>
-                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Your analysis of behaviorist feedback mechanisms and formative assessment tracking nodes goes here.</p>
+                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1rem; color: var(--text-cream-dark); font-style: italic;">Official Assignment Output Storage</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Your analysis of behaviorist feedback mechanisms, diagnostic tracking parameters, and criteria maps goes inside this container block layout.</p>
                     </div>
                 `
             },
@@ -699,12 +728,12 @@
                 museum: 'Musée du Louvre, Paris.',
                 designCaption: 'A beautifully grouped, organic floral composition utilizing soft illumination. Mirrors the thoughtful curation of modular multimedia objects, beautiful typography layouts, and balanced instructional message design.',
                 html: `
-                    <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Systemic <i>Design Models</i></h1>
-                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 111 — Module 05 Reflection</p>
+                    <h1 style="font-family: var(--font-serif); font-size: 3.6rem; font-weight: 300; margin-bottom: 0.8rem; line-height: 1.15; color: var(--text-cream-dark);">Systemic <i>Design Models</i></h1>
+                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: #9C7F68; margin-bottom: 3.5rem; font-weight: 600;">IDT 111 — Module 05 Reflection</p>
                     
                     <div class="artifact-embed-box">
-                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark); font-style: italic;">Official Assignment Output Storage</h3>
-                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Your structural breakdown of systematic instructional systems and design artifacts goes here.</p>
+                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1rem; color: var(--text-cream-dark); font-style: italic;">Official Assignment Output Storage</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Your structural breakdown of systematic instructional systems, ADDIE matrices, and final course blueprint schemas will sit cleanly within this box block layer.</p>
                     </div>
                 `
             },
@@ -716,11 +745,11 @@
                 museum: 'Musée du Louvre, Paris.',
                 designCaption: 'A monumental Romantic masterpiece depicting human desperation and systemic chaos. Perfect as a metaphor for structural breakdown, project volatility, or the frantic search for a navigation framework in systemic instructional spaces.',
                 html: `
-                    <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Introduction to <i>Context Analysis</i></h1>
-                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 121 — Module 01 Reflection</p>
+                    <h1 style="font-family: var(--font-serif); font-size: 3.6rem; font-weight: 300; margin-bottom: 0.8rem; line-height: 1.15; color: var(--text-cream-dark);">Introduction to <i>Context Analysis</i></h1>
+                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: #9C7F68; margin-bottom: 3.5rem; font-weight: 600;">IDT 121 — Module 01 Reflection</p>
                     
                     <div class="artifact-embed-box">
-                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark); font-style: italic;">Official Context Artifact Storage</h3>
+                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1rem; color: var(--text-cream-dark); font-style: italic;">Official Context Artifact Storage</h3>
                         <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Your systemic context audits, physical learning environment matrices, and target audience data fields will sit inside this dedicated presentation module area.</p>
                     </div>
                 `
@@ -733,12 +762,12 @@
                 museum: 'Musée du Louvre, Paris.',
                 designCaption: 'A grand, dramatic Baroque showcase of lavish status textures contrasted with instinctual elements. A great analog for examining competing environmental variables, deep contextual analysis, or the raw complexity of learner ecosystems.',
                 html: `
-                    <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Systems Thinking in <i>Ecosystem Audits</i></h1>
-                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 121 — Module 02 Reflection</p>
+                    <h1 style="font-family: var(--font-serif); font-size: 3.6rem; font-weight: 300; margin-bottom: 0.8rem; line-height: 1.15; color: var(--text-cream-dark);">Systems Thinking in <i>Ecosystem Audits</i></h1>
+                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: #9C7F68; margin-bottom: 3.5rem; font-weight: 600;">IDT 121 — Module 02 Reflection</p>
                     
                     <div class="artifact-embed-box">
-                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark); font-style: italic;">Official Context Artifact Storage</h3>
-                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Your breakdown of systemic variables, institutional limits, and user ecosystem criteria goes here.</p>
+                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1rem; color: var(--text-cream-dark); font-style: italic;">Official Context Artifact Storage</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Your breakdown of systemic variables, institutional limits, environmental boundaries, and organic user feedback matrices goes here.</p>
                     </div>
                 `
             },
@@ -750,12 +779,12 @@
                 museum: 'Musée du Louvre, Paris.',
                 designCaption: 'A highly dense historical staging showing diplomatic protocols and architecture. Use this to illustrate complex institutional protocols, stakeholder alignment, or navigating socio-political boundaries in learning systems.',
                 html: `
-                    <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Models and Processes of <i>Context Analysis</i></h1>
-                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 121 — Module 03 Reflection</p>
+                    <h1 style="font-family: var(--font-serif); font-size: 3.6rem; font-weight: 300; margin-bottom: 0.8rem; line-height: 1.15; color: var(--text-cream-dark);">Models and Processes of <i>Context Analysis</i></h1>
+                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: #9C7F68; margin-bottom: 3.5rem; font-weight: 600;">IDT 121 — Module 03 Reflection</p>
                     
                     <div class="artifact-embed-box">
-                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark); font-style: italic;">Official Context Artifact Storage</h3>
-                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Your strategic documentation on navigating socio-political stakeholder boundaries inside corporate/academic architectures goes here.</p>
+                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1rem; color: var(--text-cream-dark); font-style: italic;">Official Context Artifact Storage</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Your strategic documentation on navigating socio-political stakeholder boundaries, administrative variables, and operational criteria inside corporate/academic architectures goes here.</p>
                     </div>
                 `
             },
@@ -767,17 +796,17 @@
                 museum: 'Musée du Louvre, Paris.',
                 designCaption: 'An immortal ukiyo-e woodblock print showcasing immense natural scale and graphic line movement. The ultimate visual metaphor for scaling educational technology, facing overwhelming administrative waves, or designing modular content for systemic resilience.',
                 html: `
-                    <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Writing Context Analysis <i>Reports</i></h1>
-                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 121 — Module 04 Reflection</p>
+                    <h1 style="font-family: var(--font-serif); font-size: 3.6rem; font-weight: 300; margin-bottom: 0.8rem; line-height: 1.15; color: var(--text-cream-dark);">Writing Context Analysis <i>Reports</i></h1>
+                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: #9C7F68; margin-bottom: 3.5rem; font-weight: 600;">IDT 121 — Module 04 Reflection</p>
                     
                     <div class="artifact-embed-box">
-                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark); font-style: italic;">Official Context Artifact Storage</h3>
-                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Your final capstone wrap-up detailing context-resilient systemic instruction implementations goes here.</p>
+                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1rem; color: var(--text-cream-dark); font-style: italic;">Official Context Artifact Storage</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Your final capstone wrap-up detailing context-resilient systemic instruction implementations, final delivery architectures, and course wrap-up reporting schemas goes inside this section.</p>
                     </div>
                 `
             }
         };
-        // Initialize thumbnails across all grids on document load
+        // Initialize thumbnails across all exhibition grids on document load
         document.addEventListener("DOMContentLoaded", () => {
             Object.keys(journalDatabase).forEach(key => {
                 const targetVisualFrame = document.getElementById('front-visual-' + key);
@@ -787,17 +816,18 @@
             });
         });
 
-        // Immersive Portal Engine: Renders clean unboxed bottom plaque layout dynamically
+        // Immersive Portal Engine: Injects the clean box-free bottom layout directly
         function openPortal(entryId) {
             const contentZone = document.getElementById('modal-dynamic-target');
             const heroZone = document.getElementById('modal-dynamic-hero');
             
             if (journalDatabase[entryId]) {
-                // Injects the clean e-journal essay title and standard assignment container
+                // Injects the pure e-journal essay and standardized storage container elements
                 contentZone.innerHTML = journalDatabase[entryId].html;
                 
                 if (journalDatabase[entryId].image !== '') {
-                    // Renders the image on top and appends the unboxed plaque block directly below it
+                    // Renders the masterwork image full-width on top
+                    // Appends the open-air layout text placard cleanly below the frame with NO dark boxes
                     heroZone.innerHTML = `
                         <img src="${journalDatabase[entryId].image}" alt="Exhibition Masterwork Leaf Header">
                         <div class="modal-plaque-block">
@@ -817,7 +847,6 @@
         }
 
         function closePortal() {
-            document.getElementById('portal-modal-sheath').classList.remove('modal-remove');
             document.getElementById('portal-modal-sheath').classList.remove('modal-open');
             document.body.style.overflow = 'auto';
         }
