@@ -9,23 +9,18 @@
     <link href="https://googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* 75% Dark Canvas Base Ratio */
             --bg-canvas: #09090B;        
-            --bg-card: #131315;          
-            --border-muted: #222225;     
+            --bg-card: #141417;          
+            --border-muted: #242427;     
             --text-primary: #F4F4F6;     
             --text-secondary: #91919E;   
             --accent-rustic: #A48B76;    
-            
-            /* 75-20-5 Interior Louvre Leaf Transitions */
-            --bg-cream-leaf: #EDE8DC;    /* Pristine Art Institute Background */
-            --text-cream-dark: #1A1A1C;  /* Luxurious Deep Charcoal Typography */
-            --text-cream-muted: #5D5D66; /* Elegant Editorial Description Tone */
-            
+            --bg-cream-leaf: #EDE8DC;    
+            --text-cream-dark: #1A1A1C;  
+            --text-cream-muted: #5D5D66; 
             --font-serif: 'Cormorant Garamond', Georgia, serif;
             --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             background-color: var(--bg-canvas);
@@ -35,7 +30,6 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
-
         .app-view {
             display: none;
             min-height: 100vh;
@@ -43,18 +37,14 @@
             max-width: 1300px;
             margin: 0 auto;
         }
-
         .app-view.active-view {
             display: block;
             animation: fadeInView 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-
         @keyframes fadeInView {
             from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        /* --- IMMERSIVE COGNITIVE LANDING PRELUDE --- */
         #gateway-view {
             display: none;
             flex-direction: column;
@@ -65,9 +55,7 @@
             padding: 2rem;
             position: relative;
         }
-
         #gateway-view.active-view { display: flex; }
-
         .owner-branding {
             position: absolute;
             top: 4rem;
@@ -78,7 +66,6 @@
             text-transform: uppercase;
             color: var(--text-secondary);
         }
-
         .gateway-brand {
             font-family: var(--font-sans);
             font-size: 0.8rem;
@@ -87,7 +74,6 @@
             color: var(--accent-rustic);
             margin-bottom: 4rem;
         }
-
         .gateway-quote {
             font-family: var(--font-serif);
             font-size: 3.8rem;
@@ -98,7 +84,6 @@
             margin-bottom: 6rem;
             color: var(--text-primary);
         }
-
         .gateway-options {
             display: flex;
             gap: 4rem;
@@ -106,7 +91,6 @@
             max-width: 800px;
             justify-content: center;
         }
-
         .gateway-btn {
             background: none;
             border: none;
@@ -117,12 +101,10 @@
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             width: 320px;
         }
-
         .gateway-btn:hover {
             border-color: var(--accent-rustic);
             transform: translateY(-4px);
         }
-
         .gateway-btn h3 {
             font-family: var(--font-serif);
             font-size: 2rem;
@@ -130,7 +112,6 @@
             color: var(--text-primary);
             margin-bottom: 0.6rem;
         }
-
         .gateway-btn span {
             font-family: var(--font-sans);
             font-size: 0.7rem;
@@ -139,7 +120,6 @@
             color: var(--text-secondary);
         }
     </style>
-</head>
     <style>
         .dashboard-header {
             border-bottom: 1px solid var(--border-muted);
@@ -283,8 +263,6 @@
             width: 100%;
         }
         .card-locked { opacity: 0.2; pointer-events: none; }
-
-        /* --- THE SELECTIONS HIGH-CONTRAST LOUVRE LEAF SHEET --- */
         .portal-modal {
             display: none;
             position: fixed;
@@ -315,19 +293,17 @@
         }
         .close-modal-btn:hover { color: var(--text-cream-dark); }
         .modal-hero-artwork-frame {
+            display: none;
             width: 100%;
-            height: 400px;
-            background-color: #111;
+            height: 440px;
+            background-color: rgba(0, 0, 0, 0.05);
             margin-bottom: 4rem;
-            border: 1px solid rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.08);
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.06);
         }
-        .modal-hero-artwork-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .modal-hero-artwork-frame.has-art { display: block; }
+        .modal-hero-artwork-frame img { width: 100%; height: 100%; object-fit: cover; }
         .modal-essay-body {
             font-family: var(--font-sans);
             font-size: 1.1rem;
@@ -336,8 +312,8 @@
         }
         .modal-essay-body p { margin-bottom: 2.2rem; text-align: justify; }
         .artifact-embed-box {
-            background-color: rgba(0, 0, 0, 0.03);
-            border: 1px dashed rgba(0, 0, 0, 0.15);
+            background-color: rgba(0, 0, 0, 0.02);
+            border: 1px dashed rgba(0, 0, 0, 0.12);
             padding: 3rem;
             margin: 4rem 0;
             border-radius: 2px;
@@ -353,12 +329,10 @@
         <h2 class="gateway-quote">“Though this be madness, yet there is method in’t.”</h2>
         <nav class="gateway-options" aria-label="Course selection">
             <button class="gateway-btn" onclick="navigateTo('idt111-view')">
-                <h3>IDT 111</h3>
-                <span>Instructional Models</span>
+                <h3>IDT 111</h3><span>Instructional Models</span>
             </button>
             <button class="gateway-btn" onclick="navigateTo('idt121-view')">
-                <h3>IDT 121</h3>
-                <span>Context Analysis</span>
+                <h3>IDT 121</h3><span>Context Analysis</span>
             </button>
         </nav>
     </main>
@@ -375,14 +349,11 @@
         </header>
 
         <div class="artifact-grid">
-            <!-- Module 1: Active -->
             <div class="flip-card" onclick="openPortal('idt111-m1')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
                         <div class="card-meta-line"><span>Module 01</span><span>Active</span></div>
-                        <div class="front-visual-core">
-                            <span style="color: var(--accent-rustic); font-family: var(--font-serif); font-style: italic;">Exhibition No. 01</span>
-                        </div>
+                        <div class="front-visual-core"><span style="color: var(--accent-rustic); font-family: var(--font-serif); font-style: italic;">Exhibition No. 01</span></div>
                         <h2 class="card-core-heading">Overview of Instructional Design</h2>
                     </div>
                     <div class="flip-card-back">
@@ -392,50 +363,10 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Module 2: Locked -->
-            <div class="flip-card card-locked">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 02</span><span>Encrypted</span></div>
-                        <div class="front-visual-core"></div>
-                        <h2 class="card-core-heading">Learning Theory, Instructional Theory, & ID Model</h2>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Module 3: Locked -->
-            <div class="flip-card card-locked">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 03</span><span>Encrypted</span></div>
-                        <div class="front-visual-core"></div>
-                        <h2 class="card-core-heading">Learning Theories and Instructional Design</h2>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Module 4: Locked -->
-            <div class="flip-card card-locked">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 04</span><span>Encrypted</span></div>
-                        <div class="front-visual-core"></div>
-                        <h2 class="card-core-heading">Instructional Theories and Instructional Design</h2>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Module 5: Locked -->
-            <div class="flip-card card-locked">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 05</span><span>Encrypted</span></div>
-                        <div class="front-visual-core"></div>
-                        <h2 class="card-core-heading">Instructional Design Models</h2>
-                    </div>
-                </div>
-            </div>
+            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 02</span><span>Encrypted</span></div><div class="front-visual-core"></div><h2 class="card-core-heading">Learning Theory, Instructional Theory, & ID Model</h2></div></div></div>
+            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 03</span><span>Encrypted</span></div><div class="front-visual-core"></div><h2 class="card-core-heading">Learning Theories and Instructional Design</h2></div></div></div>
+            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 04</span><span>Encrypted</span></div><div class="front-visual-core"></div><h2 class="card-core-heading">Instructional Theories and Instructional Design</h2></div></div></div>
+            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 05</span><span>Encrypted</span></div><div class="front-visual-core"></div><h2 class="card-core-heading">Instructional Design Models</h2></div></div></div>
         </div>
     </section>
     <!-- ================= VIEW 3: IDT 121 EXHIBITION DASHBOARD (4 MODULES) ================= -->
@@ -450,7 +381,6 @@
         </header>
 
         <div class="artifact-grid">
-            <!-- Module 1: Active -->
             <div class="flip-card" onclick="openPortal('idt121-m1')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
@@ -465,53 +395,18 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Module 2: Locked -->
-            <div class="flip-card card-locked">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 02</span><span>Encrypted</span></div>
-                        <div class="front-visual-core"></div>
-                        <h2 class="card-core-heading">Systems Thinking in Context Analysis</h2>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Module 3: Locked -->
-            <div class="flip-card card-locked">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 03</span><span>Encrypted</span></div>
-                        <div class="front-visual-core"></div>
-                        <h2 class="card-core-heading">Models and Processes of Context Analysis</h2>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Module 4: Locked -->
-            <div class="flip-card card-locked">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 04</span><span>Encrypted</span></div>
-                        <div class="front-visual-core"></div>
-                        <h2 class="card-core-heading">Writing Context Analysis Report and Wrap-Up</h2>
-                    </div>
-                </div>
-            </div>
+            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 02</span><span>Encrypted</span></div><div class="front-visual-core"></div><h2 class="card-core-heading">Systems Thinking in Context Analysis</h2></div></div></div>
+            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 03</span><span>Encrypted</span></div><div class="front-visual-core"></div><h2 class="card-core-heading">Models and Processes of Context Analysis</h2></div></div></div>
+            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 04</span><span>Encrypted</span></div><div class="front-visual-core"></div><h2 class="card-core-heading">Writing Context Analysis Report and Wrap-Up</h2></div></div></div>
         </div>
     </section>
 
-    <!-- ================= VIEW 4: MASTER LOUVRE IMMERSIVE FULL-PAGE LEAF ================= -->
+    <!-- ================= VIEW 4: IMMERSIVE FULL-PAGE ART PRESENTATION ZONE ================= -->
     <div id="portal-modal-sheath" class="portal-modal">
         <button class="close-modal-btn" onclick="closePortal()">← Go back to modules</button>
         <main class="modal-content-wrapper">
-            <!-- Dynamic Hero Banner Frame for your Louvre Masterpieces -->
-            <div class="modal-hero-artwork-frame" id="modal-dynamic-hero">
-                <!-- Image injects here dynamically -->
-            </div>
-            <article class="modal-essay-body" id="modal-dynamic-target">
-                <!-- Immersive content injects here dynamically -->
-            </article>
+            <div class="modal-hero-artwork-frame" id="modal-dynamic-hero"></div>
+            <article class="modal-essay-body" id="modal-dynamic-target"></article>
         </main>
     </div>
 
@@ -527,15 +422,12 @@
             }
         }
 
-        // Centralized testing database housing your custom text configurations
         const journalDatabase = {
             'idt111-m1': {
-                image: 'https://unsplash.com', // Elegant oil canvas artwork anchor
+                image: '', 
                 html: `
-                    <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Overview of Instructional Design</h1>
-                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 111 — Module 01 Exhibition</p>
-                    
-                    <p>Your complex instructional model critical reflections will render completely cleanly inside this spacious layout page view. The custom typography configuration makes reading notoriously long UPOU entry paragraphs highly comfortable for your professors' eyes.</p>
+                    <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Overview of <i>Instructional Design</i></h1>
+                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 111 — Module 01 Reflection</p>
                     
                     <div class="artifact-embed-box">
                         <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark);">Official Assignment Output Storage</h3>
@@ -544,12 +436,10 @@
                 `
             },
             'idt121-m1': {
-                image: 'https://unsplash.com', // Deep canvas texture anchor
+                image: '', 
                 html: `
-                    <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Introduction to Context Analysis</h1>
-                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 121 — Module 01 Exhibition</p>
-                    
-                    <p>Your multi-perspective context analysis write-ups, student demographic metrics, and environmental systems boundary analysis reports will expand beautifully inside this high-contrast interface canvas layer.</p>
+                    <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Introduction to <i>Context Analysis</i></h1>
+                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 121 — Module 01 Reflection</p>
                     
                     <div class="artifact-embed-box">
                         <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark);">Official Context Artifact Storage</h3>
@@ -565,15 +455,21 @@
             
             if (journalDatabase[entryId]) {
                 contentZone.innerHTML = journalDatabase[entryId].html;
-                heroZone.innerHTML = `<img src="${journalDatabase[entryId].image}" alt="Exhibition Artpiece Masterwork">`;
+                if (journalDatabase[entryId].image !== '') {
+                    heroZone.innerHTML = `<img src="${journalDatabase[entryId].image}" alt="Exhibition Artpiece Masterwork">`;
+                    heroZone.classList.add('has-art');
+                } else {
+                    heroZone.innerHTML = '';
+                    heroZone.classList.remove('has-art');
+                }
                 document.getElementById('portal-modal-sheath').classList.add('modal-open');
-                document.body.style.overflow = 'hidden'; // Lock back scroll
+                document.body.style.overflow = 'hidden';
             }
         }
 
         function closePortal() {
             document.getElementById('portal-modal-sheath').classList.remove('modal-open');
-            document.body.style.overflow = 'auto'; // Release scroll
+            document.body.style.overflow = 'auto';
         }
     </script>
 </body>
