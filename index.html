@@ -100,7 +100,7 @@
         }
         .gateway-btn:hover {
             border-color: var(--accent-rustic);
-            transform: translateY(-5px);
+            transform: translateY(-4px);
         }
         .gateway-btn h3 {
             font-family: var(--font-serif);
@@ -116,6 +116,9 @@
             text-transform: uppercase;
             color: var(--text-secondary);
         }
+    </style>
+</head>
+    <style>
         .dashboard-header {
             border-bottom: 1px solid var(--border-muted);
             padding-bottom: 3rem;
@@ -249,9 +252,7 @@
             padding-top: 1.2rem;
             border-top: 1px solid var(--border-muted);
             width: 100%;
-            transition: color 0.2s ease;
         }
-        .flip-card-back:hover .explore-trigger-btn { color: var(--text-primary); }
         .card-locked { opacity: 0.2; pointer-events: none; }
         .portal-modal {
             display: none;
@@ -275,9 +276,7 @@
             text-transform: uppercase;
             letter-spacing: 0.25em;
             cursor: pointer;
-            transition: color 0.2s ease;
         }
-        .close-modal-btn:hover { color: var(--text-primary); }
         .modal-essay-body {
             font-family: var(--font-sans);
             font-size: 1.1rem;
@@ -295,8 +294,23 @@
     </style>
 </head>
 <body>
+    <!-- ================= VIEW 1: THE SHAKESPEAREAN LANDING GATEWAY ================= -->
     <main id="gateway-view" class="app-view active-view">
         <div class="owner-branding">MC Rivera — E-Journal Site</div>
+        <div class="gateway-brand">the.madness.chamber</div>
+        <h2 class="gateway-quote">“Though this be madness, yet there is method in’t.”</h2>
+        <nav class="gateway-options" aria-label="Course selection">
+            <button class="gateway-btn" onclick="navigateTo('idt111-view')">
+                <h3>IDT 111</h3>
+                <span>Instructional Models</span>
+            </button>
+            <button class="gateway-btn" onclick="navigateTo('idt121-view')">
+                <h3>IDT 121</h3>
+                <span>Context Analysis</span>
+            </button>
+        </nav>
+    </main>
+
     <!-- ================= VIEW 2: IDT 111 EXHIBITION DASHBOARD (5 MODULES) ================= -->
     <section id="idt111-view" class="app-view">
         <header class="dashboard-header">
@@ -322,7 +336,7 @@
                     <div class="flip-card-back">
                         <div class="card-meta-line"><span>Overview</span><span>01 / 05</span></div>
                         <p class="back-summary-text">A high-level critical reflection exploring core ID beliefs, values, and design judgments through the lens of Lachheb & Boling (2021).</p>
-                        <button class="explore-trigger-btn">Explore Reflection & Outputs →</button>
+                        <button class="explore-trigger-btn">Explore Exhibition Page →</button>
                     </div>
                 </div>
             </div>
@@ -389,15 +403,13 @@
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
                         <div class="card-meta-line"><span>Module 01</span><span>Active</span></div>
-                        <div class="front-visual-core">
-                            <span style="color: var(--accent-rustic); font-family: var(--font-serif); font-style: italic;">Exhibition No. 01</span>
-                        </div>
+                        <div class="front-visual-core"><span style="color: var(--accent-rustic); font-family: var(--font-serif); font-style: italic;">Exhibition No. 01</span></div>
                         <h2 class="card-core-heading">Introduction to Context Analysis</h2>
                     </div>
                     <div class="flip-card-back">
                         <div class="card-meta-line"><span>Overview</span><span>01 / 04</span></div>
-                        <p class="back-summary-text">A multi-perspective critical evaluation introducing target learner profiles and physical/digital learning ecosystem boundaries.</p>
-                        <button class="explore-trigger-btn">Explore Reflection & Outputs →</button>
+                        <p class="back-summary-text">A multi-perspective critical evaluation introducing target learner profiles and physical/digital learning ecosystems.</p>
+                        <button class="explore-trigger-btn">Explore Exhibition Page →</button>
                     </div>
                 </div>
             </div>
@@ -437,12 +449,11 @@
         </div>
     </section>
 
-    <!-- ================= VIEW 4: MASTER LOUVRE IMMERSIVE FULL-PAGE LEAF ================= -->
+    <!-- ================= VIEW 4: IMMERSIVE FULL-PAGE EMBED LEAF ================= -->
     <div id="portal-modal-sheath" class="portal-modal">
         <button class="close-modal-btn" onclick="closePortal()">Close Exhibition Leaf ✕</button>
         <main class="modal-content-wrapper">
             <article class="modal-essay-body" id="modal-dynamic-target">
-                <!-- Immersive structural database content injects here dynamically -->
             </article>
         </main>
     </div>
@@ -456,33 +467,28 @@
             if (targetView) {
                 targetView.classList.add('active-view');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+                targetView.classList.add('active-view');
             }
         }
 
-        // Dedicated Academic Database storing your long-form UPOU essays and embeds
+        // Static testing registry containing your long-form UPOU essays
         const journalDatabase = {
             'idt111-m1': `
-                <h1 style="font-family: var(--font-serif); font-size: 4rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15;">Overview of Instructional Design</h1>
-                <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem;">IDT 111 — Module 01 Deep Exhibition Leaf</p>
-                
-                <p>This dedicated workspace is explicitly designed to handle notoriously long IDT entries. Your long-form reflections, theories analysis, and metacognitive self-evaluations will sit cleanly inside this immersive full-screen view panel, allowing your UPOU professors to read and evaluate your work with maximum comfort.</p>
-                
+                <h1 style="font-family: var(--font-serif); font-size: 3.5rem; font-weight: 300; margin-bottom: 1rem;">Overview of Instructional Design</h1>
+                <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 3rem;">IDT 111 — Module 01 Deep Exhibition Leaf</p>
+                <p>This immersive space handles your long-form entries cleanly. Your outputs and critical reflections will sit inside this expansive full-screen view panel, allowing your UPOU professors to evaluate your assignments with maximum comfort.</p>
                 <div class="artifact-embed-box">
-                    <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--accent-rustic);">Official Assignment Output Storage</h3>
-                    <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 0;">[Louvre Masterpiece Image or Project Link Embed Zone] — When you are ready to include your actual output charts or documents, we will place an automated frame code here so your professor can view the complete project file without leaving your portal.</p>
+                    <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1rem; color: var(--accent-rustic);">Official Assignment Output Storage</h3>
+                    <p style="font-size: 0.95rem; color: var(--text-secondary);">[Louvre Masterpiece Image or Project Link Embed Zone] — Once we activate the text system, you can embed your actual output charts or documents here effortlessly.</p>
                 </div>
-                
-                <p>By keeping this space isolated from the main grid dashboard, we ensure your overall interface remains pristine, highly professional, and perfectly aligned with the strict 1.00 grade rubric standards.</p>
             `,
             'idt121-m1': `
-                <h1 style="font-family: var(--font-serif); font-size: 4rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15;">Introduction to Context Analysis</h1>
-                <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem;">IDT 121 — Module 01 Deep Exhibition Leaf</p>
-                
-                <p>Your complex context audits, learner demographic charts, and environmental boundary mapping documentation will render smoothly here with generous margins and premium editorial layout typography.</p>
-                
+                <h1 style="font-family: var(--font-serif); font-size: 3.5rem; font-weight: 300; margin-bottom: 1rem;">Introduction to Context Analysis</h1>
+                <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 3rem;">IDT 121 — Module 01 Deep Exhibition Leaf</p>
+                <p>Your complex context audits and learner demographic reports will render smoothly here with generous editorial margins and premium 75-20-5 typography scaling.</p>
                 <div class="artifact-embed-box">
-                    <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--accent-rustic);">Official Context Artifact Storage</h3>
-                    <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 0;">[Context Audit Charts or Document Embed Zone] — Any systemic models or data structures you build throughout this course will live safely in this dedicated frame block.</p>
+                    <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1rem; color: var(--accent-rustic);">Official Context Artifact Storage</h3>
+                    <p style="font-size: 0.95rem; color: var(--text-secondary);">[Context Audit Charts Zone] — Live evidence and systemic mapping files will render safely inside this dedicated content block.</p>
                 </div>
             `
         };
@@ -492,13 +498,13 @@
             if (journalDatabase[entryId]) {
                 displayZone.innerHTML = journalDatabase[entryId];
                 document.getElementById('portal-modal-sheath').classList.add('modal-open');
-                document.body.style.overflow = 'hidden'; // Lock background scrolling
+                document.body.style.overflow = 'hidden';
             }
         }
 
         function closePortal() {
             document.getElementById('portal-modal-sheath').classList.remove('modal-open');
-            document.body.style.overflow = 'auto'; // Restore background scrolling
+            document.body.style.overflow = 'auto';
         }
     </script>
 </body>
