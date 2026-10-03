@@ -11,8 +11,8 @@
         :root {
             /* 60 - 30 - 10 Curated Museum Balance Elements */
             --bg-canvas: #09090B;        
-            --bg-card: #121215;          
-            --bg-card-hover: #16161A;    
+            --bg-card: #131316;          
+            --bg-card-hover: #19191D;    
             --bg-sepia-surface: #EDE8DC; 
             --border-muted: rgba(164, 139, 118, 0.15);     
             --text-primary: #F4F4F6;     
@@ -47,6 +47,15 @@
             from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        
+        /* Premium Layered Dashboard Canvas Gradient */
+        #idt111-view, #idt121-view {
+            background: radial-gradient(circle at top center, #161619 0%, #09090B 70%);
+            max-width: 100%;
+            padding-left: 4rem;
+            padding-right: 4rem;
+        }
+        
         #gateway-view {
             display: none;
             flex-direction: column;
@@ -142,6 +151,9 @@
             justify-content: space-between;
             align-items: flex-end;
             position: relative;
+            max-width: 1300px;
+            margin-left: auto;
+            margin-right: auto;
         }
         .dashboard-owner {
             position: absolute;
@@ -185,6 +197,8 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
             gap: 4rem 3rem;
+            max-width: 1300px;
+            margin: 0 auto;
         }
         .flip-card {
             background-color: transparent;
@@ -202,6 +216,8 @@
             transform-style: preserve-3d;
         }
         .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        
+        /* Fixed Dashboard Card Colors & Image Containers */
         .flip-card-front, .flip-card-back {
             position: absolute;
             inset: 0;
@@ -242,6 +258,14 @@
             transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .flip-card:hover .front-visual-core img { transform: scale(1.04); }
+        
+        /* Exhibition Security System Architecture Rules */
+        .card-locked { 
+            opacity: 0.25; 
+            pointer-events: none !important; 
+            filter: grayscale(100%) brightness(70%); 
+        }
+        
         .card-meta-line {
             display: flex;
             justify-content: space-between;
@@ -321,14 +345,14 @@
         }
         .close-modal-btn:hover { color: var(--text-cream-dark); }
         
-        /* Anti-Squish Universal Frame Configuration */
+        /* Anti-Squish Framed Container Calculations */
         .modal-hero-artwork-frame {
             display: none;
             width: 100%;
             height: auto;
             max-height: 520px;
             background-color: #050507;
-            margin-bottom: 3.5rem;
+            margin-bottom: 2.5rem;
             border: 1px solid rgba(0, 0, 0, 0.15);
             overflow: hidden;
             box-shadow: 0 30px 60px rgba(0,0,0,0.12);
@@ -343,7 +367,7 @@
             filter: sepia(8%) contrast(102%) brightness(92%);
         }
         
-        /* New Flexible Bottom Plaque Block Layout */
+        /* Clean Unboxed Bottom Plaque Typography Layout */
         .modal-plaque-block {
             font-family: var(--font-sans);
             font-size: 0.9rem;
@@ -351,9 +375,8 @@
             line-height: 1.6;
             margin-bottom: 4.5rem;
             text-align: left;
-            padding: 2rem;
-            background-color: rgba(0, 0, 0, 0.03);
-            border-left: 3px solid var(--accent-rustic);
+            padding: 2rem 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
             width: 100%;
         }
         .modal-plaque-artist {
@@ -367,12 +390,12 @@
         }
         .modal-plaque-specs {
             font-family: var(--font-serif);
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             font-style: italic;
             font-weight: 600;
         }
         .modal-plaque-caption {
-            margin-top: 1.2rem;
+            margin-top: 1rem;
             margin-bottom: 0;
             font-size: 0.95rem;
             line-height: 1.6;
@@ -381,23 +404,20 @@
         }
 
         .modal-essay-body {
-            font-family: var(--font-sans);
-            font-size: 1.1rem;
-            line-height: 1.95;
-            color: var(--text-cream-dark);
+            width: 100%;
         }
-        .modal-essay-body p { margin-bottom: 2.2rem; text-align: justify; }
         .artifact-embed-box {
-            background-color: rgba(0, 0, 0, 0.04);
-            border: 1px dashed rgba(0, 0, 0, 0.15);
+            background-color: rgba(0, 0, 0, 0.03);
+            border: 1px dashed rgba(0, 0, 0, 0.12);
             padding: 3rem;
-            margin: 4rem 0;
+            margin: 1.5rem 0 4rem 0;
             border-radius: 2px;
             color: var(--text-cream-dark);
         }
     </style>
 </head>
 <body>
+
     <!-- ================= VIEW 1: THE SHAKESPEAREAN LANDING GATEWAY ================= -->
     <main id="gateway-view" class="app-view active-view">
         <div class="owner-branding">MC Rivera — E-Journal Site</div>
@@ -415,6 +435,19 @@
             </button>
         </nav>
     </main>
+    <script>
+        // Central Core View Management Engine
+        function navigateTo(viewId) {
+            document.querySelectorAll('.app-view').forEach(view => {
+                view.classList.remove('active-view');
+            });
+            const targetView = document.getElementById(viewId);
+            if (targetView) {
+                targetView.classList.add('active-view');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+    </script>
 
     <!-- ================= VIEW 2: IDT 111 EXHIBITION DASHBOARD (5 MODULES) ================= -->
     <section id="idt111-view" class="app-view">
@@ -426,7 +459,7 @@
             </div>
         </header>
         <div class="artifact-grid">
-            <!-- Module 1 -->
+            <!-- Module 01 -->
             <div class="flip-card" onclick="openPortal('idt111-m1')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
@@ -441,11 +474,11 @@
                     </div>
                 </div>
             </div>
-            <!-- Module 2 -->
-            <div class="flip-card" onclick="openPortal('idt111-m2')">
+            <!-- Module 02 -->
+            <div class="flip-card card-locked" onclick="openPortal('idt111-m2')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 02</span><span>Active</span></div>
+                        <div class="card-meta-line"><span>Module 02</span><span>Encrypted</span></div>
                         <div class="front-visual-core" id="front-visual-idt111-m2"></div>
                         <h2 class="card-core-heading">Learning Theory, Instructional Theory, & ID Model</h2>
                     </div>
@@ -456,11 +489,11 @@
                     </div>
                 </div>
             </div>
-            <!-- Module 3 -->
-            <div class="flip-card" onclick="openPortal('idt111-m3')">
+            <!-- Module 03 -->
+            <div class="flip-card card-locked" onclick="openPortal('idt111-m3')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 03</span><span>Active</span></div>
+                        <div class="card-meta-line"><span>Module 03</span><span>Encrypted</span></div>
                         <div class="front-visual-core" id="front-visual-idt111-m3"></div>
                         <h2 class="card-core-heading">Learning Theories and Instructional Design</h2>
                     </div>
@@ -471,11 +504,11 @@
                     </div>
                 </div>
             </div>
-            <!-- Module 4 -->
-            <div class="flip-card" onclick="openPortal('idt111-m4')">
+            <!-- Module 04 -->
+            <div class="flip-card card-locked" onclick="openPortal('idt111-m4')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 04</span><span>Active</span></div>
+                        <div class="card-meta-line"><span>Module 04</span><span>Encrypted</span></div>
                         <div class="front-visual-core" id="front-visual-idt111-m4"></div>
                         <h2 class="card-core-heading">Instructional Theories and Instructional Design</h2>
                     </div>
@@ -486,11 +519,11 @@
                     </div>
                 </div>
             </div>
-            <!-- Module 5 -->
-            <div class="flip-card" onclick="openPortal('idt111-m5')">
+            <!-- Module 05 -->
+            <div class="flip-card card-locked" onclick="openPortal('idt111-m5')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 05</span><span>Active</span></div>
+                        <div class="card-meta-line"><span>Module 05</span><span>Encrypted</span></div>
                         <div class="front-visual-core" id="front-visual-idt111-m5"></div>
                         <h2 class="card-core-heading">Instructional Design Models</h2>
                     </div>
@@ -503,7 +536,6 @@
             </div>
         </div>
     </section>
-
     <!-- ================= VIEW 3: IDT 121 EXHIBITION DASHBOARD (4 MODULES) ================= -->
     <section id="idt121-view" class="app-view">
         <header class="dashboard-header">
@@ -514,7 +546,7 @@
             </div>
         </header>
         <div class="artifact-grid">
-            <!-- Module 1 -->
+            <!-- Module 01 -->
             <div class="flip-card" onclick="openPortal('idt121-m1')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
@@ -529,11 +561,11 @@
                     </div>
                 </div>
             </div>
-            <!-- Module 2 -->
-            <div class="flip-card" onclick="openPortal('idt121-m2')">
+            <!-- Module 02 -->
+            <div class="flip-card card-locked" onclick="openPortal('idt121-m2')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 02</span><span>Active</span></div>
+                        <div class="card-meta-line"><span>Module 02</span><span>Encrypted</span></div>
                         <div class="front-visual-core" id="front-visual-idt121-m2"></div>
                         <h2 class="card-core-heading">Systems Thinking in Context Analysis</h2>
                     </div>
@@ -544,11 +576,11 @@
                     </div>
                 </div>
             </div>
-            <!-- Module 3 -->
-            <div class="flip-card" onclick="openPortal('idt121-m3')">
+            <!-- Module 03 -->
+            <div class="flip-card card-locked" onclick="openPortal('idt121-m3')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 03</span><span>Active</span></div>
+                        <div class="card-meta-line"><span>Module 03</span><span>Encrypted</span></div>
                         <div class="front-visual-core" id="front-visual-idt121-m3"></div>
                         <h2 class="card-core-heading">Models and Processes of Context Analysis</h2>
                     </div>
@@ -559,11 +591,11 @@
                     </div>
                 </div>
             </div>
-            <!-- Module 4 -->
-            <div class="flip-card" onclick="openPortal('idt121-m4')">
+            <!-- Module 04 -->
+            <div class="flip-card card-locked" onclick="openPortal('idt121-m4')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 04</span><span>Active</span></div>
+                        <div class="card-meta-line"><span>Module 04</span><span>Encrypted</span></div>
                         <div class="front-visual-core" id="front-visual-idt121-m4"></div>
                         <h2 class="card-core-heading">Writing Context Analysis Report and Wrap-Up</h2>
                     </div>
@@ -587,16 +619,6 @@
     </div>
 
     <script>
-        function navigateTo(viewId) {
-            document.querySelectorAll('.app-view').forEach(view => {
-                view.classList.remove('active-view');
-            });
-            const targetView = document.getElementById(viewId);
-            if (targetView) {
-                targetView.classList.add('active-view');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
         // =========================================================================
         // 🏛️ CENTRAL DYNAMIC MUSEUM CATALOG DATABASE REGISTRY (MASTER ARCHIVE CONTROL)
         // =========================================================================
@@ -611,8 +633,6 @@
                 html: `
                     <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Overview of <i>Instructional Design</i></h1>
                     <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 111 — Module 01 Reflection</p>
-                    
-                    <p>Instructional design is not merely the mechanical compilation of technological delivery nodes; rather, it functions as a highly deliberate configuration of intentional design judgments. As evaluated by Lachheb & Boling (2021), the core identity of the designer dictates structural learning outcomes.</p>
                     
                     <div class="artifact-embed-box">
                         <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark); font-style: italic;">Official Assignment Output Storage</h3>
@@ -631,7 +651,10 @@
                     <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Learning & <i>Instructional Theories</i></h1>
                     <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 111 — Module 02 Reflection</p>
                     
-                    <p>Your structured analysis of learning systems, macro frameworks, and instructional architectures will sit here. Replace this sentence with your completed Module 02 e-journal submission text over the trimester.</p>
+                    <div class="artifact-embed-box">
+                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark); font-style: italic;">Official Assignment Output Storage</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Replace this text with your completed Module 02 macro-systems analysis submission text over the trimester.</p>
+                    </div>
                 `
             },
             'idt111-m3': {
@@ -645,7 +668,10 @@
                     <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Learning Theories and <i>Instructional Design</i></h1>
                     <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 111 — Module 03 Reflection</p>
                     
-                    <p>Your critical assessment on managing cognitive load paradigms, behaviorist vs. cognitivist structures, and theory conflicts goes here.</p>
+                    <div class="artifact-embed-box">
+                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark); font-style: italic;">Official Assignment Output Storage</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Your critical assessment on managing cognitive load paradigms and theory conflicts goes here.</p>
+                    </div>
                 `
             },
             'idt111-m4': {
@@ -659,7 +685,10 @@
                     <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Instructional Theories in <i>Practice</i></h1>
                     <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 111 — Module 04 Reflection</p>
                     
-                    <p>Your analysis of behaviorist feedback mechanisms, formative assessment tracking nodes, and corrective pedagogical frameworks goes here.</p>
+                    <div class="artifact-embed-box">
+                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark); font-style: italic;">Official Assignment Output Storage</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Your analysis of behaviorist feedback mechanisms and formative assessment tracking nodes goes here.</p>
+                    </div>
                 `
             },
             'idt111-m5': {
@@ -673,7 +702,10 @@
                     <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Systemic <i>Design Models</i></h1>
                     <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 111 — Module 05 Reflection</p>
                     
-                    <p>Your structural breakdown of systematic instructional systems, ADDIE/Dick and Carey evaluations, and curation layouts goes here.</p>
+                    <div class="artifact-embed-box">
+                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark); font-style: italic;">Official Assignment Output Storage</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Your structural breakdown of systematic instructional systems and design artifacts goes here.</p>
+                    </div>
                 `
             },
             'idt121-m1': {
@@ -686,8 +718,6 @@
                 html: `
                     <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Introduction to <i>Context Analysis</i></h1>
                     <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 121 — Module 01 Reflection</p>
-                    
-                    <p>Context analysis acts as the stabilization map when navigating systemic architectural friction. Understanding environmental constraints ensures learning design functions reliably in natural wild environments.</p>
                     
                     <div class="artifact-embed-box">
                         <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark); font-style: italic;">Official Context Artifact Storage</h3>
@@ -706,7 +736,10 @@
                     <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Systems Thinking in <i>Ecosystem Audits</i></h1>
                     <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 121 — Module 02 Reflection</p>
                     
-                    <p>Your breakdown of systemic variables, institutional limits, performance requirements, and organic user feedback matrices goes here. Replace this boilerplate text as the trimester moves forward.</p>
+                    <div class="artifact-embed-box">
+                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark); font-style: italic;">Official Context Artifact Storage</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Your breakdown of systemic variables, institutional limits, and user ecosystem criteria goes here.</p>
+                    </div>
                 `
             },
             'idt121-m3': {
@@ -720,7 +753,10 @@
                     <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Models and Processes of <i>Context Analysis</i></h1>
                     <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 121 — Module 03 Reflection</p>
                     
-                    <p>Your strategic documentation on navigating socio-political stakeholder boundaries, administrative constraints, and structural policy frameworks inside corporate or academic architectures goes here.</p>
+                    <div class="artifact-embed-box">
+                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark); font-style: italic;">Official Context Artifact Storage</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Your strategic documentation on navigating socio-political stakeholder boundaries inside corporate/academic architectures goes here.</p>
+                    </div>
                 `
             },
             'idt121-m4': {
@@ -734,7 +770,10 @@
                     <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Writing Context Analysis <i>Reports</i></h1>
                     <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 121 — Module 04 Reflection</p>
                     
-                    <p>Your final capstone wrap-up detailing context-resilient systemic instruction implementations, final context reporting schemas, and design arguments goes here.</p>
+                    <div class="artifact-embed-box">
+                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark); font-style: italic;">Official Context Artifact Storage</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Your final capstone wrap-up detailing context-resilient systemic instruction implementations goes here.</p>
+                    </div>
                 `
             }
         };
@@ -748,17 +787,17 @@
             });
         });
 
-        // Immersive Portal Engine: Renders clean bottom plaque layout dynamically
+        // Immersive Portal Engine: Renders clean unboxed bottom plaque layout dynamically
         function openPortal(entryId) {
             const contentZone = document.getElementById('modal-dynamic-target');
             const heroZone = document.getElementById('modal-dynamic-hero');
             
             if (journalDatabase[entryId]) {
-                // Injects the pure, unboxed e-journal essay layout
+                // Injects the clean e-journal essay title and standard assignment container
                 contentZone.innerHTML = journalDatabase[entryId].html;
                 
                 if (journalDatabase[entryId].image !== '') {
-                    // Renders the image on top and appends the unboxed plaque block below it
+                    // Renders the image on top and appends the unboxed plaque block directly below it
                     heroZone.innerHTML = `
                         <img src="${journalDatabase[entryId].image}" alt="Exhibition Masterwork Leaf Header">
                         <div class="modal-plaque-block">
@@ -778,6 +817,7 @@
         }
 
         function closePortal() {
+            document.getElementById('portal-modal-sheath').classList.remove('modal-remove');
             document.getElementById('portal-modal-sheath').classList.remove('modal-open');
             document.body.style.overflow = 'auto';
         }
