@@ -6,18 +6,26 @@
     <title>the.madness.chamber — MC Rivera IDT Portfolio</title>
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
+            /* 75% Dark Canvas Base Ratio */
             --bg-canvas: #09090B;        
-            --bg-card: #141417;          
-            --border-muted: #242427;     
+            --bg-card: #131315;          
+            --border-muted: #222225;     
             --text-primary: #F4F4F6;     
             --text-secondary: #91919E;   
             --accent-rustic: #A48B76;    
+            
+            /* 75-20-5 Interior Louvre Leaf Transitions */
+            --bg-cream-leaf: #EDE8DC;    /* Pristine Art Institute Background */
+            --text-cream-dark: #1A1A1C;  /* Luxurious Deep Charcoal Typography */
+            --text-cream-muted: #5D5D66; /* Elegant Editorial Description Tone */
+            
             --font-serif: 'Cormorant Garamond', Georgia, serif;
             --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
         }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             background-color: var(--bg-canvas);
@@ -27,6 +35,7 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
+
         .app-view {
             display: none;
             min-height: 100vh;
@@ -34,14 +43,18 @@
             max-width: 1300px;
             margin: 0 auto;
         }
+
         .app-view.active-view {
             display: block;
             animation: fadeInView 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+
         @keyframes fadeInView {
             from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* --- IMMERSIVE COGNITIVE LANDING PRELUDE --- */
         #gateway-view {
             display: none;
             flex-direction: column;
@@ -52,7 +65,9 @@
             padding: 2rem;
             position: relative;
         }
+
         #gateway-view.active-view { display: flex; }
+
         .owner-branding {
             position: absolute;
             top: 4rem;
@@ -63,6 +78,7 @@
             text-transform: uppercase;
             color: var(--text-secondary);
         }
+
         .gateway-brand {
             font-family: var(--font-sans);
             font-size: 0.8rem;
@@ -71,6 +87,7 @@
             color: var(--accent-rustic);
             margin-bottom: 4rem;
         }
+
         .gateway-quote {
             font-family: var(--font-serif);
             font-size: 3.8rem;
@@ -81,6 +98,7 @@
             margin-bottom: 6rem;
             color: var(--text-primary);
         }
+
         .gateway-options {
             display: flex;
             gap: 4rem;
@@ -88,6 +106,7 @@
             max-width: 800px;
             justify-content: center;
         }
+
         .gateway-btn {
             background: none;
             border: none;
@@ -98,10 +117,12 @@
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             width: 320px;
         }
+
         .gateway-btn:hover {
             border-color: var(--accent-rustic);
             transform: translateY(-4px);
         }
+
         .gateway-btn h3 {
             font-family: var(--font-serif);
             font-size: 2rem;
@@ -109,6 +130,7 @@
             color: var(--text-primary);
             margin-bottom: 0.6rem;
         }
+
         .gateway-btn span {
             font-family: var(--font-sans);
             font-size: 0.7rem;
@@ -200,6 +222,7 @@
         .flip-card-front {
             background-color: var(--bg-card);
             justify-content: space-between;
+            border-color: rgba(164, 139, 118, 0.15);
         }
         .front-visual-core {
             width: 100%;
@@ -211,6 +234,12 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+        }
+        .front-visual-core img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: sepia(40%) contrast(110%) brightness(75%);
         }
         .card-meta-line {
             display: flex;
@@ -254,14 +283,18 @@
             width: 100%;
         }
         .card-locked { opacity: 0.2; pointer-events: none; }
+
+        /* --- THE SELECTIONS HIGH-CONTRAST LOUVRE LEAF SHEET --- */
         .portal-modal {
             display: none;
             position: fixed;
             inset: 0;
             z-index: 1000;
-            background-color: #070709;
+            background-color: var(--bg-cream-leaf);
             overflow-y: auto;
             padding: 8rem 4rem;
+            color: var(--text-cream-dark);
+            animation: fadeInView 0.5s ease forwards;
         }
         .portal-modal.modal-open { display: block; }
         .modal-content-wrapper { max-width: 900px; margin: 0 auto; position: relative; }
@@ -271,25 +304,44 @@
             right: 5rem;
             background: none;
             border: none;
-            color: var(--text-secondary);
+            color: var(--text-cream-muted);
+            font-family: var(--font-sans);
             font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 0.25em;
+            letter-spacing: 0.2em;
             cursor: pointer;
+            transition: color 0.2s ease;
+            font-weight: 600;
+        }
+        .close-modal-btn:hover { color: var(--text-cream-dark); }
+        .modal-hero-artwork-frame {
+            width: 100%;
+            height: 400px;
+            background-color: #111;
+            margin-bottom: 4rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+        .modal-hero-artwork-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         .modal-essay-body {
             font-family: var(--font-sans);
             font-size: 1.1rem;
-            line-height: 1.9;
-            color: var(--text-primary);
+            line-height: 1.95;
+            color: var(--text-cream-dark);
         }
         .modal-essay-body p { margin-bottom: 2.2rem; text-align: justify; }
         .artifact-embed-box {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-muted);
+            background-color: rgba(0, 0, 0, 0.03);
+            border: 1px dashed rgba(0, 0, 0, 0.15);
             padding: 3rem;
             margin: 4rem 0;
-            border-radius: 4px;
+            border-radius: 2px;
+            color: var(--text-cream-dark);
         }
     </style>
 </head>
@@ -449,11 +501,16 @@
         </div>
     </section>
 
-    <!-- ================= VIEW 4: IMMERSIVE FULL-PAGE EMBED LEAF ================= -->
+    <!-- ================= VIEW 4: MASTER LOUVRE IMMERSIVE FULL-PAGE LEAF ================= -->
     <div id="portal-modal-sheath" class="portal-modal">
-        <button class="close-modal-btn" onclick="closePortal()">Close Exhibition Leaf ✕</button>
+        <button class="close-modal-btn" onclick="closePortal()">← Go back to modules</button>
         <main class="modal-content-wrapper">
+            <!-- Dynamic Hero Banner Frame for your Louvre Masterpieces -->
+            <div class="modal-hero-artwork-frame" id="modal-dynamic-hero">
+                <!-- Image injects here dynamically -->
+            </div>
             <article class="modal-essay-body" id="modal-dynamic-target">
+                <!-- Immersive content injects here dynamically -->
             </article>
         </main>
     </div>
@@ -467,44 +524,56 @@
             if (targetView) {
                 targetView.classList.add('active-view');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-                targetView.classList.add('active-view');
             }
         }
 
-        // Static testing registry containing your long-form UPOU essays
+        // Centralized testing database housing your custom text configurations
         const journalDatabase = {
-            'idt111-m1': `
-                <h1 style="font-family: var(--font-serif); font-size: 3.5rem; font-weight: 300; margin-bottom: 1rem;">Overview of Instructional Design</h1>
-                <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 3rem;">IDT 111 — Module 01 Deep Exhibition Leaf</p>
-                <p>This immersive space handles your long-form entries cleanly. Your outputs and critical reflections will sit inside this expansive full-screen view panel, allowing your UPOU professors to evaluate your assignments with maximum comfort.</p>
-                <div class="artifact-embed-box">
-                    <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1rem; color: var(--accent-rustic);">Official Assignment Output Storage</h3>
-                    <p style="font-size: 0.95rem; color: var(--text-secondary);">[Louvre Masterpiece Image or Project Link Embed Zone] — Once we activate the text system, you can embed your actual output charts or documents here effortlessly.</p>
-                </div>
-            `,
-            'idt121-m1': `
-                <h1 style="font-family: var(--font-serif); font-size: 3.5rem; font-weight: 300; margin-bottom: 1rem;">Introduction to Context Analysis</h1>
-                <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 3rem;">IDT 121 — Module 01 Deep Exhibition Leaf</p>
-                <p>Your complex context audits and learner demographic reports will render smoothly here with generous editorial margins and premium 75-20-5 typography scaling.</p>
-                <div class="artifact-embed-box">
-                    <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1rem; color: var(--accent-rustic);">Official Context Artifact Storage</h3>
-                    <p style="font-size: 0.95rem; color: var(--text-secondary);">[Context Audit Charts Zone] — Live evidence and systemic mapping files will render safely inside this dedicated content block.</p>
-                </div>
-            `
+            'idt111-m1': {
+                image: 'https://unsplash.com', // Elegant oil canvas artwork anchor
+                html: `
+                    <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Overview of Instructional Design</h1>
+                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 111 — Module 01 Exhibition</p>
+                    
+                    <p>Your complex instructional model critical reflections will render completely cleanly inside this spacious layout page view. The custom typography configuration makes reading notoriously long UPOU entry paragraphs highly comfortable for your professors' eyes.</p>
+                    
+                    <div class="artifact-embed-box">
+                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark);">Official Assignment Output Storage</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Once your assignments are graded, you can cleanly embed your actual instructional architecture schemas, workflow flowcharts, or system diagrams directly into this dedicated exhibition block.</p>
+                    </div>
+                `
+            },
+            'idt121-m1': {
+                image: 'https://unsplash.com', // Deep canvas texture anchor
+                html: `
+                    <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Introduction to Context Analysis</h1>
+                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 121 — Module 01 Exhibition</p>
+                    
+                    <p>Your multi-perspective context analysis write-ups, student demographic metrics, and environmental systems boundary analysis reports will expand beautifully inside this high-contrast interface canvas layer.</p>
+                    
+                    <div class="artifact-embed-box">
+                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark);">Official Context Artifact Storage</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Your systemic context audits, physical learning environment matrices, and target audience data fields will sit inside this dedicated presentation module area.</p>
+                    </div>
+                `
+            }
         };
 
         function openPortal(entryId) {
-            const displayZone = document.getElementById('modal-dynamic-target');
+            const contentZone = document.getElementById('modal-dynamic-target');
+            const heroZone = document.getElementById('modal-dynamic-hero');
+            
             if (journalDatabase[entryId]) {
-                displayZone.innerHTML = journalDatabase[entryId];
+                contentZone.innerHTML = journalDatabase[entryId].html;
+                heroZone.innerHTML = `<img src="${journalDatabase[entryId].image}" alt="Exhibition Artpiece Masterwork">`;
                 document.getElementById('portal-modal-sheath').classList.add('modal-open');
-                document.body.style.overflow = 'hidden';
+                document.body.style.overflow = 'hidden'; // Lock back scroll
             }
         }
 
         function closePortal() {
             document.getElementById('portal-modal-sheath').classList.remove('modal-open');
-            document.body.style.overflow = 'auto';
+            document.body.style.overflow = 'auto'; // Release scroll
         }
     </script>
 </body>
