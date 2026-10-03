@@ -9,22 +9,18 @@
     <link href="https://googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* 60 - 30 - 10 Louvre Curated Palette Design */
-            --bg-canvas: #111113;        /* 60% Dominant Deep Charcoal Gallery Wall */
-            --bg-card: #18181B;          /* Structural Card Core Canvas */
-            --bg-sepia-surface: #EDE8DC; /* 30% Secondary Weathered Louvre Surface Sheet */
-            --border-muted: #2E2E33;     /* Architectural layout divider lines */
-            --text-primary: #F4F4F6;     /* Off-white crisp typography label */
-            --text-secondary: #91919E;   /* Muted structural museum marker grey */
-            --accent-rustic: #A48B76;    /* 10% Accent Layer: Earthy Renaissance Sepia Gold */
-            
-            --text-cream-dark: #1A1A1C;  /* Immersive leaf reading dark typography text */
-            --text-cream-muted: #5D5D66; /* Immersive leaf reading muted typography description */
-            
+            --bg-canvas: #111113;        
+            --bg-card: #18181B;          
+            --bg-sepia-surface: #EDE8DC; 
+            --border-muted: #2E2E33;     
+            --text-primary: #F4F4F6;     
+            --text-secondary: #91919E;   
+            --accent-rustic: #A48B76;    
+            --text-cream-dark: #1A1A1C;  
+            --text-cream-muted: #5D5D66; 
             --font-serif: 'Cormorant Garamond', Georgia, serif;
             --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             background-color: var(--bg-canvas);
@@ -34,7 +30,6 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
-
         .app-view {
             display: none;
             min-height: 100vh;
@@ -42,18 +37,14 @@
             max-width: 1300px;
             margin: 0 auto;
         }
-
         .app-view.active-view {
             display: block;
             animation: fadeInView 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-
         @keyframes fadeInView {
             from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        /* --- THE DUAL-LINE EMBEDDED SHAKESPEARE HERO --- */
         #gateway-view {
             display: none;
             flex-direction: column;
@@ -63,11 +54,9 @@
             text-align: center;
             padding: 2rem;
             position: relative;
-            background-color: #09090B; /* Deep cinematic anchor for gateway entry zone */
+            background-color: #09090B;
         }
-
         #gateway-view.active-view { display: flex; }
-
         .owner-branding {
             position: absolute;
             top: 4rem;
@@ -78,7 +67,6 @@
             text-transform: uppercase;
             color: var(--text-secondary);
         }
-
         .gateway-brand {
             font-family: var(--font-sans);
             font-size: 0.8rem;
@@ -87,7 +75,6 @@
             color: var(--accent-rustic);
             margin-bottom: 4rem;
         }
-
         .gateway-quote-container {
             display: flex;
             flex-direction: column;
@@ -95,14 +82,12 @@
             margin-bottom: 6rem;
             max-width: 900px;
         }
-
         .madness-line {
             font-family: var(--font-serif);
             font-size: 3.6rem;
             font-weight: 300;
             color: var(--text-primary);
         }
-
         .method-line {
             font-family: var(--font-serif);
             font-size: 3.8rem;
@@ -110,7 +95,6 @@
             font-style: italic;
             color: var(--accent-rustic);
         }
-
         .gateway-options {
             display: flex;
             gap: 4rem;
@@ -118,7 +102,6 @@
             max-width: 800px;
             justify-content: center;
         }
-
         .gateway-btn {
             background: none;
             border: none;
@@ -129,12 +112,10 @@
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             width: 320px;
         }
-
         .gateway-btn:hover {
             border-color: var(--accent-rustic);
             transform: translateY(-4px);
         }
-
         .gateway-btn h3 {
             font-family: var(--font-serif);
             font-size: 2rem;
@@ -142,7 +123,6 @@
             color: var(--text-primary);
             margin-bottom: 0.6rem;
         }
-
         .gateway-btn span {
             font-family: var(--font-sans);
             font-size: 0.7rem;
@@ -153,7 +133,6 @@
     </style>
 </head>
     <style>
-        /* --- 60-30-10 ADVANCED EXHIBITION DASHBOARD STYLES --- */
         .dashboard-header {
             border-bottom: 2px solid var(--accent-rustic);
             padding-bottom: 3rem;
@@ -191,7 +170,7 @@
             font-size: 4rem;
             font-weight: 300;
             line-height: 1.1;
-            color: var(--bg-sepia-surface); /* Premium Illuminated Header */
+            color: var(--bg-sepia-surface);
             text-transform: capitalize;
         }
         .course-title p {
@@ -256,12 +235,10 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: sepia(50%) contrast(105%) brightness(70%);
+            filter: sepia(40%) contrast(105%) brightness(75%);
             transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .flip-card:hover .front-visual-core img {
-            transform: scale(1.06);
-        }
+        .flip-card:hover .front-visual-core img { transform: scale(1.06); }
         .card-meta-line {
             display: flex;
             justify-content: space-between;
@@ -307,7 +284,6 @@
         }
         .card-locked { opacity: 0.15; pointer-events: none; filter: grayscale(100%); }
 
-        /* --- THE COGNITIVE LOUVRE LEAF SHEET LAYOUT --- */
         .portal-modal {
             display: none;
             position: fixed;
@@ -364,11 +340,11 @@
         }
         .modal-essay-body p { margin-bottom: 2.2rem; text-align: justify; }
         .artifact-embed-box {
-            background-color: rgba(0, 0, 0, 0.03);
-            border: 1px dashed rgba(0, 0, 0, 0.15);
+            background-color: rgba(0, 0, 0, 0.02);
+            border: 1px dashed rgba(0, 0, 0, 0.12);
             padding: 3rem;
             margin: 4rem 0;
-            border-radius: 4px;
+            border-radius: 2px;
             color: var(--text-cream-dark);
         }
     </style>
@@ -411,7 +387,7 @@
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
                         <div class="card-meta-line"><span>Module 01</span><span>Active</span></div>
-                        <div class="front-visual-core">
+                        <div class="front-visual-core" id="front-visual-idt111-m1">
                             <span style="color: var(--accent-rustic); font-family: var(--font-serif); font-style: italic;">Exhibition No. 01</span>
                         </div>
                         <h2 class="card-core-heading">Overview of Instructional Design</h2>
@@ -486,7 +462,9 @@
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
                         <div class="card-meta-line"><span>Module 01</span><span>Active</span></div>
-                        <div class="front-visual-core"><span style="color: var(--accent-rustic); font-family: var(--font-serif); font-style: italic;">Exhibition No. 01</span></div>
+                        <div class="front-visual-core" id="front-visual-idt121-m1">
+                            <span style="color: var(--accent-rustic); font-family: var(--font-serif); font-style: italic;">Exhibition No. 01</span>
+                        </div>
                         <h2 class="card-core-heading">Introduction to Context Analysis</h2>
                     </div>
                     <div class="flip-card-back">
@@ -532,7 +510,7 @@
         </div>
     </section>
 
-    <!-- ================= VIEW 4: IMMERSIVE FULL-PAGE PRESENTATION zone ================= -->
+    <!-- ================= VIEW 4: IMMERSIVE FULL-PAGE PRESENTATION ZONE ================= -->
     <div id="portal-modal-sheath" class="portal-modal">
         <button class="close-modal-btn" onclick="closePortal()">← Go back to modules</button>
         <main class="modal-content-wrapper">
@@ -553,10 +531,15 @@
             }
         }
 
-        // Centralized Testing Database for Masterworks & Academic Content
+        // =========================================================================
+        // 🏛️ CENTRAL LOUVRE ARTWORK & TEXT REGISTRY DATABASE (YOUR MASTER CONTROL ZONE)
+        // =========================================================================
+        // Whaller, paste your public internet painting links inside the image quotes below!
+        // Leaving an image empty strings '' automatically hides the top placeholder block!
+        // =========================================================================
         const journalDatabase = {
             'idt111-m1': {
-                image: 'https://unsplash.com', 
+                image: '', // e.g., 'https://unsplash.com'
                 html: `
                     <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Overview of <i>Instructional Design</i></h1>
                     <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 111 — Module 01 Reflection</p>
@@ -568,7 +551,7 @@
                 `
             },
             'idt121-m1': {
-                image: 'https://unsplash.com', 
+                image: '', // e.g., 'https://unsplash.com'
                 html: `
                     <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Introduction to <i>Context Analysis</i></h1>
                     <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 121 — Module 01 Reflection</p>
@@ -581,6 +564,16 @@
             }
         };
 
+        // Automated loop runner that draws cover paintings directly onto the front card frames if available!
+        document.addEventListener("DOMContentLoaded", () => {
+            Object.keys(journalDatabase).forEach(key => {
+                const targetVisualFrame = document.getElementById(`front-visual-\${key}`);
+                if (targetVisualFrame && journalDatabase[key].image !== '') {
+                    targetVisualFrame.innerHTML = `<img src="\${journalDatabase[key].image}" alt="Louvre Cover Masterwork Thumbnail">`;
+                }
+            });
+        });
+
         function openPortal(entryId) {
             const contentZone = document.getElementById('modal-dynamic-target');
             const heroZone = document.getElementById('modal-dynamic-hero');
@@ -588,7 +581,7 @@
             if (journalDatabase[entryId]) {
                 contentZone.innerHTML = journalDatabase[entryId].html;
                 if (journalDatabase[entryId].image !== '') {
-                    heroZone.innerHTML = `<img src="${journalDatabase[entryId].image}" alt="Exhibition Artpiece Masterwork">`;
+                    heroZone.innerHTML = `<img src="\${journalDatabase[entryId].image}" alt="Exhibition Artpiece Masterwork">`;
                     heroZone.classList.add('has-art');
                 } else {
                     heroZone.innerHTML = '';
