@@ -9,22 +9,18 @@
     <link href="https://googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* 60 - 30 - 10 Curated Gallery Formula Variables */
-            --bg-canvas: #111113;        /* 60% Dominant Matte Gallery Onyx */
+            --bg-canvas: #111113;        
             --bg-card: #18181B;          
-            --bg-sepia-surface: #EDE8DC; /* 30% Secondary Weathered Louvre Stone Paper */
+            --bg-sepia-surface: #EDE8DC; 
             --border-muted: #2E2E33;     
             --text-primary: #F4F4F6;     
             --text-secondary: #91919E;   
-            --accent-rustic: #A48B76;    /* 10% Accent Layer: Earthy Renaissance Sepia Gold */
-            
+            --accent-rustic: #A48B76;    
             --text-cream-dark: #1A1A1C;  
             --text-cream-muted: #5D5D66; 
-            
             --font-serif: 'Cormorant Garamond', Georgia, serif;
             --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             background-color: var(--bg-canvas);
@@ -34,7 +30,6 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
-
         .app-view {
             display: none;
             min-height: 100vh;
@@ -42,18 +37,14 @@
             max-width: 1300px;
             margin: 0 auto;
         }
-
         .app-view.active-view {
             display: block;
             animation: fadeInView 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-
         @keyframes fadeInView {
             from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        /* --- THE TWO-LINE ASYMMETRIC GATEWAY HERO --- */
         #gateway-view {
             display: none;
             flex-direction: column;
@@ -65,9 +56,7 @@
             position: relative;
             background-color: #09090B; 
         }
-
         #gateway-view.active-view { display: flex; }
-
         .owner-branding {
             position: absolute;
             top: 4rem;
@@ -78,7 +67,6 @@
             text-transform: uppercase;
             color: var(--text-secondary);
         }
-
         .gateway-brand {
             font-family: var(--font-sans);
             font-size: 0.8rem;
@@ -87,7 +75,6 @@
             color: var(--accent-rustic);
             margin-bottom: 4rem;
         }
-
         .gateway-quote-container {
             display: flex;
             flex-direction: column;
@@ -95,14 +82,12 @@
             margin-bottom: 6rem;
             max-width: 900px;
         }
-
         .madness-line {
             font-family: var(--font-serif);
             font-size: 3.6rem;
             font-weight: 300;
             color: var(--text-primary);
         }
-
         .method-line {
             font-family: var(--font-serif);
             font-size: 3.8rem;
@@ -110,7 +95,6 @@
             font-style: italic;
             color: var(--accent-rustic);
         }
-
         .gateway-options {
             display: flex;
             gap: 4rem;
@@ -118,7 +102,6 @@
             max-width: 800px;
             justify-content: center;
         }
-
         .gateway-btn {
             background: none;
             border: none;
@@ -129,12 +112,10 @@
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             width: 320px;
         }
-
         .gateway-btn:hover {
             border-color: var(--accent-rustic);
             transform: translateY(-4px);
         }
-
         .gateway-btn h3 {
             font-family: var(--font-serif);
             font-size: 2rem;
@@ -142,7 +123,6 @@
             color: var(--text-primary);
             margin-bottom: 0.6rem;
         }
-
         .gateway-btn span {
             font-family: var(--font-sans);
             font-size: 0.7rem;
@@ -151,9 +131,7 @@
             color: var(--text-secondary);
         }
     </style>
-</head>
     <style>
-        /* --- 60-30-10 ILLUMINATED PHYSICAL GALLERY ARCHITECTURE --- */
         .dashboard-header {
             border-bottom: 2px solid var(--accent-rustic);
             padding-bottom: 3rem;
@@ -304,7 +282,6 @@
         }
         .card-locked { opacity: 0.15; pointer-events: none; filter: grayscale(100%); }
 
-        /* --- THE COGNITIVE LOUVRE LEAF SHEET OVERLAY --- */
         .portal-modal {
             display: none;
             position: fixed;
@@ -381,12 +358,10 @@
         </div>
         <nav class="gateway-options" aria-label="Course selection">
             <button class="gateway-btn" onclick="navigateTo('idt111-view')">
-                <h3>IDT 111</h3>
-                <span>Instructional Models</span>
+                <h3>IDT 111</h3><span>Instructional Models</span>
             </button>
             <button class="gateway-btn" onclick="navigateTo('idt121-view')">
-                <h3>IDT 121</h3>
-                <span>Context Analysis</span>
+                <h3>IDT 121</h3><span>Context Analysis</span>
             </button>
         </nav>
     </main>
@@ -397,13 +372,10 @@
             <div class="dashboard-owner">MC Rivera Archives</div>
             <div class="course-title">
                 <button class="back-nav" onclick="navigateTo('gateway-view')">← Return to Gateway</button>
-                <h1>Selections from IDT 111</h1>
-                <p>Instructional Design Models & Applications</p>
+                <h1>Selections from IDT 111</h1><p>Instructional Design Models & Applications</p>
             </div>
         </header>
-
         <div class="artifact-grid">
-            <!-- Module 1: Active -->
             <div class="flip-card" onclick="openPortal('idt111-m1')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
@@ -420,50 +392,10 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Module 2: Locked -->
-            <div class="flip-card card-locked">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 02</span><span>Encrypted</span></div>
-                        <div class="front-visual-core"></div>
-                        <h2 class="card-core-heading">Learning Theory, Instructional Theory, & ID Model</h2>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Module 3: Locked -->
-            <div class="flip-card card-locked">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 03</span><span>Encrypted</span></div>
-                        <div class="front-visual-core"></div>
-                        <h2 class="card-core-heading">Learning Theories and Instructional Design</h2>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Module 4: Locked -->
-            <div class="flip-card card-locked">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 04</span><span>Encrypted</span></div>
-                        <div class="front-visual-core"></div>
-                        <h2 class="card-core-heading">Instructional Theories and Instructional Design</h2>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Module 5: Locked -->
-            <div class="flip-card card-locked">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 05</span><span>Encrypted</span></div>
-                        <div class="front-visual-core"></div>
-                        <h2 class="card-core-heading">Instructional Design Models</h2>
-                    </div>
-                </div>
-            </div>
+            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 02</span><span>Encrypted</span></div><div class="front-visual-core" id="front-visual-idt111-m2"></div><h2 class="card-core-heading">Learning Theory, Instructional Theory, & ID Model</h2></div></div></div>
+            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 03</span><span>Encrypted</span></div><div class="front-visual-core" id="front-visual-idt111-m3"></div><h2 class="card-core-heading">Learning Theories and Instructional Design</h2></div></div></div>
+            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 04</span><span>Encrypted</span></div><div class="front-visual-core" id="front-visual-idt111-m4"></div><h2 class="card-core-heading">Instructional Theories and Instructional Design</h2></div></div></div>
+            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 05</span><span>Encrypted</span></div><div class="front-visual-core" id="front-visual-idt111-m5"></div><h2 class="card-core-heading">Instructional Design Models</h2></div></div></div>
         </div>
     </section>
     <!-- ================= VIEW 3: IDT 121 EXHIBITION DASHBOARD (4 MODULES) ================= -->
@@ -472,13 +404,10 @@
             <div class="dashboard-owner">MC Rivera Archives</div>
             <div class="course-title">
                 <button class="back-nav" onclick="navigateTo('gateway-view')">← Return to Gateway</button>
-                <h1>Selections from IDT 121</h1>
-                <p>Context Analysis for Instructional Design</p>
+                <h1>Selections from IDT 121</h1><p>Context Analysis for Instructional Design</p>
             </div>
         </header>
-
         <div class="artifact-grid">
-            <!-- Module 1: Active Slot -->
             <div class="flip-card" onclick="openPortal('idt121-m1')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
@@ -495,39 +424,9 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Module 2: Locked Slot -->
-            <div class="flip-card card-locked">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 02</span><span>Encrypted</span></div>
-                        <div class="front-visual-core" id="front-visual-idt121-m2"></div>
-                        <h2 class="card-core-heading">Systems Thinking in Context Analysis</h2>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Module 3: Locked Slot -->
-            <div class="flip-card card-locked">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 03</span><span>Encrypted</span></div>
-                        <div class="front-visual-core" id="front-visual-idt121-m3"></div>
-                        <h2 class="card-core-heading">Models and Processes of Context Analysis</h2>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Module 4: Locked Slot -->
-            <div class="flip-card card-locked">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 04</span><span>Encrypted</span></div>
-                        <div class="front-visual-core" id="front-visual-idt121-m4"></div>
-                        <h2 class="card-core-heading">Writing Context Analysis Report and Wrap-Up</h2>
-                    </div>
-                </div>
-            </div>
+            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 02</span><span>Encrypted</span></div><div class="front-visual-core" id="front-visual-idt121-m2"></div><h2 class="card-core-heading">Systems Thinking in Context Analysis</h2></div></div></div>
+            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 03</span><span>Encrypted</span></div><div class="front-visual-core" id="front-visual-idt121-m3"></div><h2 class="card-core-heading">Models and Processes of Context Analysis</h2></div></div></div>
+            <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 04</span><span>Encrypted</span></div><div class="front-visual-core" id="front-visual-idt121-m4"></div><h2 class="card-core-heading">Writing Context Analysis Report and Wrap-Up</h2></div></div></div>
         </div>
     </section>
 
@@ -605,13 +504,13 @@
             Object.keys(journalDatabase).forEach(key => {
                 const targetVisualFrame = document.getElementById('front-visual-' + key);
                 if (targetVisualFrame && journalDatabase[key].image !== '') {
-                    targetVisualFrame.innerHTML = '<img src="' + journalDatabase[key].image + '" alt="Exhibition Masterwork Thumbnail">';
+                    targetVisualFrame.innerHTML = '<img src="' + journalDatabase[key].image + '" alt="Exhibition Thumbnail">';
                 }
             });
             Object.keys(lockedPreviews).forEach(key => {
                 const targetVisualFrame = document.getElementById('front-visual-' + key);
                 if (targetVisualFrame) {
-                    targetVisualFrame.innerHTML = '<img src="' + lockedPreviews[key]" + '" alt="Locked Exhibition Thumbnail">';
+                    targetVisualFrame.innerHTML = '<img src="' + lockedPreviews[key] + '" alt="Locked Thumbnail">';
                 }
             });
         });
