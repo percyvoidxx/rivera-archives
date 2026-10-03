@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>the.madness.chamber — Rivera IDT Portfolio</title>
+    <title>the.madness.chamber — MC Rivera IDT Portfolio</title>
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -54,6 +54,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* --- EXQUISITE GATEWAY INTERFACE --- */
         #gateway-view {
             display: none;
             flex-direction: column;
@@ -62,10 +63,22 @@
             height: 100vh;
             text-align: center;
             padding: 2rem;
+            position: relative;
         }
 
         #gateway-view.active-view {
             display: flex;
+        }
+
+        .owner-branding {
+            position: absolute;
+            top: 3rem;
+            left: 4rem;
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
         }
 
         .gateway-brand {
@@ -128,6 +141,7 @@
             color: var(--text-secondary);
         }
 
+        /* --- DASHBOARD CONFIGURATION --- */
         .dashboard-header {
             border-bottom: 1px solid var(--border-muted);
             padding-bottom: 2.5rem;
@@ -135,6 +149,17 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
+            position: relative;
+        }
+
+        .dashboard-owner {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent-rustic);
         }
 
         .back-nav {
@@ -169,6 +194,7 @@
             margin-top: 0.5rem;
         }
 
+        /* --- 3D FLIP CONTAINER PROPERTIES --- */
         .artifact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
@@ -291,6 +317,7 @@
             pointer-events: none;
         }
 
+        /* --- OVERLAY SHEATH SYSTEM --- */
         .portal-modal {
             display: none;
             position: fixed;
@@ -326,27 +353,3 @@
         }
 
         .close-modal-btn:hover {
-            color: var(--text-primary);
-        }
-
-        .modal-essay-body {
-            font-family: var(--font-sans);
-            font-size: 1.05rem;
-            line-height: 1.8;
-            color: var(--text-primary);
-        }
-
-        .modal-essay-body p {
-            margin-bottom: 2rem;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- ================= VIEW 1: THE SHAKESPEAREAN LANDING GATEWAY ================= -->
-    <main id="gateway-view" class="app-view active-view">
-        <div class="gateway-brand">the.madness.chamber</div>
-        <h2 class="gateway-quote">“Though this be madness, yet there is method in’t.”</h2>
-        <nav class="gateway-options" aria-label="Course selection">
-            <button class="gateway-btn" onclick="navigateTo('idt111-view')">
-                <h3>IDT 111</h3>
