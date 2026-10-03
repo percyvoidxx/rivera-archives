@@ -9,19 +9,22 @@
     <link href="https://googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* 60 - 30 - 10 Curated Museum Balance Elements */
-            --bg-canvas: #111113;        
+            /* 60 - 30 - 10 Curated Gallery Scale Formula */
+            --bg-canvas: #111113;        /* 60% Dominant Matte Gallery Onyx */
             --bg-card: #18181B;          
-            --bg-sepia-surface: #EDE8DC; 
+            --bg-sepia-surface: #EDE8DC; /* 30% Secondary Weathered Louvre Stone Sheet */
             --border-muted: #2E2E33;     
             --text-primary: #F4F4F6;     
             --text-secondary: #91919E;   
-            --accent-rustic: #A48B76;    
+            --accent-rustic: #A48B76;    /* 10% Accent Layer: Earthy Renaissance Sepia Gold */
+            
             --text-cream-dark: #1A1A1C;  
             --text-cream-muted: #5D5D66; 
+            
             --font-serif: 'Cormorant Garamond', Georgia, serif;
             --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
         }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             background-color: var(--bg-canvas);
@@ -31,6 +34,7 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
+
         .app-view {
             display: none;
             min-height: 100vh;
@@ -38,101 +42,19 @@
             max-width: 1300px;
             margin: 0 auto;
         }
+
         .app-view.active-view {
             display: block;
             animation: fadeInView 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+
         @keyframes fadeInView {
             from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        #gateway-view {
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-            padding: 2rem;
-            position: relative;
-            background-color: #09090B; 
-        }
-        #gateway-view.active-view { display: flex; }
-        .owner-branding {
-            position: absolute;
-            top: 4rem;
-            left: 4rem;
-            font-family: var(--font-sans);
-            font-size: 0.75rem;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: var(--text-secondary);
-        }
-        .gateway-brand {
-            font-family: var(--font-sans);
-            font-size: 0.8rem;
-            letter-spacing: 0.4em;
-            text-transform: uppercase;
-            color: var(--accent-rustic);
-            margin-bottom: 4rem;
-        }
-        .gateway-quote-container {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            margin-bottom: 6rem;
-            max-width: 900px;
-        }
-        .madness-line {
-            font-family: var(--font-serif);
-            font-size: 3.6rem;
-            font-weight: 300;
-            color: var(--text-primary);
-        }
-        .method-line {
-            font-family: var(--font-serif);
-            font-size: 3.8rem;
-            font-weight: 400;
-            font-style: italic;
-            color: var(--accent-rustic);
-        }
-        .gateway-options {
-            display: flex;
-            gap: 4rem;
-            width: 100%;
-            max-width: 800px;
-            justify-content: center;
-        }
-        .gateway-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            text-align: center;
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--border-muted);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            width: 320px;
-        }
-        .gateway-btn:hover {
-            border-color: var(--accent-rustic);
-            transform: translateY(-4px);
-        }
-        .gateway-btn h3 {
-            font-family: var(--font-serif);
-            font-size: 2rem;
-            font-weight: 400;
-            color: var(--text-primary);
-            margin-bottom: 0.6rem;
-        }
-        .gateway-btn span {
-            font-family: var(--font-sans);
-            font-size: 0.7rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--text-secondary);
-        }
     </style>
     <style>
+        /* --- 60-30-10 MASTER DASHBOARD ARCHITECTURE SCALING --- */
         .dashboard-header {
             border-bottom: 2px solid var(--accent-rustic);
             padding-bottom: 3rem;
@@ -282,7 +204,9 @@
             font-weight: 500;
         }
         .card-locked { opacity: 0.15; pointer-events: none; filter: grayscale(100%); }
-
+    </style>
+    <style>
+        /* --- THE COGNITIVE VERTICAL FLOATING SHEET OVERLAY SYSTEM --- */
         .portal-modal {
             display: none;
             position: fixed;
@@ -316,12 +240,12 @@
         .modal-hero-artwork-frame {
             display: none;
             width: 100%;
-            height: 460px;
+            height: 520px;
             background-color: #0b0b0c;
-            margin-bottom: 4.5rem;
-            border: 1px solid rgba(0, 0, 0, 0.15);
+            margin-bottom: 3.5rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.08);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -342,7 +266,7 @@
         }
         .modal-essay-body p { margin-bottom: 2.2rem; text-align: justify; }
         .artifact-embed-box {
-            background-color: rgba(0, 0, 0, 0.03);
+            background-color: rgba(0, 0, 0, 0.02);
             border: 1px dashed rgba(0, 0, 0, 0.12);
             padding: 3rem;
             margin: 4rem 0;
@@ -369,7 +293,6 @@
             </button>
         </nav>
     </main>
-
     <!-- ================= VIEW 2: IDT 111 EXHIBITION DASHBOARD (5 MODULES) ================= -->
     <section id="idt111-view" class="app-view">
         <header class="dashboard-header">
@@ -380,7 +303,6 @@
             </div>
         </header>
         <div class="artifact-grid">
-            <!-- Module 1: Active -->
             <div class="flip-card" onclick="openPortal('idt111-m1')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
@@ -397,13 +319,9 @@
                     </div>
                 </div>
             </div>
-            <!-- Module 2: Locked -->
             <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 02</span><span>Encrypted</span></div><div class="front-visual-core" id="front-visual-idt111-m2"></div><h2 class="card-core-heading">Learning Theory, Instructional Theory, & ID Model</h2></div></div></div>
-            <!-- Module 3: Locked -->
             <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 03</span><span>Encrypted</span></div><div class="front-visual-core" id="front-visual-idt111-m3"></div><h2 class="card-core-heading">Learning Theories and Instructional Design</h2></div></div></div>
-            <!-- Module 4: Locked -->
             <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 04</span><span>Encrypted</span></div><div class="front-visual-core" id="front-visual-idt111-m4"></div><h2 class="card-core-heading">Instructional Theories and Instructional Design</h2></div></div></div>
-            <!-- Module 5: Locked -->
             <div class="flip-card card-locked"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-meta-line"><span>Module 05</span><span>Encrypted</span></div><div class="front-visual-core" id="front-visual-idt111-m5"></div><h2 class="card-core-heading">Instructional Design Models</h2></div></div></div>
         </div>
     </section>
@@ -464,63 +382,59 @@
         }
 
         // =========================================================================
-        // 🏛️ CENTRAL DYNAMIC MUSEUM CATALOG DATABASE REGISTRY (MASTER ARCHIVE CONTROL)
+        // 🏛️ CENTRAL DYNAMIC MUSEUM CATALOG DATABASE REGISTRY (YOUR TRIMESTER PAYLOAD)
         // =========================================================================
         const journalDatabase = {
             'idt111-m1': {
-                image: 'monalisa.JPG',
-                artist: 'Leonardo da Vinci',
-                title: 'Mona Lisa',
-                year: 'c. 1503–1519',
-                museum: 'Musée du Louvre, Paris.',
+                image: 'monalisa.JPG', artist: 'Leonardo da Vinci', title: 'Mona Lisa', year: 'c. 1503–1519', museum: 'Musée du Louvre, Paris.',
                 designCaption: 'The ultimate paradigm of subtle visual balance and sfumato technique. Represents user-centric mystery, soft cognitive scaffolding, and the enduring complexity of intuitive human-computer interaction (HCI).',
-                html: `
-                    <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Overview of <i>Instructional Design</i></h1>
-                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 111 — Module 01 Reflection</p>
-                    
-                    <div class="artifact-embed-box">
-                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark); font-style: italic;">Official Assignment Output Storage</h3>
-                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Once your assignments are graded, you can cleanly embed your actual instructional architecture schemas, workflow flowcharts, or system diagrams directly into this dedicated exhibition block.</p>
-                    </div>
-                `
+                html: `<h1 style="font-family:var(--font-serif);font-size:3.8rem;font-weight:300;margin-bottom:1rem;line-height:1.15;color:var(--text-cream-dark);">Overview of <i>Instructional Design</i></h1><p style="text-transform:uppercase;letter-spacing:0.2em;font-size:0.8rem;color:var(--accent-rustic);margin-bottom:4rem;font-weight:600;">IDT 111 — Module 01 Reflection</p><div class="artifact-embed-box"><h3 style="font-family:var(--font-serif);font-size:1.8rem;font-weight:400;margin-bottom:1.5rem;color:var(--text-cream-dark);font-style:italic;">Official Assignment Output Storage</h3><p style="font-size:0.95rem;color:var(--text-cream-muted);line-height:1.6;">Once your assignments are graded, you can cleanly embed your actual instructional architecture schemas, workflow flowcharts, or system diagrams directly into this dedicated exhibition block.</p></div>`
+            },
+            'idt111-m2': {
+                image: 'salvator.JPG', artist: 'Leonardo da Vinci (Attributed)', title: 'Salvator Mundi', year: 'c. 1500', museum: 'Private Collection.',
+                designCaption: 'An iconic image of order holding a crystal orb representing the cosmos. Ideal for sections addressing high-level project governance, comprehensive needs assessment, or the macro-view of instructional systems design.',
+                html: `<h1 style="font-family:var(--font-serif);font-size:3.8rem;font-weight:300;margin-bottom:1rem;line-height:1.15;color:var(--text-cream-dark);">Learning Theory, Instructional Theory, & <i>ID Model</i></h1><p style="text-transform:uppercase;letter-spacing:0.2em;font-size:0.8rem;color:var(--accent-rustic);margin-bottom:4rem;font-weight:600;">IDT 111 — Module 02 Reflection</p>`
+            },
+            'idt111-m3': {
+                image: 'battle.jpg', artist: 'Joachim Wtewael', title: 'The Battle between the Gods and the Giants', year: 'c. 1592', museum: 'Musée du Louvre, Paris.',
+                designCaption: 'An intensely fluid, chaotic Mannerist portrayal of dynamic forces colliding. Represents systemic friction, pedagogical paradigm shifts, and managing overwhelming cognitive load in complex educational interventions.',
+                html: `<h1 style="font-family:var(--font-serif);font-size:3.8rem;font-weight:300;margin-bottom:1rem;line-height:1.15;color:var(--text-cream-dark);">Learning Theories and <i>Instructional Design</i></h1><p style="text-transform:uppercase;letter-spacing:0.2em;font-size:0.8rem;color:var(--accent-rustic);margin-bottom:4rem;font-weight:600;">IDT 111 — Module 03 Reflection</p>`
+            },
+            'idt111-m4': {
+                image: 'cupid.jpg', artist: 'Bartolomeo Manfredi', title: 'Cupid Chastised', year: 'c. 1613', museum: 'Musée du Louvre, Paris.',
+                designCaption: 'A dramatic, high-contrast Caravaggites execution showing stark tension and behavioral correction. Serves as a raw artistic metaphor for formative assessment, behaviorist feedback loops, or disruptive interventions in instructional tracking.',
+                html: `<h1 style="font-family:var(--font-serif);font-size:3.8rem;font-weight:300;margin-bottom:1rem;line-height:1.15;color:var(--text-cream-dark);">Instructional Theories and <i>Instructional Design</i></h1><p style="text-transform:uppercase;letter-spacing:0.2em;font-size:0.8rem;color:var(--accent-rustic);margin-bottom:4rem;font-weight:600;">IDT 111 — Module 04 Reflection</p>`
+            },
+            'idt111-m5': {
+                image: 'flowers.jpg', artist: 'Henri Fantin-Latour', title: 'Still Life with Flowers', year: '1864', museum: 'Musée du Louvre, Paris.',
+                designCaption: 'A beautifully grouped, organic floral composition utilizing soft illumination. Mirrors the thoughtful curation of modular multimedia objects, beautiful typography layouts, and balanced instructional message design.',
+                html: `<h1 style="font-family:var(--font-serif);font-size:3.8rem;font-weight:300;margin-bottom:1rem;line-height:1.15;color:var(--text-cream-dark);">Instructional <i>Design Models</i></h1><p style="text-transform:uppercase;letter-spacing:0.2em;font-size:0.8rem;color:var(--accent-rustic);margin-bottom:4rem;font-weight:600;">IDT 111 — Module 05 Reflection</p>`
             },
             'idt121-m1': {
-                image: 'medusa.jpg',
-                artist: 'Théodore Géricault',
-                title: 'The Raft of the Medusa',
-                year: '1818–1819',
-                museum: 'Musée du Louvre, Paris.',
+                image: 'medusa.jpg', artist: 'Théodore Géricault', title: 'The Raft of the Medusa', year: '1818–1819', museum: 'Musée du Louvre, Paris.',
                 designCaption: 'A monumental Romantic masterpiece depicting human desperation and systemic chaos. Perfect as a metaphor for structural breakdown, project volatility, or the frantic search for a navigation framework in systemic instructional spaces.',
-                html: `
-                    <h1 style="font-family: var(--font-serif); font-size: 3.8rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.15; color: var(--text-cream-dark);">Introduction to <i>Context Analysis</i></h1>
-                    <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--accent-rustic); margin-bottom: 4rem; font-weight: 600;">IDT 121 — Module 01 Reflection</p>
-                    
-                    <div class="artifact-embed-box">
-                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-cream-dark); font-style: italic;">Official Context Artifact Storage</h3>
-                        <p style="font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.6;">Your systemic context audits, physical learning environment matrices, and target audience data fields will sit inside this dedicated presentation module area.</p>
-                    </div>
-                `
+                html: `<h1 style="font-family:var(--font-serif);font-size:3.8rem;font-weight:300;margin-bottom:1rem;line-height:1.15;color:var(--text-cream-dark);">Introduction to <i>Context Analysis</i></h1><p style="text-transform:uppercase;letter-spacing:0.2em;font-size:0.8rem;color:var(--accent-rustic);margin-bottom:4rem;font-weight:600;">IDT 121 — Module 01 Reflection</p><div class="artifact-embed-box"><h3 style="font-family:var(--font-serif);font-size:1.8rem;font-weight:400;margin-bottom:1.5rem;color:var(--text-cream-dark);font-style:italic;">Official Context Artifact Storage</h3><p style="font-size:0.95rem;color:var(--text-cream-muted);line-height:1.6;">Your systemic context audits, physical learning environment matrices, and target audience data fields will sit inside this dedicated presentation module area.</p></div>`
+            },
+            'idt121-m2': {
+                image: 'peacock.JPG', artist: 'Jan Weenix', title: 'Still-Life with a Peacock and a Dog', year: '1696', museum: 'Musée du Louvre, Paris.',
+                designCaption: 'A grand, dramatic Baroque showcase of lavish status textures contrasted with instinctual elements. A great analog for examining competing environmental variables, deep contextual analysis, or the raw complexity of learner ecosystems.',
+                html: `<h1 style="font-family:var(--font-serif);font-size:3.8rem;font-weight:300;margin-bottom:1rem;line-height:1.15;color:var(--text-cream-dark);">Systems Thinking in <i>Context Analysis</i></h1><p style="text-transform:uppercase;letter-spacing:0.2em;font-size:0.8rem;color:var(--accent-rustic);margin-bottom:4rem;font-weight:600;">IDT 121 — Module 02 Reflection</p>`
+            },
+            'idt121-m3': {
+                image: 'charles.JPG', artist: 'Jean-Auguste-Dominique Ingres', title: 'Charles V Received by Francis I at the Louvre', year: '1843', museum: 'Musée du Louvre, Paris.',
+                designCaption: 'A highly dense historical staging showing diplomatic protocols and architecture. Use this to illustrate complex institutional protocols, stakeholder alignment, or navigating socio-political boundaries in learning systems.',
+                html: `<h1 style="font-family:var(--font-serif);font-size:3.8rem;font-weight:300;margin-bottom:1rem;line-height:1.15;color:var(--text-cream-dark);">Models and Processes of <i>Context Analysis</i></h1><p style="text-transform:uppercase;letter-spacing:0.2em;font-size:0.8rem;color:var(--accent-rustic);margin-bottom:4rem;font-weight:600;">IDT 121 — Module 03 Reflection</p>`
+            },
+            'idt121-m4': {
+                image: 'greatwave.jpg', artist: 'Katsushika Hokusai', title: 'The Great Wave off Kanagawa', year: 'c. 1831', museum: 'Musée du Louvre, Paris.',
+                designCaption: 'An immortal ukiyo-e woodblock print showcasing immense natural scale and graphic line movement. The ultimate visual metaphor for scaling educational technology, facing overwhelming administrative waves, or designing modular content for systemic resilience.',
+                html: `<h1 style="font-family:var(--font-serif);font-size:3.8rem;font-weight:300;margin-bottom:1rem;line-height:1.15;color:var(--text-cream-dark);">Writing Context Analysis Report and <i>Wrap-Up</i></h1><p style="text-transform:uppercase;letter-spacing:0.2em;font-size:0.8rem;color:var(--accent-rustic);margin-bottom:4rem;font-weight:600;">IDT 121 — Module 04 Reflection</p>`
             }
         };
 
         const lockedPreviews = {
-            'idt111-m2': 'salvator.JPG',
-            'idt111-m3': 'battle.jpg',
-            'idt111-m4': 'cupid.jpg',
-            'idt111-m5': 'flowers.jpg',
-            'idt121-m2': 'peacock.JPG',
-            'idt121-m3': 'charles.JPG',
-            'idt121-m4': 'greatwave.jpg'
-        };
-
-        const lockedMetadata = {
-            'idt111-m2': { artist: 'Leonardo da Vinci (Attributed)', title: 'Salvator Mundi', year: 'c. 1500', museum: 'Private Collection.', caption: 'An iconic image of order holding a crystal orb representing the cosmos. Ideal for sections addressing high-level project governance, comprehensive needs assessment, or the macro-view of instructional systems design.' },
-            'idt111-m3': { artist: 'Joachim Wtewael', title: 'The Battle between the Gods and the Giants', year: 'c. 1592', museum: 'Musée du Louvre, Paris.', caption: 'An intensely fluid, chaotic Mannerist portrayal of dynamic forces colliding. Represents systemic friction, pedagogical paradigm shifts, and managing overwhelming cognitive load in complex educational interventions.' },
-            'idt111-m4': { artist: 'Bartolomeo Manfredi', title: 'Cupid Chastised', year: 'c. 1613', museum: 'Musée du Louvre, Paris.', caption: 'A dramatic, high-contrast Caravaggites execution showing stark tension and behavioral correction. Serves as a raw artistic metaphor for formative assessment, behaviorist feedback loops, or disruptive interventions in instructional tracking.' },
-            'idt111-m5': { artist: 'Henri Fantin-Latour', title: 'Still Life with Flowers', year: '1864', museum: 'Musée du Louvre, Paris.', caption: 'A beautifully grouped, organic floral composition utilizing soft illumination. Mirrors the thoughtful curation of modular multimedia objects, beautiful typography layouts, and balanced instructional message design.' },
-            'idt121-m2': { artist: 'Jan Weenix', title: 'Still-Life with a Peacock and a Dog', year: '1696', museum: 'Musée du Louvre, Paris.', caption: 'A grand, dramatic Baroque showcase of lavish status textures contrasted with instinctual elements. A great analog for examining competing environmental variables, deep contextual analysis, or the raw complexity of learner ecosystems.' },
-            'idt121-m3': { artist: 'Jean-Auguste-Dominique Ingres', title: 'Charles V Received by Francis I at the Louvre', year: '1843', museum: 'Musée du Louvre, Paris.', caption: 'A highly dense historical staging showing diplomatic protocols and architecture. Use this to illustrate complex institutional protocols, stakeholder alignment, or navigating socio-political boundaries in learning systems.' },
-            'idt121-m4': { artist: 'Katsushika Hokusai', title: 'The Great Wave off Kanagawa', year: 'c. 1831', museum: 'Musée du Louvre, Paris.', caption: 'An immortal ukiyo-e woodblock print showcasing immense natural scale and graphic line movement. The ultimate visual metaphor for scaling educational technology, facing overwhelming administrative waves, or designing modular content for systemic resilience.' }
+            'idt111-m2': 'salvator.JPG', 'idt111-m3': 'battle.jpg', 'idt111-m4': 'cupid.jpg', 'idt111-m5': 'flowers.jpg',
+            'idt121-m2': 'peacock.JPG', 'idt121-m3': 'charles.JPG', 'idt121-m4': 'greatwave.jpg'
         };
         document.addEventListener("DOMContentLoaded", () => {
             Object.keys(journalDatabase).forEach(key => {
@@ -546,10 +460,10 @@
                 if (journalDatabase[entryId].image !== '') {
                     heroZone.innerHTML = `
                         <img src="${journalDatabase[entryId].image}" alt="Exhibition Masterwork Leaf Header">
-                        <div style="font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-cream-dark); line-height: 1.6; margin-top: 1.5rem; text-align: left; padding: 1.5rem; background-color: rgba(0,0,0,0.02); border-left: 3px solid var(--accent-rustic); width: 100%;">
+                        <div style="font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-cream-dark); line-height: 1.6; margin-top: 2rem; text-align: left; padding: 1.5rem 0 0 0; border-top: 1px solid rgba(0,0,0,0.08); width: 100%;">
                             <span style="font-weight: 700; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.15em; display: block; margin-bottom: 0.25rem; color: var(--accent-rustic);">${journalDatabase[entryId].artist}</span>
-                            <span style="font-family: var(--font-serif); font-size: 1.1rem; font-style: italic; font-weight: 600;">${journalDatabase[entryId].title}</span>, ${journalDatabase[entryId].year}. ${journalDatabase[entryId].museum}
-                            <p style="margin-top: 1rem; margin-bottom: 0; font-size: 0.9rem; line-height: 1.5; color: var(--text-cream-muted); font-style: normal; font-weight: 400; text-align: justify;">${journalDatabase[entryId].designCaption}</p>
+                            <span style="font-family: var(--font-serif); font-size: 1.2rem; font-style: italic; font-weight: 600;">${journalDatabase[entryId].title}</span>, ${journalDatabase[entryId].year}. ${journalDatabase[entryId].museum}
+                            <p style="margin-top: 1.2rem; margin-bottom: 0; font-size: 0.95rem; line-height: 1.6; color: var(--text-cream-muted); font-style: normal; font-weight: 400; text-align: justify; border-left: 2px solid var(--accent-rustic); padding-left: 1.2rem;">${journalDatabase[entryId].designCaption}</p>
                         </div>
                     `;
                     heroZone.classList.add('has-art');
