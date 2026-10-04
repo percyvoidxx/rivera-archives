@@ -626,6 +626,21 @@
         .essay-text ul, .essay-text ol { margin: 0 0 1.4em 1.4em; }
         .essay-text li { margin-bottom: 0.4em; }
         .essay-text a { color: var(--accent-oxblood); text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+        /* References: hanging indent, slightly smaller, long links wrap instead of overflowing */
+        .essay-text .references-title {
+            border-top: 1px solid rgba(26, 26, 28, 0.14);
+            padding-top: 1.6em;
+            margin-top: 3em;
+        }
+        .essay-text p.reference {
+            font-size: 1rem;
+            line-height: 1.55;
+            padding-left: 2em;
+            text-indent: -2em;
+            margin-bottom: 0.9em;
+            overflow-wrap: anywhere;
+            hyphens: none;
+        }
         .essay-text img, .essay-text iframe { max-width: 100%; display: block; }
         .essay-text figure { margin: 2.2em 0; }
         .essay-text figcaption {
@@ -891,12 +906,31 @@
                 course: 'idt121', locked: false,
                 tag: 'Overview',
                 cardTitle: 'Introduction to Context Analysis',
-                summary: 'A multi-perspective evaluation introducing target learner parameters and digital ecosystems.',
+                summary: 'Examining how localized technological, physical, and psychological ecosystems dismantle closed-system instructional assumptions.',
                 heading: 'Introduction to <i>Context Analysis</i>',
                 image: 'medusa.jpg',
                 artist: 'Théodore Géricault', title: 'The Raft of the Medusa', year: '1818–1819', museum: 'Musée du Louvre, Paris',
                 designCaption: 'A monumental Romantic masterpiece depicting human desperation and systemic chaos. Perfect as a metaphor for structural breakdown, project volatility, or the frantic search for a navigation framework in systemic instructional spaces.',
-                essay: ``, outputs: ``
+                essay: `
+                    <p>The transition into a new academic trimester often proves that past experience doesn't guarantee an effortless path. Even as a returning distance learner navigating the UP Open University system, every new course brings its own faculty styles, different requirements, and unique workflows. This mirrors the core idea from Tessmer and Richey (1997), who describe context as a multi-layered ecosystem that constantly shapes and limits performance. As they put it, learning never happens in a vacuum (Tessmer and Richey, 1997). This week, while managing my remote HR role from my home desk in Caloocan and at the same time troubleshooting repository bugs and deployment errors for my web-based learning portfolio, that idea of environmental friction stopped being theoretical and became very real.</p>
+
+                    <p>I could have easily gone with a standard, template-driven portfolio using basic commercial design platforms like I did last semester. But choosing a more complex, manual frontend development stack forced me to see firsthand how the limits of your setup, your internet, your tools, your platform, change how you're actually able to work. In instructional systems design, practitioners often mix up a big-picture needs assessment with a more specific needs analysis or contextual analysis (Stefaniak, 2021). A needs assessment focuses on identifying the baseline performance gap to figure out whether training is even necessary, while a contextual analysis, as explained by the same authors, looks into the physical, social, and technological realities the solution actually has to survive in (Malamed, n.d.). My internal motivation and technical goals made up my orienting context, basically my mindset going into the task before I even started (Tessmer and Richey, 1997). The actual instructional context, though, consisted of fluctuating home internet, local distractions at home, and the strict technical limits of the hosting platform (Stefaniak, 2021).</p>
+
+                    <p>This kind of friction is exactly why instructional designers need to move away from closed-system thinking (von Bertalanffy, 1972, as cited in Stefaniak &amp; Sentz, 2020). As noted under general systems theory, a learning environment is an open system, meaning internal components and external variables are constantly interacting and affecting how everyone involved behaves (Stefaniak &amp; Sentz, 2020). If a design strategy lead builds an onboarding program or a university module assuming learners exist in perfect isolation with flawless tools, that program is bound to fall apart the moment it meets real-world conditions (Stefaniak &amp; Sentz, 2020). In my own corporate HR work, we manage remote cross-border onboarding where new hires deal with real performance anxiety while tracking complex data on specialized software. If our training designs ignore their home office limitations or how unstable their regional internet is, the transfer context breaks down, and the knowledge never actually turns into lasting job performance (Tessmer and Richey, 1997).</p>
+
+                    <p>Paying attention to these variables lines up with what Connie Malamed (n.d.) calls a 360-degree approach to design. By intentionally looking at the physical, emotional, and technological layers of someone's workspace, designers can build learning experiences that genuinely ease the mental strain on the learner (Malamed, n.d.). Building my portfolio reminded me that we have to be intentional about planning for the messiness that comes with real-world execution (Stefaniak and Sentz, 2020). Real expertise in instructional technology isn't about assuming a friction-free environment. As the readings this week made clear, it's about understanding the actual ground the learner is standing on, so the design can hold up against the inevitable chaos of execution (Stefaniak, 2021).</p>
+
+                    <h3 class="references-title">References</h3>
+
+                    <p class="reference">Malamed, C. (n.d.). <i>The importance of context in learning design</i>. The eLearning Coach. <a href="https://theelearningcoach.com/elearning_design/context-in-learning-design/">https://theelearningcoach.com/elearning_design/context-in-learning-design/</a></p>
+
+                    <p class="reference">Stefaniak, J. E. (2021). Determining environmental and contextual needs (Chap. 4). In J. K. McDonald &amp; R. E. West (Eds.), <i>Design for learning: Principles, processes, and praxis</i>. BYU Open Learning Network. <a href="https://edtechbooks.s3.us-west-2.amazonaws.com/pdfs/22/2435.pdf">https://edtechbooks.s3.us-west-2.amazonaws.com/pdfs/22/2435.pdf</a></p>
+
+                    <p class="reference">Stefaniak, J. E., &amp; Sentz, J. (2020). The role of needs assessment to validate contextual factors related to user experience design practices. In M. Schmidt, A. A. Tawfik, I. Jahnke, &amp; Y. Earnshaw (Eds.), <i>Learner and user experience research: An introduction for the field of learning design &amp; technology</i>. EdTech Books. <a href="https://edtechbooks.s3.us-west-2.amazonaws.com/pdfs/36/3244.pdf">https://edtechbooks.s3.us-west-2.amazonaws.com/pdfs/36/3244.pdf</a></p>
+
+                    <p class="reference">Tessmer, M., &amp; Richey, R. C. (1997). The role of context in learning and instructional design. <i>Educational Technology Research and Development, 45</i>(2), 85–115.</p>
+                `,
+                outputs: ``
             },
             'idt121-m2': {
                 course: 'idt121', locked: true,
