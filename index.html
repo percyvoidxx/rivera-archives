@@ -480,6 +480,7 @@
             transition: color 0.2s, transform 0.3s var(--ease-out);
         }
         .close-modal-btn:hover { color: var(--text-cream-dark); transform: translateX(-3px); }
+        .portal-modal:focus { outline: none; }
         .portal-modal :focus-visible { outline-color: var(--accent-oxblood); }
 
         /* Painting: the frame hugs the image, sitting on the cream like a hung canvas */
@@ -632,6 +633,7 @@
             padding-top: 1.6em;
             margin-top: 3em;
         }
+        .essay-text.references-block { margin-top: 5rem; }
         .essay-text p.reference {
             font-size: 1rem;
             line-height: 1.55;
@@ -651,7 +653,7 @@
             margin-top: 0.7em;
         }
         /* Manuscript-style drop cap on the first paragraph only, in oxblood */
-        .essay-text > p:first-of-type::first-letter {
+        .essay-text.dropcap > p:first-of-type::first-letter {
             font-family: var(--font-serif);
             font-weight: 500;
             color: var(--accent-oxblood);
@@ -661,7 +663,7 @@
             padding: 0.06em 0.1em 0 0;
         }
         @supports (initial-letter: 3) or (-webkit-initial-letter: 3) {
-            .essay-text > p:first-of-type::first-letter {
+            .essay-text.dropcap > p:first-of-type::first-letter {
                 float: none;
                 font-size: inherit;
                 line-height: inherit;
@@ -672,31 +674,224 @@
             }
         }
 
-        /* Optional box for assignment outputs (PDF, Canva, Google Slides, images) */
-        .artifact-embed-box {
-            margin-top: 3rem;
-            padding: 2.2rem 2.2rem 2.4rem;
+        /* =================================================================
+           TWO-PART PAGES: Part I Learning Output + Part II Reflections
+           (pages with no output stay a single reflection, no part headers)
+           ================================================================= */
+        .modal-essay-body > .entry-part { max-width: 52rem; margin-top: 4.2rem; scroll-margin-top: 1.5rem; }
+        .entry-part + .entry-part { margin-top: 6.5rem; }
+        .part-header {
+            position: relative;
+            max-width: 40rem;
+            margin: 0 auto 2.4rem;
+            padding-top: 1.7rem;
+            border-top: 1px solid rgba(26, 26, 28, 0.18);
+        }
+        .part-header::before {
+            content: "";
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 3.5rem;
+            height: 2px;
+            background: var(--accent-oxblood);
+        }
+        .part-label {
+            display: block;
+            font-size: 0.72rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--label-on-cream);
+            margin-bottom: 0.6rem;
+        }
+        .part-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.1rem, 5.5vw, 3rem);
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+            color: var(--text-cream-dark);
+        }
+        .entry-part .essay-text > * { max-width: 40rem; margin-left: auto; margin-right: auto; }
+        .entry-part .essay-text > .output-embed,
+        .entry-part .essay-text > .case-grid { max-width: 52rem; }
+        .part-body > .pending-note { max-width: 40rem; margin-left: auto; margin-right: auto; }
+
+        /* Jump links under the title (only on two-part pages) */
+        .module-subtitle-meta.with-jump { margin-bottom: 1.4rem !important; }
+        .part-jump { display: flex; flex-wrap: wrap; gap: 0.8rem 1.8rem; }
+        .part-jump button {
+            background: none;
+            border: none;
+            border-bottom: 1px solid rgba(26, 26, 28, 0.3);
+            padding: 0.3rem 0;
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--text-cream-muted);
+            cursor: pointer;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .part-jump button:hover { color: var(--accent-oxblood); border-color: var(--accent-oxblood); }
+
+        /* Embedded output (Figma, PDF, Google Drive...) hung like a painting */
+        .output-embed { margin-top: 0; margin-bottom: 2.4rem; }
+        .embed-frame {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            background: var(--bg-ink);
+            box-shadow: 0 2px 4px rgba(20, 12, 6, 0.25), 0 36px 70px -28px rgba(20, 12, 6, 0.6);
+        }
+        .embed-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; max-width: none; }
+        .embed-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 1rem;
+            margin-top: 1.1rem;
+            font-size: 0.72rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--text-cream-muted);
+        }
+        .embed-actions a {
+            color: var(--accent-oxblood);
+            text-decoration: none;
+            white-space: nowrap;
+            border-bottom: 1px solid currentColor;
+            padding-bottom: 2px;
+        }
+        .output-image img { box-shadow: 0 2px 4px rgba(20, 12, 6, 0.2), 0 24px 50px -24px rgba(20, 12, 6, 0.5); }
+
+        .output-caption { font-size: 1.15rem !important; }
+        .caption-label {
+            display: block;
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--label-on-cream);
+            margin-bottom: 0.45rem;
+        }
+
+        /* Branch list (concept map branches) */
+        .branch-list { margin: 2rem auto 2.2rem; }
+        .branch-list > div {
+            display: grid;
+            grid-template-columns: 6rem 1fr;
+            gap: 1.2rem;
+            padding: 1.2rem 0;
+            border-top: 1px solid rgba(26, 26, 28, 0.12);
+        }
+        .branch-list > div:last-child { border-bottom: 1px solid rgba(26, 26, 28, 0.12); }
+        .branch-list dt {
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--accent-oxblood);
+            padding-top: 0.45rem;
+        }
+        .branch-list dd { margin: 0; font-size: 1.15rem; line-height: 1.65; }
+        .branch-name {
+            display: block;
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-weight: 500;
+            font-size: 1.5rem;
+            line-height: 1.2;
+            color: var(--text-cream-dark);
+            margin-bottom: 0.3rem;
+        }
+
+        /* Subheading inside a part, and side-by-side case cards */
+        .essay-text h3.subhead {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-weight: 500;
+            font-size: 2rem;
+            line-height: 1.2;
+            text-transform: none;
+            letter-spacing: 0;
+            color: var(--text-cream-dark);
+            margin-top: 2.6em;
+            margin-bottom: 0.7em;
+        }
+        .case-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.4rem;
+            margin-top: 2rem;
+            margin-bottom: 2.4rem;
+        }
+        .case-card {
             background: rgba(26, 26, 28, 0.035);
             border: 1px solid rgba(26, 26, 28, 0.14);
             border-top: 2px solid var(--accent-rustic);
             border-radius: 2px;
+            padding: 1.7rem 1.7rem 1.5rem;
         }
-        .artifact-embed-box h3 {
+        .case-card.is-non { border-top-color: var(--accent-oxblood); }
+        .case-tag {
+            font-family: var(--font-sans);
+            font-size: 0.68rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--label-on-cream);
+            margin-bottom: 0.4rem !important;
+        }
+        .case-card h4 {
             font-family: var(--font-serif);
             font-style: italic;
             font-weight: 500;
-            font-size: 1.7rem;
-            margin-bottom: 1rem;
+            font-size: 1.6rem;
+            line-height: 1.2;
             color: var(--text-cream-dark);
+            margin-bottom: 0.4rem;
         }
-        .artifact-embed-box p { font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.65; }
-        .artifact-embed-box iframe, .artifact-embed-box img {
-            display: block;
-            width: 100%;
-            border: 1px solid rgba(26, 26, 28, 0.14);
-            background: #fff;
+        .case-card dt {
+            font-family: var(--font-sans);
+            font-size: 0.68rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--label-on-cream);
+            margin-top: 1.1rem;
         }
-        .artifact-embed-box iframe { aspect-ratio: 16 / 10; }
+        .case-card dd { margin: 0.3rem 0 0; font-size: 1.05rem; line-height: 1.6; color: var(--text-cream-body); }
+
+        /* Reflection steps: 01 What? / 02 So what? / 03 Now what? */
+        .essay-text h3.reflect-step {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-weight: 500;
+            font-size: 2rem;
+            line-height: 1.2;
+            text-transform: none;
+            letter-spacing: 0;
+            color: var(--text-cream-dark);
+            margin-top: 2.6em;
+            margin-bottom: 0.6em;
+        }
+        .essay-text h3.reflect-step:first-child { margin-top: 0; }
+        .reflect-step span {
+            font-family: var(--font-sans);
+            font-style: normal;
+            font-size: 0.72rem;
+            letter-spacing: 0.2em;
+            font-weight: 700;
+            color: var(--accent-oxblood);
+        }
 
         .modal-footer-nav {
             width: 100%;
@@ -738,7 +933,12 @@
             .flip-card { height: 460px; }
             .portal-modal { padding: 1.5rem 1.1rem 4rem; }
             .essay-text { font-size: 1.15rem; }
-            .artifact-embed-box { padding: 1.5rem; }
+            .embed-frame { aspect-ratio: 3 / 4; }
+            .embed-actions { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+            .case-grid { grid-template-columns: 1fr; }
+            .branch-list > div { grid-template-columns: 1fr; gap: 0.3rem; }
+            .branch-list dt { padding-top: 0; }
+            .essay-text h3.subhead, .essay-text h3.reflect-step { font-size: 1.7rem; }
         }
         /* On touch screens there is no hover, so tapping simply opens the page */
         @media (hover: none) {
@@ -802,7 +1002,7 @@
     </section>
 
     <!-- ================= VIEW 4: THE JOURNAL PAGE ================= -->
-    <div id="portal-modal-sheath" class="portal-modal" role="dialog" aria-modal="true" aria-label="Journal entry" aria-hidden="true">
+    <div id="portal-modal-sheath" class="portal-modal" role="dialog" aria-modal="true" aria-label="Journal entry" aria-hidden="true" tabindex="-1">
         <main class="modal-content-wrapper">
             <button class="close-modal-btn" data-action="close">← Go back to modules</button>
             <figure class="modal-hero-artwork-frame" id="modal-dynamic-hero"></figure>
@@ -831,12 +1031,47 @@
         //           <blockquote>An optional quote</blockquote>
         //       `,
         //
-        //  3. Optional: `outputs` shows an "Assignment output" box under the essay.
-        //     Put a link, an image, or an embed in it, for example:
-        //       outputs: `<iframe src="https://..."></iframe>`
+        //  3. TWO KINDS OF PAGES
+        //     - Reflection only:  fill in `essay` and leave `outputs: ``` empty.
+        //       The page shows just your reflection (no part headers).
+        //     - Output + reflection: ALSO fill in `outputs`. The page automatically
+        //       becomes two parts: "Part I Learning Output" (your outputs) and
+        //       "Part II Reflections" (your essay), with jump links at the top.
         //
-        //  Do not type a backtick ( ` ) or the characters ${ inside the essay text.
+        //  4. WHAT GOES IN `outputs` (use the helpers below, and plain <p> text):
+        //       outputs: embed('https://...', 'Name of the output') + `<p>Caption text</p>`,
+        //       outputs: image('my-output.png', 'Describe the image', 'Figure 1. Caption'),
+        //     embed() works for Figma, Google Drive/Docs/Slides, Canva and PDF links.
+        //     It also adds an "Open in a new tab" link, in case a site refuses to be embedded.
+        //     For a Word file: save it as PDF, upload the PDF to GitHub, then
+        //       embed('my-output.pdf', 'My output (PDF)')
+        //
+        //  5. REFERENCES (optional): fill in `references` with one <p class="reference"> per
+        //     source, in alphabetical order. It appears at the very end of the page under
+        //     a "References" heading. Example:
+        //       references: `
+        //           <p class="reference">Author, A. (2020). <i>Title</i>. <a href="https://...">https://...</a></p>
+        //       `,
+        //
+        //  Do not type a backtick ( ` ) or the characters ${ inside the text.
         // =========================================================================
+
+        // ---------- Helpers for the `outputs` field ----------
+        function embed(url, title, linkLabel) {
+            const u = String(url).replace(/"/g, '&quot;');
+            const t = String(title || 'Embedded output').replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+            return '<figure class="output-embed"><div class="embed-frame">' +
+                '<iframe src="' + u + '" title="' + t + '" loading="lazy" allowfullscreen></iframe></div>' +
+                '<div class="embed-actions"><span>' + t + '</span>' +
+                '<a href="' + u + '" target="_blank" rel="noopener">' + (linkLabel || 'Open in a new tab') + ' ↗</a></div></figure>';
+        }
+        function image(src, alt, caption) {
+            const s = String(src).replace(/"/g, '&quot;');
+            const a = String(alt || '').replace(/"/g, '&quot;');
+            return '<figure class="output-image"><img src="' + s + '" alt="' + a + '" loading="lazy">' +
+                (caption ? '<figcaption>' + caption + '</figcaption>' : '') + '</figure>';
+        }
+
         const COURSES = {
             idt111: { code: 'IDT 111', view: 'idt111-view' },
             idt121: { code: 'IDT 121', view: 'idt121-view' }
@@ -848,13 +1083,87 @@
                 course: 'idt111', locked: false,
                 tag: 'Overview',
                 cardTitle: 'Overview of Instructional Design',
-                summary: 'A high-level critical reflection exploring core ID beliefs, values, and design judgments through the lens of Lachheb & Boling (2021).',
+                summary: 'Mapping the multidimensional identity of instructional design, and telling apart the problems training can solve from the ones it cannot.',
                 heading: 'Overview of <i>Instructional Design</i>',
                 image: 'monalisa.JPG',
                 artist: 'Leonardo da Vinci', title: 'Mona Lisa', year: 'c. 1503–1519', museum: 'Musée du Louvre, Paris',
                 designCaption: 'The ultimate paradigm of subtle visual balance and sfumato technique. Represents user-centric mystery, soft cognitive scaffolding, and the enduring complexity of intuitive human-computer interaction (HCI).',
-                essay: ``,
-                outputs: ``
+                outputs: embed('https://draw-mark-58955729.figma.site', 'Interactive concept map: the identity of instructional design', 'Open the concept map') + `
+                    <p class="output-caption"><span class="caption-label">Caption</span>This interactive concept map is basically my attempt at laying out instructional design (ID) in a way that connects the theory to how it actually shows up in real life. Wagner (2018) makes the point that the identity of the field is multidimensional, so I split the map into four main branches, each one with small parenthetical citations tying back to the authors and theorists from our modules.</p>
+
+                    <dl class="branch-list">
+                        <div>
+                            <dt>Branch A</dt>
+                            <dd><span class="branch-name">The Nature &amp; Perspectives of ID</span>Covers the philosophical definitions from the University of Michigan framework, comparing ID as a “systematic science” versus what it actually looks like in practice, which is a lot messier and a lot more documentation.</dd>
+                        </div>
+                        <div>
+                            <dt>Branch B</dt>
+                            <dd><span class="branch-name">Historical Origins &amp; Process Evolution</span>Walks through how systemic design started out in the military during World War II under people like Robert Gagné, all the way up to today, framed around the phases of ADDIE.</dd>
+                        </div>
+                        <div>
+                            <dt>Branch C</dt>
+                            <dd><span class="branch-name">Core Terminology &amp; Theoretical Foundations</span>Breaks down the differences between education, instruction, training, and teaching, plus how behaviorist, cognitivist, constructivist, and connectivist theories developed over time.</dd>
+                        </div>
+                        <div>
+                            <dt>Branch D</dt>
+                            <dd><span class="branch-name">Performance Analysis &amp; Problem Solving</span>Points out that designers today are expected to act more like performance consultants than just people who build courses, and that it's important to actually tell whether a gap is instructional or not before jumping into a solution.</dd>
+                        </div>
+                    </dl>
+
+                    <h3 class="subhead">Problem Differentiation &amp; Corporate Application</h3>
+
+                    <p>A lot of organizations end up wasting time and money because they don't bother figuring out whether a performance issue can actually be solved with training, or if it's something else entirely. McGriff (2019) describes an instructional problem as a real gap in knowledge, skills, or attitude (KSA) that training can actually fix. A non-instructional problem is different, it comes from things like broken tools, environment issues, or how the organization itself is set up, and no amount of training will fix that.</p>
+
+                    <p>Here's a side by side using our current situation with Regal and Salesforce, our third-party tools that our Patient Support Team use on their daily tasks:</p>
+
+                    <div class="case-grid">
+                        <div class="case-card">
+                            <p class="case-tag">Case A</p>
+                            <h4>The Instructional Problem</h4>
+                            <dl>
+                                <dt>The Performance Gap</dt>
+                                <dd>The patient support team keeps missing their weekly call numbers because agents simply don't know how to do multi-tier record lookups on the new Salesforce layout.</dd>
+                                <dt>The Root Cause</dt>
+                                <dd>The agents want to do the job well, they just don't have the specific skills yet for the updated platform.</dd>
+                                <dt>The ID Solution</dt>
+                                <dd>We fix this by building sandbox simulations, step-by-step video tutorials, and hands-on onboarding practice during initial nesting.</dd>
+                            </dl>
+                        </div>
+                        <div class="case-card is-non">
+                            <p class="case-tag">Case B</p>
+                            <h4>The Non-Instructional Problem</h4>
+                            <dl>
+                                <dt>The Performance Gap</dt>
+                                <dd>The team is still missing their weekly numbers even after scoring well on the training assessments.</dd>
+                                <dt>The Root Cause</dt>
+                                <dd>Turns out the real issue is that Salesforce keeps crashing during peak hours, and the bonus targets are set so high that agents end up pacing themselves slower on purpose just to avoid burning out.</dd>
+                                <dt>The Non-ID Solution</dt>
+                                <dd>This one needs actual changes from HR and IT, like upgrading the company's server package and reworking the bonus system so it doesn't push people toward burnout.</dd>
+                            </dl>
+                        </div>
+                    </div>
+                `,
+                essay: `
+                    <h3 class="reflect-step"><span>01</span>What?</h3>
+                    <p>Honestly, putting this whole concept map together was more fun than I expected, mostly because I got to mix the structured side of it with my own creative choices. The readings felt like a lot at first, but it didn't feel like a totally separate world from what I already know. ID is one of those fields that's small but tightly packed, it keeps circling back to the same theories, processes, and problems no matter which angle you look at it from. Breaking everything into blocks like this actually helped me connect the textbook definitions to stuff I deal with at my actual job. Evaluating the process, the real challenge wasn't just balancing the design, but confronting how heavily our readings critique the very corporate habits I practice daily.</p>
+
+                    <h3 class="reflect-step"><span>02</span>So what?</h3>
+                    <p>The whole instructional versus non-instructional distinction kind of called out my own habits as someone working in HR. In most corporate setups, the first instinct when a team underperforms is to blame either the employee or the training team. Reading through the critique of the course factory model made me realize how often we fall into that same trap at work, just throwing another training session at a problem without really checking what's causing it. When support teams miss their numbers, management almost always jumps straight to “let's retrain them,” without stopping to ask if training is even the problem. This module made me realize that we are operating within rigid corporate power structures that favor the quick fix of an information-heavy “course factory” model to enforce compliance, rather than addressing the actual socio-economic and structural breakdowns in infrastructure or metrics.</p>
+
+                    <h3 class="reflect-step"><span>03</span>Now what?</h3>
+                    <p>This gives me actual language to explain the patterns I already notice in my day to day remote work. These breakdowns aren't just bad luck or people slacking off, they're usually predictable and you can actually trace them if you know where to look. Going forward, I want to use this way of thinking to push back a little on how quickly we jump to “more training” as the default fix at work. By reframing my role from a passive content creator to a systemic performance consultant, I can ground my recommendations in front-end diagnostic data. As a concrete next step for this coming week, I plan to audit our team's upcoming retraining request by mapping it directly against McGriff’s KSA framework before any content development begins. Changing how a company operates takes time, especially with budgets, approvals, and office politics in the way, but at least now I have something solid to back up my recommendations instead of just going off a hunch.</p>
+                `,
+                references: `
+                    <p class="reference">McGriff, S. (2019, October 17). <i>Instructional problems presentation</i> [Online video]. <a href="https://www.youtube.com/watch?v=zNTN0yLeq1E">https://www.youtube.com/watch?v=zNTN0yLeq1E</a></p>
+
+                    <p class="reference">Peck, D. (2021, March 23). <i>Which problems can instructional designers solve</i> [Online video]. <a href="https://www.youtube.com/watch?v=UXYUvdkyqq8">https://www.youtube.com/watch?v=UXYUvdkyqq8</a></p>
+
+                    <p class="reference">Raible, J. (2020). History of instructional design (Chap. 1). In <i>Introduction to instructional design</i>. Pressbooks. <a href="https://pressbooks.pub/itec51602/chapter/chapter-1/">https://pressbooks.pub/itec51602/chapter/chapter-1/</a></p>
+
+                    <p class="reference">Rajaratnam, V. (2025, July 27). <i>Introduction to instructional design</i> [Online video]. <a href="https://www.youtube.com/watch?v=bOfBd4mIgr4">https://www.youtube.com/watch?v=bOfBd4mIgr4</a></p>
+
+                    <p class="reference">Wagner, E. (2018). What is this thing called instructional design? In R. E. West (Ed.), <i>Foundations of learning and instructional design technology</i>. <a href="https://edtechbooks.org/lidtfoundations/what_is_instructional_design">https://edtechbooks.org/lidtfoundations/what_is_instructional_design</a></p>
+                `
             },
             'idt111-m2': {
                 course: 'idt111', locked: true,
@@ -1077,7 +1386,10 @@
             if (currentEntry === entryId) return;
             const e = journalDatabase[entryId];
             const n = entryId.split('-m')[1];
-            const label = COURSES[e.course].code + ' — Module ' + String(n).padStart(2, '0') + ' Reflection';
+            const hasOutput = !!(e.outputs && e.outputs.trim());
+            const hasEssay = !!(e.essay && e.essay.trim());
+            const label = COURSES[e.course].code + ' — Module ' + String(n).padStart(2, '0') +
+                (hasOutput ? ' · Learning Output &amp; Reflections' : ' Reflection');
 
             const hero = document.getElementById('modal-dynamic-hero');
             const plaque = document.getElementById('modal-dynamic-plaque-target');
@@ -1096,14 +1408,31 @@
                 plaque.innerHTML = '';
             }
 
-            const body = e.essay && e.essay.trim()
-                ? '<div class="essay-text">' + e.essay + '</div>'
+            const essayBlock = hasEssay
+                ? '<div class="essay-text dropcap">' + e.essay + '</div>'
                 : '<p class="pending-note">This reflection is in preparation.</p>';
-            const outputs = e.outputs && e.outputs.trim()
-                ? '<section class="artifact-embed-box"><h3>Assignment output</h3>' + e.outputs + '</section>'
+            const part = (id, kicker, title, inner) =>
+                '<section class="entry-part" id="' + id + '"><header class="part-header">' +
+                '<span class="part-label">' + kicker + '</span><h2 class="part-title">' + title + '</h2></header>' +
+                '<div class="part-body">' + inner + '</div></section>';
+
+            let body, jump = '';
+            if (hasOutput) {
+                // Two-part page: Part I Learning Output + Part II Reflections
+                jump = '<nav class="part-jump" aria-label="On this page">' +
+                    '<button data-jump="part-output">I · Learning Output ↓</button>' +
+                    '<button data-jump="part-reflections">II · Reflections ↓</button></nav>';
+                body = part('part-output', 'Part I', 'Learning <i>Output</i>', '<div class="essay-text">' + e.outputs + '</div>') +
+                       part('part-reflections', 'Part II', '<i>Reflections</i>', essayBlock);
+            } else {
+                body = essayBlock;   // reflection-only page: no part headers
+            }
+            // Optional reference list, shown at the very end of the page (after all parts)
+            const refs = e.references && e.references.trim()
+                ? '<div class="essay-text references-block"><h3 class="references-title">References</h3>' + e.references + '</div>'
                 : '';
             document.getElementById('modal-dynamic-target').innerHTML =
-                '<h1>' + e.heading + '</h1><p class="module-subtitle-meta">' + label + '</p>' + body + outputs;
+                '<h1>' + e.heading + '</h1><p class="module-subtitle-meta' + (hasOutput ? ' with-jump' : '') + '">' + label + '</p>' + jump + body + refs;
             document.getElementById('modal-footer-nav').innerHTML = footerNav(entryId);
 
             if (!currentEntry) lastFocus = document.activeElement;
@@ -1113,8 +1442,7 @@
             document.body.style.overflow = 'hidden';
             currentEntry = entryId;
             updateTitle();
-            const closeBtn = modal.querySelector('.close-modal-btn');
-            if (closeBtn) closeBtn.focus({ preventScroll: true });
+            modal.focus({ preventScroll: true });   // focus the page itself (no ring); Tab then reaches the back button
         }
 
         function hidePortal() {
@@ -1163,6 +1491,13 @@
         document.addEventListener('click', ev => {
             const go = ev.target.closest('[data-goto]');
             if (go) { goTo(go.dataset.goto); return; }
+
+            const jumpBtn = ev.target.closest('[data-jump]');
+            if (jumpBtn) {
+                const target = document.getElementById(jumpBtn.dataset.jump);
+                if (target) target.scrollIntoView({ behavior: reduceMotion() ? 'auto' : 'smooth', block: 'start' });
+                return;
+            }
 
             const closeBtn = ev.target.closest('[data-action="close"]');
             if (closeBtn) { closePortal(); return; }
