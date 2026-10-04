@@ -3,27 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0B0B0D">
+    <meta name="description" content="the.madness.chamber: the IDT e-journal archive of MC Rivera (IDT 111 and IDT 121).">
     <title>the.madness.chamber — MC Rivera IDT Portfolio</title>
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230B0B0D'/%3E%3Crect x='7' y='7' width='18' height='18' fill='none' stroke='%23C2A27A' stroke-width='1.5'/%3E%3Crect x='11' y='11' width='10' height='10' fill='%239C7F68'/%3E%3C/svg%3E">
+
+    <!-- FIXED: these links were missing "fonts." so the fonts never loaded (the site was showing the Georgia fallback) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
+        /* =====================================================================
+           PALETTE: black is dominant, rustic tones sit on top of it.
+           ink / canvas / cards  = the black gallery wall
+           rustic + brass        = aged tan and brass trim
+           oxblood               = a rare manuscript red (drop cap, links, hover)
+           ===================================================================== */
         :root {
-            /* 60 - 30 - 10 Curated Museum Balance Elements */
-            --bg-canvas: #141416;          /* 60% Dominant: Elegant charcoal gallery wall */
-            --bg-card: #1d1d21;            /* 30% Structural: Visible grey surface frames */
-            --bg-card-hover: #26262b;      /* Interactive elevated depth layer */
-            --bg-sepia-surface: #EDE8DC;   /* Pure luxury sand cream pop-up layout canvas */
-            --border-muted: rgba(156,127,104,0.25); /* Defined vintage metallic trim */
-            --text-primary: #EAE5DA;       /* Premium cream text for headers */
-            --text-secondary: #A6A6B2;     
-            --accent-rustic: #9C7F68;      /* 10% Accent: Vivid gold placard typography */
-            --text-cream-dark: #1A1A1C;  
-            --text-cream-muted: #5D5D66; 
+            --bg-ink: #0B0B0D;
+            --bg-canvas: #141416;
+            --bg-card: #1b1b1f;
+            --bg-card-hover: #232328;
+            --bg-card-back: #17171b;
+            --bg-sepia-surface: #EDE8DC;
+
+            --border-muted: rgba(156, 127, 104, 0.25);
+            --border-strong: rgba(194, 162, 122, 0.55);
+
+            --text-primary: #EAE5DA;
+            --text-secondary: #A8A296;
+            --text-dim: #8A857A;
+
+            --accent-rustic: #9C7F68;
+            --accent-brass: #C2A27A;
+            --accent-oxblood: #7A2E2E;
+
+            --text-cream-dark: #1A1A1C;
+            --text-cream-body: #2A2927;
+            --text-cream-muted: #5B574F;
+            --label-on-cream: #7A5F4A;
+
             --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-body: 'EB Garamond', Georgia, serif;
             --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
         }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { color-scheme: dark; scrollbar-color: #3a352f var(--bg-canvas); }
         body {
             background-color: var(--bg-canvas);
             color: var(--text-primary);
@@ -31,7 +59,29 @@
             min-height: 100vh;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            transition: background-color 0.6s ease;
         }
+        button { font: inherit; color: inherit; }
+        h1, h2, h3, .madness-line, .method-line, .card-core-heading { text-wrap: balance; }   /* no lonely last words */
+        .essay-text p, .modal-plaque-caption { text-wrap: pretty; }
+        ::selection { background: rgba(194, 162, 122, 0.35); color: #fff; }
+        :focus-visible { outline: 1px solid var(--accent-brass); outline-offset: 4px; }
+
+        /* Soft spotlight on the gallery wall (fixed, so it never clips at the column edge) */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background: radial-gradient(ellipse 80% 55% at 50% 0%, rgba(156, 127, 104, 0.13), transparent 70%);
+        }
+        body[data-view="gateway-view"] { background-color: var(--bg-ink); }
+        body[data-view="gateway-view"]::before {
+            background: radial-gradient(ellipse 60% 50% at 50% 42%, rgba(156, 127, 104, 0.10), transparent 70%);
+        }
+
         .app-view {
             display: none;
             min-height: 100vh;
@@ -41,38 +91,44 @@
         }
         .app-view.active-view {
             display: block;
-            animation: fadeInView 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: fadeInView 0.7s var(--ease-out) both;
         }
         @keyframes fadeInView {
             from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
-    </style>
-    <style>
-        /* 60-30-10 Curated Gallery Top Spotlight Lighting Vignette */
-        #idt111-view, #idt121-view {
-            background-image: radial-gradient(ellipse at top, rgba(156, 127, 104, 0.12), transparent 60%) !important;
-            background-repeat: no-repeat;
-            background-attachment: local;
+        @keyframes riseIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
+        /* =====================================================================
+           GATEWAY (landing)
+           ===================================================================== */
         #gateway-view {
-            display: none;
+            max-width: none;
+            width: 100%;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
+            min-height: 100svh;
             text-align: center;
             padding: 2rem;
             position: relative;
-            background-color: #0B0B0D; 
         }
         #gateway-view.active-view { display: flex; }
+        #gateway-view.active-view > * { animation: riseIn 1.1s var(--ease-out) both; }
+        #gateway-view.active-view > :nth-child(2) { animation-delay: 0.10s; }
+        #gateway-view.active-view > :nth-child(3) { animation-delay: 0.22s; }
+        #gateway-view.active-view > :nth-child(4) { animation-delay: 0.34s; }
+        #gateway-view.active-view > :nth-child(5) { animation-delay: 0.46s; }
+        #gateway-view.active-view > :nth-child(6) { animation-delay: 0.58s; }
+
         .owner-branding {
             position: absolute;
-            top: 4rem;
+            top: 3.5rem;
             left: 4rem;
-            font-family: var(--font-sans);
             font-size: 0.75rem;
             letter-spacing: 0.25em;
             text-transform: uppercase;
@@ -81,30 +137,51 @@
         .gateway-brand {
             font-family: var(--font-sans);
             font-size: 0.8rem;
+            font-weight: 400;
             letter-spacing: 0.4em;
             text-transform: uppercase;
             color: var(--accent-rustic);
-            margin-bottom: 4rem;
+            margin-bottom: 3.5rem;
         }
         .gateway-quote-container {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
-            margin-bottom: 4rem; /* Adjusted for navigation helper spacing flexibility */
+            gap: 0.4rem;
             max-width: 900px;
         }
         .madness-line {
             font-family: var(--font-serif);
-            font-size: 3.6rem;
+            font-size: clamp(2.1rem, 5.2vw, 3.7rem);
             font-weight: 300;
+            line-height: 1.15;
             color: var(--text-primary);
         }
         .method-line {
             font-family: var(--font-serif);
-            font-size: 3.8rem;
+            font-size: clamp(2.2rem, 5.5vw, 3.9rem);
             font-weight: 400;
             font-style: italic;
+            line-height: 1.15;
             color: var(--accent-rustic);
+        }
+        .gateway-ornament {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 3rem 0 3rem;
+        }
+        .gateway-ornament span {
+            width: 4.5rem;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-strong));
+        }
+        .gateway-ornament span:last-child { transform: scaleX(-1); }
+        .gateway-ornament i {
+            width: 6px;
+            height: 6px;
+            border: 1px solid var(--accent-brass);
+            transform: rotate(45deg);
         }
         .gateway-options {
             display: flex;
@@ -112,60 +189,77 @@
             width: 100%;
             max-width: 800px;
             justify-content: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
         .gateway-btn {
+            position: relative;
             background: none;
             border: none;
             cursor: pointer;
             text-align: center;
             padding: 1.5rem;
-            border-bottom: 1px solid var(--border-muted);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             width: 320px;
+            transition: transform 0.5s var(--ease-out);
         }
-        .gateway-btn:hover {
-            border-color: var(--accent-rustic);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(156, 127, 104, 0.08);
+        .gateway-btn::before,
+        .gateway-btn::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            height: 1px;
         }
+        .gateway-btn::before { left: 0; right: 0; background: var(--border-muted); }
+        .gateway-btn::after {
+            left: 50%;
+            width: 0;
+            background: var(--accent-brass);
+            transition: width 0.6s var(--ease-out), left 0.6s var(--ease-out);
+        }
+        .gateway-btn:hover, .gateway-btn:focus-visible { transform: translateY(-3px); }
+        .gateway-btn:hover::after, .gateway-btn:focus-visible::after { left: 0; width: 100%; }
         .gateway-btn h3 {
             font-family: var(--font-serif);
-            font-size: 2rem;
+            font-size: 2.1rem;
             font-weight: 400;
             color: var(--text-primary);
             margin-bottom: 0.6rem;
             transition: color 0.3s ease;
         }
-        .gateway-btn:hover h3 {
-            color: var(--accent-rustic);
-        }
+        .gateway-btn:hover h3, .gateway-btn:focus-visible h3 { color: var(--accent-brass); }
         .gateway-btn span {
-            font-family: var(--font-sans);
             font-size: 0.7rem;
             letter-spacing: 0.15em;
             text-transform: uppercase;
             color: var(--text-secondary);
         }
         .gateway-navigation-hint {
-            font-family: var(--font-sans);
             font-size: 0.7rem;
             letter-spacing: 0.2em;
             text-transform: uppercase;
-            color: var(--text-secondary);
-            opacity: 0.5;
+            color: var(--text-dim);
             margin-top: 1rem;
         }
-    </style>
-    <style>
+
+        /* =====================================================================
+           COURSE PAGES (selection grids)
+           ===================================================================== */
         .dashboard-header {
-            border-bottom: 2px solid var(--accent-rustic);
+            border-bottom: 1px solid var(--border-muted);
             padding-bottom: 3rem;
-            margin-bottom: 5rem;
+            margin-bottom: 4.5rem;
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
             position: relative;
+        }
+        .dashboard-header::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -1px;
+            width: 6rem;
+            height: 2px;
+            background: var(--accent-brass);
         }
         .dashboard-owner {
             position: absolute;
@@ -187,12 +281,13 @@
             cursor: pointer;
             margin-bottom: 2rem;
             display: block;
-            transition: color 0.2s ease;
+            padding: 0.4rem 0;
+            transition: color 0.2s ease, transform 0.3s var(--ease-out);
         }
-        .back-nav:hover { color: var(--accent-rustic); }
+        .back-nav:hover { color: var(--accent-brass); transform: translateX(-3px); }
         .course-title h1 {
             font-family: var(--font-serif);
-            font-size: 4rem;
+            font-size: clamp(2.4rem, 6vw, 4rem);
             font-weight: 300;
             line-height: 1.1;
             color: var(--text-primary);
@@ -202,677 +297,864 @@
             color: var(--accent-rustic);
             text-transform: uppercase;
             letter-spacing: 0.2em;
-            margin-top: 0.6rem;
+            margin-top: 0.8rem;
             font-weight: 500;
         }
         .artifact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 4rem 3rem;
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+            gap: 3.5rem 2.5rem;
         }
-        
-        /* 60-30-10 Card Framework Configuration */
+
+        /* ---------- Flip cards ---------- */
         .flip-card {
-            background-color: transparent;
             width: 100%;
-            height: 440px;
+            height: 480px;
             perspective: 1500px;
             cursor: pointer;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
         }
         .flip-card-inner {
             position: relative;
             width: 100%;
             height: 100%;
             text-align: left;
-            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 1.1s var(--ease-out);
             transform-style: preserve-3d;
         }
-        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card:not(.card-locked):hover .flip-card-inner,
+        .flip-card:not(.card-locked):focus-visible .flip-card-inner {
+            transform: translateY(-4px) rotateY(180deg);
+        }
         .flip-card-front, .flip-card-back {
             position: absolute;
             inset: 0;
-            width: 100%;
-            height: 100%;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
             border: 1px solid var(--border-muted);
-            padding: 2.2rem;
+            padding: 1.9rem;
             display: flex;
             flex-direction: column;
-            border-radius: 6px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 4px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
         }
         .flip-card-front {
             background-color: var(--bg-card);
-            justify-content: space-between;
+            gap: 1.15rem;
             transition: background-color 0.3s ease, border-color 0.3s ease;
         }
-        .flip-card:hover .flip-card-front {
-            background-color: var(--bg-card-hover);
-            border-color: #9C7F68; /* Active visual accent border */
-            transform: translateY(-4px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        .flip-card:not(.card-locked) .flip-card-front {
+            background: linear-gradient(180deg, #212126 0%, var(--bg-card) 70%);
+            border-color: rgba(194, 162, 122, 0.38);
         }
-        
-        /* Aspect-Ratio Symmetrical Constrained Image Core Frame */
+        .flip-card:not(.card-locked):hover .flip-card-front {
+            border-color: var(--accent-brass);
+            box-shadow: 0 18px 44px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(194, 162, 122, 0.12);
+        }
+
+        /* Image area fills whatever space is left, so every card lines up exactly */
         .front-visual-core {
-            width: 100%;
-            aspect-ratio: 4 / 3; /* Enforces strict geometric baseline layout */
-            background-color: #101012;
-            position: relative;
-            border: 1px solid rgba(156,127,104,0.15);
+            flex: 1 1 auto;
+            min-height: 0;
+            background-color: #0E0E10;
+            border: 1px solid rgba(156, 127, 104, 0.15);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            border-radius: 4px;
+            border-radius: 2px;
         }
         .front-visual-core img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Eradicates portrait layout title push variations */
-            filter: sepia(10%) contrast(102%) brightness(90%);
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            object-fit: contain;
+            filter: sepia(10%) contrast(102%) brightness(92%);
+            transition: transform 0.8s var(--ease-out);
         }
-        .flip-card:hover .front-visual-core img { transform: scale(1.04); }
-        
-        /* Clear Cryptic Locked State Opacity Handler */
-        .card-locked { 
-            opacity: 0.55 !important; /* Enhanced baseline typography transparency read */
-            pointer-events: none !important; 
-        }
-        .card-locked .front-visual-core img {
-            filter: grayscale(100%) brightness(50%) !important;
-        }
-        
+        .flip-card:not(.card-locked):hover .front-visual-core img { transform: scale(1.04); }
+
+        /* Locked cards */
+        .card-locked { opacity: 0.6; cursor: not-allowed; }
+        .card-locked .front-visual-core img { filter: grayscale(100%) brightness(52%); }
+        .card-locked .flip-card-front { box-shadow: none; }
+
         .card-meta-line {
             display: flex;
             justify-content: space-between;
-            font-size: 0.72rem;
+            align-items: center;
+            font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 0.15em;
             color: var(--accent-rustic);
             font-weight: 600;
         }
+        .card-status { position: relative; display: inline-flex; align-items: center; gap: 0.45rem; }
+        .status-default { display: inline-flex; align-items: center; gap: 0.45rem; transition: opacity 0.25s ease; }
+        .status-hover {
+            position: absolute;
+            right: 0;
+            white-space: nowrap;
+            opacity: 0;
+            color: var(--accent-brass);
+            transition: opacity 0.25s ease;
+        }
+        .card-locked:hover .status-default { opacity: 0; }
+        .card-locked:hover .status-hover { opacity: 1; }
+        .lock-icon { flex: none; }
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent-brass);
+            box-shadow: 0 0 8px rgba(194, 162, 122, 0.7);
+        }
         .card-core-heading {
             font-family: var(--font-serif);
-            font-size: 1.8rem;
-            font-weight: 300;
+            font-size: 1.65rem;
+            font-weight: 400;
             line-height: 1.25;
+            min-height: 3.75em;   /* reserve three lines so titles never push the image around */
             color: var(--text-primary);
         }
+
         .flip-card-back {
-            background-color: #1A1A1F;
+            background-color: var(--bg-card-back);
             transform: rotateY(180deg);
             justify-content: space-between;
-            border-color: var(--accent-rustic);
+            border-color: var(--accent-brass);
         }
         .back-summary-text {
-            font-size: 0.9rem;
+            font-family: var(--font-body);
+            font-size: 1.15rem;
             line-height: 1.6;
-            color: #C0C0CB;
+            color: #CFCABE;
             margin-top: 1rem;
         }
         .explore-trigger-btn {
-            background: none;
-            border: none;
-            color: var(--accent-rustic);
-            font-family: var(--font-sans);
-            font-size: 0.8rem;
+            color: var(--accent-brass);
+            font-size: 0.78rem;
             text-transform: uppercase;
             letter-spacing: 0.2em;
-            cursor: pointer;
-            text-align: left;
             padding-top: 1.2rem;
             border-top: 1px solid var(--border-muted);
             width: 100%;
             font-weight: 500;
         }
-    </style>
-    <style>
-        /* =========================================================================
-           🏛️ POP-UP CANVAS RULES (Enforces strict vertical layout below art frame)
-           ========================================================================= */
+
+        /* =====================================================================
+           JOURNAL PAGE (the cream presentation canvas)
+           ===================================================================== */
         .portal-modal {
             display: none;
             position: fixed;
             inset: 0;
             z-index: 1000;
-            background-color: var(--bg-sepia-surface) !important; 
+            background: radial-gradient(ellipse 90% 60% at 50% 0%, #F4F0E6, var(--bg-sepia-surface) 70%) var(--bg-sepia-surface);
             overflow-y: auto;
-            padding: 6rem 2rem;
+            overscroll-behavior: contain;
+            padding: 2.5rem 1.5rem 5rem;
             color: var(--text-cream-dark);
-            animation: fadeInView 0.5s ease forwards;
+            color-scheme: light;
+            scrollbar-color: #b8ab95 var(--bg-sepia-surface);
         }
-        .portal-modal.modal-open { display: block; }
-        .modal-content-wrapper { 
-            max-width: 800px; 
-            margin: 0 auto; 
-            position: relative; 
+        .portal-modal.modal-open { display: block; animation: fadeInView 0.5s ease both; }
+        .modal-content-wrapper {
+            max-width: 52rem;
+            margin: 0 auto;
             display: flex;
-            flex-direction: column !important; 
+            flex-direction: column;
         }
         .close-modal-btn {
-            position: fixed;
-            top: 3rem;
-            right: 4rem;
+            align-self: flex-start;
             background: none;
             border: none;
             color: var(--text-cream-muted);
-            font-family: var(--font-sans);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.2em;
             cursor: pointer;
             font-weight: 600;
-            transition: color 0.2s;
-            z-index: 1100;
+            padding: 0.6rem 0;
+            margin-bottom: 2rem;
+            transition: color 0.2s, transform 0.3s var(--ease-out);
         }
-        .close-modal-btn:hover { color: var(--text-cream-dark); }
-        
-        .modal-hero-artwork-frame { 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            width: 100%; 
-            max-height: 500px; 
-            background: #050507; 
-            margin-bottom: 0; 
+        .close-modal-btn:hover { color: var(--text-cream-dark); transform: translateX(-3px); }
+        .portal-modal :focus-visible { outline-color: var(--accent-oxblood); }
+
+        /* Painting: the frame hugs the image, sitting on the cream like a hung canvas */
+        .modal-hero-artwork-frame {
+            margin: 0 auto;
+            width: fit-content;
+            max-width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #050507;
+            box-shadow: 0 2px 4px rgba(20, 12, 6, 0.25), 0 36px 70px -28px rgba(20, 12, 6, 0.6);
         }
-        .modal-hero-artwork-frame img { 
-            width: auto; 
-            max-width: 100%; 
-            max-height: 500px; 
-            object-fit: contain; 
+        .modal-hero-artwork-frame:empty { display: none; }
+        .modal-hero-artwork-frame img {
+            display: block;
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: min(68vh, 540px);
+            object-fit: contain;
         }
-        .modal-plaque-block { 
-            background: transparent; 
-            padding: 1.5rem 0 2rem; 
-            margin-bottom: 2.5rem; 
-            border-bottom: 1px solid rgba(0,0,0,0.12); 
-            text-align: left; 
+        /* Sfumato fade-in: like gallery lights slowly coming up */
+        @media (prefers-reduced-motion: no-preference) {
+            .modal-hero-artwork-frame img { animation: sfumato 1.4s ease-out both; }
         }
-        .modal-plaque-artist { 
-            display: block; 
-            font-weight: 700; 
-            text-transform: uppercase; 
-            letter-spacing: 0.12em; 
-            font-size: 0.8rem; 
-            color: #9C7F68; 
-            margin-bottom: 0.4rem; 
-        }
-        .modal-plaque-specs { 
-            display: block; 
-            font-family: 'Cormorant Garamond', serif; 
-            font-size: 1.3rem; 
-            font-style: italic; 
-            font-weight: 600; 
-            color: #1a1a1a; 
-            margin-bottom: 0.8rem; 
-        }
-        .modal-plaque-caption { 
-            font-size: 0.95rem; 
-            line-height: 1.65; 
-            color: #4a4a52; 
-            text-align: left; 
-            margin: 0; 
+        @keyframes sfumato {
+            from { opacity: 0; filter: sepia(0.9) brightness(0.55) blur(2px); }
+            to { opacity: 1; filter: none; }
         }
 
-        /* Clean Essay Structure Blocks */
-        .modal-essay-body {
-            width: 100% !important;
-            display: block !important;
+        /* Museum placard under the painting */
+        .modal-plaque-block {
+            max-width: 34rem;
+            margin: 0 auto;
+            padding: 1.75rem 0 0;
+            text-align: center;
         }
+        .modal-plaque-block::after {
+            content: "";
+            display: block;
+            width: 6rem;
+            height: 1px;
+            margin: 2.2rem auto 3rem;
+            background: linear-gradient(90deg, transparent, var(--label-on-cream), transparent);
+        }
+        .modal-plaque-artist {
+            display: block;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            font-size: 0.72rem;
+            color: var(--label-on-cream);
+            margin-bottom: 0.5rem;
+        }
+        .modal-plaque-specs {
+            display: block;
+            font-family: var(--font-serif);
+            font-size: 1.7rem;
+            font-style: italic;
+            font-weight: 500;
+            line-height: 1.2;
+            color: var(--text-cream-dark);
+            margin-bottom: 0.35rem;
+        }
+        .modal-plaque-detail {
+            display: block;
+            font-size: 0.78rem;
+            letter-spacing: 0.06em;
+            color: var(--text-cream-muted);
+            margin-bottom: 1.1rem;
+        }
+        .modal-plaque-caption {
+            font-family: var(--font-body);
+            font-size: 1.08rem;
+            line-height: 1.6;
+            color: var(--text-cream-muted);
+            margin: 0;
+        }
+
+        /* Essay column */
+        .modal-essay-body { display: block; width: 100%; }
+        .modal-essay-body > * { max-width: 40rem; margin-left: auto; margin-right: auto; }
         .modal-essay-body h1 {
             font-family: var(--font-serif);
-            font-size: 3.6rem;
-            font-weight: 300;
-            margin-bottom: 0.8rem;
-            line-height: 1.15;
+            font-size: clamp(2.3rem, 6vw, 3.5rem);
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            line-height: 1.12;
+            margin-bottom: 0.9rem;
             color: var(--text-cream-dark);
         }
         .modal-essay-body p.module-subtitle-meta {
             text-transform: uppercase;
             letter-spacing: 0.2em;
-            font-size: 0.8rem;
-            color: #9C7F68;
-            margin-bottom: 3.5rem;
+            font-size: 0.75rem;
+            color: var(--label-on-cream);
+            margin-bottom: 3rem;
             font-weight: 600;
         }
+        .pending-note {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.5rem;
+            color: var(--text-cream-muted);
+            padding-top: 2rem;
+            border-top: 1px solid rgba(26, 26, 28, 0.14);
+        }
+
+        .essay-text {
+            font-family: var(--font-body);
+            font-size: 1.25rem;
+            line-height: 1.75;
+            color: var(--text-cream-body);
+            hyphens: auto;
+            -webkit-hyphens: auto;
+        }
+        .essay-text p { margin: 0 0 1.4em; text-align: left; }
+        .essay-text h2 {
+            font-family: var(--font-serif);
+            font-weight: 500;
+            font-style: italic;
+            font-size: 2rem;
+            line-height: 1.2;
+            margin: 2.4em 0 0.7em;
+            color: var(--text-cream-dark);
+        }
+        .essay-text h3 {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--label-on-cream);
+            margin: 2.2em 0 0.8em;
+            font-weight: 600;
+        }
+        .essay-text blockquote {
+            margin: 2em 0;
+            padding: 0.2em 0 0.2em 1.5em;
+            border-left: 2px solid var(--accent-rustic);
+            font-style: italic;
+            color: var(--text-cream-muted);
+        }
+        .essay-text ul, .essay-text ol { margin: 0 0 1.4em 1.4em; }
+        .essay-text li { margin-bottom: 0.4em; }
+        .essay-text a { color: var(--accent-oxblood); text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+        .essay-text img, .essay-text iframe { max-width: 100%; display: block; }
+        .essay-text figure { margin: 2.2em 0; }
+        .essay-text figcaption {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            letter-spacing: 0.06em;
+            color: var(--text-cream-muted);
+            margin-top: 0.7em;
+        }
+        /* Manuscript-style drop cap on the first paragraph only, in oxblood */
+        .essay-text > p:first-of-type::first-letter {
+            font-family: var(--font-serif);
+            font-weight: 500;
+            color: var(--accent-oxblood);
+            float: left;
+            font-size: 5.3em;
+            line-height: 0.78;
+            padding: 0.06em 0.1em 0 0;
+        }
+        @supports (initial-letter: 3) or (-webkit-initial-letter: 3) {
+            .essay-text > p:first-of-type::first-letter {
+                float: none;
+                font-size: inherit;
+                line-height: inherit;
+                padding: 0;
+                margin-right: 0.12em;
+                -webkit-initial-letter: 3;
+                initial-letter: 3;
+            }
+        }
+
+        /* Optional box for assignment outputs (PDF, Canva, Google Slides, images) */
         .artifact-embed-box {
-            background-color: rgba(0, 0, 0, 0.03) !important;
-            border: 1px dashed rgba(0, 0, 0, 0.15) !important;
-            padding: 3rem !important;
-            margin: 2rem 0 4rem 0 !important;
-            border-radius: 3px;
-            color: var(--text-cream-dark) !important;
-            width: 100% !important;
+            margin-top: 3rem;
+            padding: 2.2rem 2.2rem 2.4rem;
+            background: rgba(26, 26, 28, 0.035);
+            border: 1px solid rgba(26, 26, 28, 0.14);
+            border-top: 2px solid var(--accent-rustic);
+            border-radius: 2px;
         }
         .artifact-embed-box h3 {
             font-family: var(--font-serif);
-            font-size: 1.8rem;
-            font-weight: 400;
+            font-style: italic;
+            font-weight: 500;
+            font-size: 1.7rem;
             margin-bottom: 1rem;
             color: var(--text-cream-dark);
-            font-style: italic;
         }
-        .artifact-embed-box p {
-            font-size: 0.95rem;
-            color: var(--text-cream-muted);
-            line-height: 1.6;
+        .artifact-embed-box p { font-size: 0.95rem; color: var(--text-cream-muted); line-height: 1.65; }
+        .artifact-embed-box iframe, .artifact-embed-box img {
+            display: block;
+            width: 100%;
+            border: 1px solid rgba(26, 26, 28, 0.14);
+            background: #fff;
+        }
+        .artifact-embed-box iframe { aspect-ratio: 16 / 10; }
+
+        .modal-footer-nav {
+            width: 100%;
+            max-width: 40rem;
+            margin: 4.5rem auto 0;
+            padding-top: 1.6rem;
+            border-top: 1px solid rgba(26, 26, 28, 0.16);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+        .modal-footer-nav button, .modal-footer-nav .nav-sealed {
+            background: none;
+            border: none;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 600;
+            padding: 0.6rem 0;
+        }
+        .modal-footer-nav button { color: var(--text-cream-muted); cursor: pointer; transition: color 0.2s; }
+        .modal-footer-nav button:hover { color: var(--accent-oxblood); }
+        .modal-footer-nav .nav-sealed { color: #9a9285; }
+
+        /* =====================================================================
+           RESPONSIVE + ACCESSIBILITY
+           ===================================================================== */
+        @media (max-width: 720px) {
+            .app-view { padding: 3rem 1.25rem; }
+            #gateway-view { padding: 1.5rem; }
+            .owner-branding { top: 1.5rem; left: 1.5rem; font-size: 0.65rem; }
+            .gateway-brand { margin-bottom: 2.4rem; }
+            .gateway-ornament { margin: 2.2rem 0; }
+            .gateway-options { flex-direction: column; align-items: center; gap: 1rem; }
+            .gateway-btn { width: 100%; max-width: 340px; }
+            .dashboard-owner { display: none; }
+            .dashboard-header { padding-bottom: 2rem; margin-bottom: 3rem; }
+            .flip-card { height: 460px; }
+            .portal-modal { padding: 1.5rem 1.1rem 4rem; }
+            .essay-text { font-size: 1.15rem; }
+            .artifact-embed-box { padding: 1.5rem; }
+        }
+        /* On touch screens there is no hover, so tapping simply opens the page */
+        @media (hover: none) {
+            .flip-card:not(.card-locked):hover .flip-card-inner { transform: none; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
-<body>
+<body data-view="gateway-view">
+
     <!-- ================= VIEW 1: THE SHAKESPEAREAN LANDING GATEWAY ================= -->
     <main id="gateway-view" class="app-view active-view">
         <div class="owner-branding">MC Rivera — E-Journal Site</div>
-        <div class="gateway-brand">the.madness.chamber</div>
+        <h1 class="gateway-brand">the.madness.chamber</h1>
         <div class="gateway-quote-container">
             <span class="madness-line">“Though this be madness, yet</span>
             <span class="method-line">there is method in’t.”</span>
         </div>
+        <div class="gateway-ornament" aria-hidden="true"><span></span><i></i><span></span></div>
         <nav class="gateway-options" aria-label="Course selection">
-            <button class="gateway-btn" onclick="navigateTo('idt111-view')">
+            <button class="gateway-btn" data-goto="idt111">
                 <h3>IDT 111</h3><span>Instructional Models</span>
             </button>
-            <button class="gateway-btn" onclick="navigateTo('idt121-view')">
+            <button class="gateway-btn" data-goto="idt121">
                 <h3>IDT 121</h3><span>Context Analysis</span>
             </button>
         </nav>
         <div class="gateway-navigation-hint">Select a course to enter archive chamber</div>
     </main>
 
-    <!-- ================= VIEW 2: IDT 111 EXHIBITION DASHBOARD (5 MODULES) ================= -->
+    <!-- ================= VIEW 2: IDT 111 (cards are built from the database below) ================= -->
     <section id="idt111-view" class="app-view">
         <header class="dashboard-header">
             <div class="dashboard-owner">MC Rivera Archives</div>
             <div class="course-title">
-                <button class="back-nav" onclick="navigateTo('gateway-view')">← Return to Gateway</button>
-                <h1>Selections from IDT 111</h1><p>Instructional Design Models & Applications</p>
+                <button class="back-nav" data-goto="">← Return to Gateway</button>
+                <h1>Selections from IDT 111</h1>
+                <p>Instructional Design Models &amp; Applications</p>
             </div>
         </header>
-        <div class="artifact-grid">
-            <!-- Module 01: Active Entry -->
-            <div class="flip-card" onclick="openPortal('idt111-m1')">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 01</span><span>Active</span></div>
-                        <div class="front-visual-core" id="front-visual-idt111-m1"></div>
-                        <h2 class="card-core-heading">Overview of Instructional Design</h2>
-                    </div>
-                    <div class="flip-card-back">
-                        <div class="card-meta-line"><span>Overview</span><span>01 / 05</span></div>
-                        <p class="back-summary-text">A high-level critical reflection exploring core ID beliefs, values, and design judgments through the lens of Lachheb & Boling (2021).</p>
-                        <button class="explore-trigger-btn">Explore Exhibition Page →</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Module 02: Secure Locked Entry -->
-            <div class="flip-card card-locked" onclick="openPortal('idt111-m2')">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 02</span><span>🔒 Encrypted</span></div>
-                        <div class="front-visual-core" id="front-visual-idt111-m2"></div>
-                        <h2 class="card-core-heading">Learning Theory, Instructional Theory, & ID Model</h2>
-                    </div>
-                    <div class="flip-card-back">
-                        <div class="card-meta-line"><span>Theory Base</span><span>02 / 05</span></div>
-                        <p class="back-summary-text">An examination of structural ordering frameworks and macro-views of instructional system design.</p>
-                        <button class="explore-trigger-btn">Explore Exhibition Page →</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Module 03: Secure Locked Entry -->
-            <div class="flip-card card-locked" onclick="openPortal('idt111-m3')">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 03</span><span>🔒 Encrypted</span></div>
-                        <div class="front-visual-core" id="front-visual-idt111-m3"></div>
-                        <h2 class="card-core-heading">Learning Theories and Instructional Design</h2>
-                    </div>
-                    <div class="flip-card-back">
-                        <div class="card-meta-line"><span>Pedagogy</span><span>03 / 05</span></div>
-                        <p class="back-summary-text">Managing friction, pedagogical paradigm shifts, and configurations inside modern curriculum structures.</p>
-                        <button class="explore-trigger-btn">Explore Exhibition Page →</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Module 04: Secure Locked Entry -->
-            <div class="flip-card card-locked" onclick="openPortal('idt111-m4')">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 04</span><span>🔒 Encrypted</span></div>
-                        <div class="front-visual-core" id="front-visual-idt111-m4"></div>
-                        <h2 class="card-core-heading">Instructional Theories and Instructional Design</h2>
-                    </div>
-                    <div class="flip-card-back">
-                        <div class="card-meta-line"><span>Intervention</span><span>04 / 05</span></div>
-                        <p class="back-summary-text">Stark tensions, behavioral feedback matrices, and critical tracking models.</p>
-                        <button class="explore-trigger-btn">Explore Exhibition Page →</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Module 05: Secure Locked Entry -->
-            <div class="flip-card card-locked" onclick="openPortal('idt111-m5')">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 05</span><span>🔒 Encrypted</span></div>
-                        <div class="front-visual-core" id="front-visual-idt111-m5"></div>
-                        <h2 class="card-core-heading">Instructional Design Models</h2>
-                    </div>
-                    <div class="flip-card-back">
-                        <div class="card-meta-line"><span>Curation</span><span>05 / 05</span></div>
-                        <p class="back-summary-text">Thoughtful compilation of modular multimedia objects, beautiful typography layouts, and balanced instructional message design.</p>
-                        <button class="explore-trigger-btn">Explore Exhibition Page →</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="artifact-grid" data-course-grid="idt111"></div>
     </section>
-    <!-- ================= VIEW 3: IDT 121 EXHIBITION DASHBOARD (4 MODULES) ================= -->
+
+    <!-- ================= VIEW 3: IDT 121 ================= -->
     <section id="idt121-view" class="app-view">
         <header class="dashboard-header">
             <div class="dashboard-owner">MC Rivera Archives</div>
             <div class="course-title">
-                <button class="back-nav" onclick="navigateTo('gateway-view')">← Return to Gateway</button>
-                <h1>Selections from IDT 121</h1><p>Context Analysis for Instructional Design</p>
+                <button class="back-nav" data-goto="">← Return to Gateway</button>
+                <h1>Selections from IDT 121</h1>
+                <p>Context Analysis for Instructional Design</p>
             </div>
         </header>
-        <div class="artifact-grid">
-            <!-- Module 01: Active Entry -->
-            <div class="flip-card" onclick="openPortal('idt121-m1')">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 01</span><span>Active</span></div>
-                        <div class="front-visual-core" id="front-visual-idt121-m1"></div>
-                        <h2 class="card-core-heading">Introduction to Context Analysis</h2>
-                    </div>
-                    <div class="flip-card-back">
-                        <div class="card-meta-line"><span>Overview</span><span>01 / 04</span></div>
-                        <p class="back-summary-text">A multi-perspective evaluation introducing target learner parameters and digital ecosystems.</p>
-                        <button class="explore-trigger-btn">Explore Exhibition Page →</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Module 02: Secure Locked Entry -->
-            <div class="flip-card card-locked" onclick="openPortal('idt121-m2')">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 02</span><span>🔒 Encrypted</span></div>
-                        <div class="front-visual-core" id="front-visual-idt121-m2"></div>
-                        <h2 class="card-core-heading">Systems Thinking in Context Analysis</h2>
-                    </div>
-                    <div class="flip-card-back">
-                        <div class="card-meta-line"><span>Ecosystems</span><span>02 / 04</span></div>
-                        <p class="back-summary-text">Examining environmental operational criteria, system thresholds, and organic user feedback matrices.</p>
-                        <button class="explore-trigger-btn">Explore Exhibition Page →</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Module 03: Secure Locked Entry -->
-            <div class="flip-card card-locked" onclick="openPortal('idt121-m3')">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 03</span><span>🔒 Encrypted</span></div>
-                        <div class="front-visual-core" id="front-visual-idt121-m3"></div>
-                        <h2 class="card-core-heading">Models and Processes of Context Analysis</h2>
-                    </div>
-                    <div class="flip-card-back">
-                        <div class="card-meta-line"><span>Protocols</span><span>03 / 04</span></div>
-                        <p class="back-summary-text">Navigating institutional boundaries, stakeholder requirements, and structural policy constraints.</p>
-                        <button class="explore-trigger-btn">Explore Exhibition Page →</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Module 04: Secure Locked Entry -->
-            <div class="flip-card card-locked" onclick="openPortal('idt121-m4')">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="card-meta-line"><span>Module 04</span><span>🔒 Encrypted</span></div>
-                        <div class="front-visual-core" id="front-visual-idt121-m4"></div>
-                        <h2 class="card-core-heading">Writing Context Analysis Report and Wrap-Up</h2>
-                    </div>
-                    <div class="flip-card-back">
-                        <div class="card-meta-line"><span>Resilience</span><span>04 / 04</span></div>
-                        <p class="back-summary-text">Scaling technological solutions across massive administrative structures with extreme precision.</p>
-                        <button class="explore-trigger-btn">Explore Exhibition Page →</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="artifact-grid" data-course-grid="idt121"></div>
     </section>
 
-    <!-- ================= VIEW 4: IMMERSIVE FULL-PAGE PRESENTATION CANVAS ================= -->
-    <div id="portal-modal-sheath" class="portal-modal">
-        <button class="close-modal-btn" onclick="closePortal()">← Go back to modules</button>
+    <!-- ================= VIEW 4: THE JOURNAL PAGE ================= -->
+    <div id="portal-modal-sheath" class="portal-modal" role="dialog" aria-modal="true" aria-label="Journal entry" aria-hidden="true">
         <main class="modal-content-wrapper">
-            <!-- Strict Structural Sibling Layering Hooks Configuration -->
-            <div class="modal-hero-artwork-frame" id="modal-dynamic-hero"></div>
+            <button class="close-modal-btn" data-action="close">← Go back to modules</button>
+            <figure class="modal-hero-artwork-frame" id="modal-dynamic-hero"></figure>
             <div id="modal-dynamic-plaque-target"></div>
             <article class="modal-essay-body" id="modal-dynamic-target"></article>
+            <nav class="modal-footer-nav" id="modal-footer-nav" aria-label="Module navigation"></nav>
         </main>
     </div>
 
     <script>
-        // Central Navigation Link Director Rules
-        function navigateTo(viewId) {
-            document.querySelectorAll('.app-view').forEach(view => {
-                view.classList.remove('active-view');
-            });
-            const targetView = document.getElementById(viewId);
-            if (targetView) {
-                targetView.classList.add('active-view');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
         // =========================================================================
-        // 🏛️ CENTRAL DYNAMIC MUSEUM CATALOG DATABASE REGISTRY (MASTER ARCHIVE CONTROL)
+        //  MASTER ARCHIVE: everything about each module lives in ONE place below.
+        //
+        //  locked: true   -> card shows "Encrypted" and cannot be opened
+        //  locked: false  -> card is "Active" and opens the journal page
+        //
+        //  HOW TO ADD A JOURNAL ESSAY
+        //  1. Set locked: false for the module.
+        //  2. Paste your writing into the `essay` field between the backticks.
+        //     The FIRST <p> automatically gets the drop cap. Example:
+        //
+        //       essay: `
+        //           <p>My first paragraph...</p>
+        //           <p>My second paragraph...</p>
+        //           <h2>An optional heading</h2>
+        //           <blockquote>An optional quote</blockquote>
+        //       `,
+        //
+        //  3. Optional: `outputs` shows an "Assignment output" box under the essay.
+        //     Put a link, an image, or an embed in it, for example:
+        //       outputs: `<iframe src="https://..."></iframe>`
+        //
+        //  Do not type a backtick ( ` ) or the characters ${ inside the essay text.
         // =========================================================================
+        const COURSES = {
+            idt111: { code: 'IDT 111', view: 'idt111-view' },
+            idt121: { code: 'IDT 121', view: 'idt121-view' }
+        };
+
         const journalDatabase = {
+            // ---------------------------- IDT 111 ----------------------------
             'idt111-m1': {
+                course: 'idt111', locked: false,
+                tag: 'Overview',
+                cardTitle: 'Overview of Instructional Design',
+                summary: 'A high-level critical reflection exploring core ID beliefs, values, and design judgments through the lens of Lachheb & Boling (2021).',
+                heading: 'Overview of <i>Instructional Design</i>',
                 image: 'monalisa.JPG',
-                artist: 'Leonardo da Vinci',
-                title: 'Mona Lisa',
-                year: 'c. 1503–1519',
-                museum: 'Musée du Louvre, Paris.',
+                artist: 'Leonardo da Vinci', title: 'Mona Lisa', year: 'c. 1503–1519', museum: 'Musée du Louvre, Paris',
                 designCaption: 'The ultimate paradigm of subtle visual balance and sfumato technique. Represents user-centric mystery, soft cognitive scaffolding, and the enduring complexity of intuitive human-computer interaction (HCI).',
-                html: `
-                    <h1>Overview of <i>Instructional Design</i></h1>
-                    <p class="module-subtitle-meta">IDT 111 — Module 01 Reflection</p>
-                    
-                    <div class="artifact-embed-box">
-                        <h3>Official Assignment Output Storage</h3>
-                        <p>Drop assignment maps or custom workflow schematics seamlessly within this immersive container element block once your grades are ready.</p>
-                    </div>
-                `
+                essay: ``,
+                outputs: ``
             },
             'idt111-m2': {
+                course: 'idt111', locked: true,
+                tag: 'Theory Base',
+                cardTitle: 'Learning Theory, Instructional Theory, & ID Model',
+                summary: 'An examination of structural ordering frameworks and macro-views of instructional system design.',
+                heading: 'Learning Theory, Instructional Theory, &amp; <i>ID Model</i>',
                 image: 'salvator.JPG',
-                artist: 'Leonardo da Vinci (Attributed)',
-                title: 'Salvator Mundi',
-                year: 'c. 1500',
-                museum: 'Private Collection.',
+                artist: 'Leonardo da Vinci (Attributed)', title: 'Salvator Mundi', year: 'c. 1500', museum: 'Private Collection',
                 designCaption: 'An iconic image of order holding a crystal orb representing the cosmos. Ideal for sections addressing high-level project governance, comprehensive needs assessment, or the macro-view of instructional systems design.',
-                html: `
-                    <h1>Learning & <i>Instructional Theories</i></h1>
-                    <p class="module-subtitle-meta">IDT 111 — Module 02 Reflection</p>
-                    
-                    <div class="artifact-embed-box">
-                        <h3>Official Assignment Output Storage</h3>
-                        <p>Your macro-systems analysis submission elements, systematic evaluation charts, or grading framework feedback variables will sit cleanly within this container box.</p>
-                    </div>
-                `
+                essay: ``, outputs: ``
             },
             'idt111-m3': {
+                course: 'idt111', locked: true,
+                tag: 'Pedagogy',
+                cardTitle: 'Learning Theories and Instructional Design',
+                summary: 'Managing friction, pedagogical paradigm shifts, and configurations inside modern curriculum structures.',
+                heading: 'Learning Theories and <i>Instructional Design</i>',
                 image: 'battle.jpg',
-                artist: 'Joachim Wtewael',
-                title: 'The Battle between the Gods and the Giants',
-                year: 'c. 1592',
-                museum: 'Musée du Louvre, Paris.',
+                artist: 'Joachim Wtewael', title: 'The Battle between the Gods and the Giants', year: 'c. 1592', museum: 'Musée du Louvre, Paris',
                 designCaption: 'An intensely fluid, chaotic Mannerist portrayal of dynamic forces colliding. Represents systemic friction, pedagogical paradigm shifts, and managing overwhelming cognitive load in complex educational interventions.',
-                html: `
-                    <h1>Learning Theories and <i>Instructional Design</i></h1>
-                    <p class="module-subtitle-meta">IDT 111 — Module 03 Reflection</p>
-                    
-                    <div class="artifact-embed-box">
-                        <h3>Official Assignment Output Storage</h3>
-                        <p>Your critical assessment on managing cognitive load paradigms, cognitive flexibility workflows, and academic structural data goes here.</p>
-                    </div>
-                `
+                essay: ``, outputs: ``
             },
             'idt111-m4': {
+                course: 'idt111', locked: true,
+                tag: 'Intervention',
+                cardTitle: 'Instructional Theories and Instructional Design',
+                summary: 'Stark tensions, behavioral feedback matrices, and critical tracking models.',
+                heading: 'Instructional Theories and <i>Instructional Design</i>',
                 image: 'cupid.jpg',
-                artist: 'Bartolomeo Manfredi',
-                title: 'Cupid Chastised',
-                year: 'c. 1613',
-                museum: 'Musée du Louvre, Paris.',
-                designCaption: 'A dramatic, high-contrast Caravaggites execution showing stark tension and behavioral correction. Serves as a raw artistic metaphor for formative assessment, behaviorist feedback loops, or disruptive interventions in instructional tracking.',
-                html: `
-                    <h1>Instructional Theories in <i>Practice</i></h1>
-                    <p class="module-subtitle-meta">IDT 111 — Module 04 Reflection</p>
-                    
-                    <div class="artifact-embed-box">
-                        <h3>Official Assignment Output Storage</h3>
-                        <p>Your analysis of behaviorist feedback mechanisms, diagnostic tracking parameters, and criteria maps goes inside this container block layout.</p>
-                    </div>
-                `
+                artist: 'Bartolomeo Manfredi', title: 'Cupid Chastised', year: 'c. 1613', museum: 'Musée du Louvre, Paris',
+                designCaption: 'A dramatic, high-contrast Caravaggist execution showing stark tension and behavioral correction. Serves as a raw artistic metaphor for formative assessment, behaviorist feedback loops, or disruptive interventions in instructional tracking.',
+                essay: ``, outputs: ``
             },
             'idt111-m5': {
+                course: 'idt111', locked: true,
+                tag: 'Curation',
+                cardTitle: 'Instructional Design Models',
+                summary: 'Thoughtful compilation of modular multimedia objects, beautiful typography layouts, and balanced instructional message design.',
+                heading: 'Instructional Design <i>Models</i>',
                 image: 'flowers.jpg',
-                artist: 'Henri Fantin-Latour',
-                title: 'Still Life with Flowers',
-                year: '1864',
-                museum: 'Musée du Louvre, Paris.',
+                artist: 'Henri Fantin-Latour', title: 'Still Life with Flowers', year: '1864', museum: 'Musée du Louvre, Paris',
                 designCaption: 'A beautifully grouped, organic floral composition utilizing soft illumination. Mirrors the thoughtful curation of modular multimedia objects, beautiful typography layouts, and balanced instructional message design.',
-                html: `
-                    <h1>Systemic <i>Design Models</i></h1>
-                    <p class="module-subtitle-meta">IDT 111 — Module 05 Reflection</p>
-                    
-                    <div class="artifact-embed-box">
-                        <h3>Official Assignment Output Storage</h3>
-                        <p>Your structural breakdown of systematic instructional systems, ADDIE matrices, and final course blueprint schemas will sit cleanly within this box block layer.</p>
-                    </div>
-                `
+                essay: ``, outputs: ``
             },
+
+            // ---------------------------- IDT 121 ----------------------------
             'idt121-m1': {
+                course: 'idt121', locked: false,
+                tag: 'Overview',
+                cardTitle: 'Introduction to Context Analysis',
+                summary: 'A multi-perspective evaluation introducing target learner parameters and digital ecosystems.',
+                heading: 'Introduction to <i>Context Analysis</i>',
                 image: 'medusa.jpg',
-                artist: 'Théodore Géricault',
-                title: 'The Raft of the Medusa',
-                year: '1818–1819',
-                museum: 'Musée du Louvre, Paris.',
+                artist: 'Théodore Géricault', title: 'The Raft of the Medusa', year: '1818–1819', museum: 'Musée du Louvre, Paris',
                 designCaption: 'A monumental Romantic masterpiece depicting human desperation and systemic chaos. Perfect as a metaphor for structural breakdown, project volatility, or the frantic search for a navigation framework in systemic instructional spaces.',
-                html: `
-                    <h1>Introduction to <i>Context Analysis</i></h1>
-                    <p class="module-subtitle-meta">IDT 121 — Module 01 Reflection</p>
-                    
-                    <div class="artifact-embed-box">
-                        <h3>Official Context Artifact Storage</h3>
-                        <p>Your systemic context audits, physical learning environment matrices, and target audience data fields will sit inside this dedicated presentation module area.</p>
-                    </div>
-                `
+                essay: ``, outputs: ``
             },
             'idt121-m2': {
+                course: 'idt121', locked: true,
+                tag: 'Ecosystems',
+                cardTitle: 'Systems Thinking in Context Analysis',
+                summary: 'Examining environmental operational criteria, system thresholds, and organic user feedback matrices.',
+                heading: 'Systems Thinking in <i>Context Analysis</i>',
                 image: 'peacock.JPG',
-                artist: 'Jan Weenix',
-                title: 'Still-Life with a Peacock and a Dog',
-                year: '1696',
-                museum: 'Musée du Louvre, Paris.',
+                artist: 'Jan Weenix', title: 'Still-Life with a Peacock and a Dog', year: '1696', museum: 'Musée du Louvre, Paris',
                 designCaption: 'A grand, dramatic Baroque showcase of lavish status textures contrasted with instinctual elements. A great analog for examining competing environmental variables, deep contextual analysis, or the raw complexity of learner ecosystems.',
-                html: `
-                    <h1>Systems Thinking in <i>Ecosystem Audits</i></h1>
-                    <p class="module-subtitle-meta">IDT 121 — Module 02 Reflection</p>
-                    
-                    <div class="artifact-embed-box">
-                        <h3>Official Context Artifact Storage</h3>
-                        <p>Your breakdown of systemic variables, institutional limits, environmental boundaries, and organic user feedback matrices goes here.</p>
-                    </div>
-                `
+                essay: ``, outputs: ``
             },
             'idt121-m3': {
+                course: 'idt121', locked: true,
+                tag: 'Protocols',
+                cardTitle: 'Models and Processes of Context Analysis',
+                summary: 'Navigating institutional boundaries, stakeholder requirements, and structural policy constraints.',
+                heading: 'Models and Processes of <i>Context Analysis</i>',
                 image: 'charles.JPG',
-                artist: 'Jean-Auguste-Dominique Ingres',
-                title: 'Charles V Received by Francis I at the Louvre',
-                year: '1843',
-                museum: 'Musée du Louvre, Paris.',
+                artist: 'Jean-Auguste-Dominique Ingres', title: 'Charles V Received by Francis I at the Louvre', year: '1843', museum: 'Musée du Louvre, Paris',
                 designCaption: 'A highly dense historical staging showing diplomatic protocols and architecture. Use this to illustrate complex institutional protocols, stakeholder alignment, or navigating socio-political boundaries in learning systems.',
-                html: `
-                    <h1>Models and Processes of <i>Context Analysis</i></h1>
-                    <p class="module-subtitle-meta">IDT 121 — Module 03 Reflection</p>
-                    
-                    <div class="artifact-embed-box">
-                        <h3>Official Context Artifact Storage</h3>
-                        <p>Your strategic documentation on navigating socio-political stakeholder boundaries, administrative variables, and operational criteria inside corporate/academic architectures goes here.</p>
-                    </div>
-                `
+                essay: ``, outputs: ``
             },
             'idt121-m4': {
+                course: 'idt121', locked: true,
+                tag: 'Resilience',
+                cardTitle: 'Writing Context Analysis Report and Wrap-Up',
+                summary: 'Writing up the final context analysis report and closing out the course.',
+                heading: 'Writing Context Analysis <i>Report and Wrap-Up</i>',
                 image: 'greatwave.jpg',
-                artist: 'Katsushika Hokusai',
-                title: 'The Great Wave off Kanagawa',
-                year: 'c. 1831',
-                museum: 'Musée du Louvre, Paris.',
+                artist: 'Katsushika Hokusai', title: 'The Great Wave off Kanagawa', year: 'c. 1831', museum: 'Musée du Louvre, Paris',
                 designCaption: 'An immortal ukiyo-e woodblock print showcasing immense natural scale and graphic line movement. The ultimate visual metaphor for scaling educational technology, facing overwhelming administrative waves, or designing modular content for systemic resilience.',
-                html: `
-                    <h1>Writing Context Analysis <i>Reports</i></h1>
-                    <p class="module-subtitle-meta">IDT 121 — Module 04 Reflection</p>
-                    
-                    <div class="artifact-embed-box">
-                        <h3>Official Context Artifact Storage</h3>
-                        <p>Your final capstone wrap-up detailing context-resilient systemic instruction implementations, final delivery architectures, and course wrap-up reporting schemas goes inside this section.</p>
-                    </div>
-                `
+                essay: ``, outputs: ``
             }
         };
 
-        // Initialize thumbnails across all grids on document load
-        document.addEventListener("DOMContentLoaded", () => {
-            Object.keys(journalDatabase).forEach(key => {
-                const targetVisualFrame = document.getElementById('front-visual-' + key);
-                if (targetVisualFrame && journalDatabase[key].image !== '') {
-                    targetVisualFrame.innerHTML = '<img src="' + journalDatabase[key].image + '" alt="Exhibition Thumbnail">';
-                }
-            });
-        });
+        // =========================================================================
+        //  ENGINE (you should not need to edit anything below this line)
+        // =========================================================================
+        const BASE_TITLE = document.title;
+        const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const attr = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+        const LOCK_ICON = '<svg class="lock-icon" viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><rect x="2" y="5.2" width="8" height="5.6" rx="1" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M4 5.2V3.6a2 2 0 0 1 4 0v1.6" fill="none" stroke="currentColor" stroke-width="1.1"/></svg>';
 
-        // Upgraded Immersive Portal Engine: Restructures markup dynamically as clean structural siblings
-        function openPortal(entryId) {
-            const contentZone = document.getElementById('modal-dynamic-target');
-            const heroZone = document.getElementById('modal-dynamic-hero');
-            const plaqueZone = document.getElementById('modal-dynamic-plaque-target');
-            
-            if (journalDatabase[entryId]) {
-                // Injects clean h1, subtitle metadata, and standardized assignment artifact boxes
-                contentZone.innerHTML = journalDatabase[entryId].html;
-                
-                if (journalDatabase[entryId].image !== '') {
-                    // 1. Hero frame contains ONLY the image markup node string
-                    heroZone.innerHTML = `<img src="${journalDatabase[entryId].image}" alt="Exhibition Masterwork Leaf Header">`;
-                    heroZone.className = 'modal-hero-artwork-frame has-art';
-                    
-                    // 2. Renders plaque block into a sibling node zone directly AFTER the frame on the clean cream backdrop
-                    plaqueZone.innerHTML = `
-                        <div class="modal-plaque-block">
-                            <span class="modal-plaque-artist">${journalDatabase[entryId].artist}</span>
-                            <span class="modal-plaque-specs">${journalDatabase[entryId].title}</span>, ${journalDatabase[entryId].year}. ${journalDatabase[entryId].museum}
-                            <p class="modal-plaque-caption">${journalDatabase[entryId].designCaption}</p>
-                        </div>
-                    `;
-                } else {
-                    heroZone.innerHTML = '';
-                    heroZone.className = 'modal-hero-artwork-frame';
-                    plaqueZone.innerHTML = '';
-                }
-                
-                document.getElementById('portal-modal-sheath').classList.add('modal-open');
-                document.body.style.overflow = 'hidden';
+        // ---------- Build the cards from the database ----------
+        function cardMarkup(key, e, index, total) {
+            const n = String(index).padStart(2, '0');
+            const t = String(total).padStart(2, '0');
+            const status = e.locked
+                ? '<span class="status-default">' + LOCK_ICON + 'Encrypted</span><span class="status-hover">Unlocks soon</span>'
+                : '<span class="status-dot" aria-hidden="true"></span>Active';
+            const img = e.image
+                ? '<img src="' + e.image + '" alt="' + attr(e.title + ', ' + e.artist) + '" loading="lazy" decoding="async" onerror="this.remove()">'
+                : '';
+            return '' +
+            '<div class="flip-card' + (e.locked ? ' card-locked' : '') + '" data-entry="' + key + '" role="button" tabindex="' + (e.locked ? -1 : 0) + '"' +
+                (e.locked ? ' aria-disabled="true"' : '') + ' aria-label="Module ' + n + ': ' + attr(e.cardTitle) + (e.locked ? ' (locked)' : '') + '">' +
+                '<div class="flip-card-inner">' +
+                    '<div class="flip-card-front">' +
+                        '<div class="card-meta-line"><span>Module ' + n + '</span><span class="card-status">' + status + '</span></div>' +
+                        '<div class="front-visual-core">' + img + '</div>' +
+                        '<h2 class="card-core-heading">' + e.cardTitle.replace(/&/g, '&amp;') + '</h2>' +
+                    '</div>' +
+                    '<div class="flip-card-back">' +
+                        '<div class="card-meta-line"><span>' + e.tag + '</span><span>' + n + ' / ' + t + '</span></div>' +
+                        '<p class="back-summary-text">' + e.summary.replace(/&/g, '&amp;') + '</p>' +
+                        '<div class="explore-trigger-btn">Explore Exhibition Page →</div>' +
+                    '</div>' +
+                '</div>' +
+            '</div>';
+        }
+
+        function buildCards() {
+            Object.keys(COURSES).forEach(course => {
+                const grid = document.querySelector('[data-course-grid="' + course + '"]');
+                if (!grid) return;
+                const keys = Object.keys(journalDatabase).filter(k => journalDatabase[k].course === course);
+                grid.innerHTML = keys.map((k, i) => cardMarkup(k, journalDatabase[k], i + 1, keys.length)).join('');
+            });
+        }
+
+        // ---------- Tiny hash router: #/  #/idt111  #/idt111/m1 ----------
+        let currentView = 'gateway-view';
+        let currentEntry = null;
+        let lastFocus = null;
+
+        function parseHash() {
+            const raw = (location.hash || '').replace(/^#\/?/, '').replace(/\/$/, '');
+            const parts = raw.split('/');
+            return { course: parts[0] || '', mod: parts[1] || '' };
+        }
+        function setHash(hash, mode, state) {
+            try {
+                if (mode === 'replace') history.replaceState(state || null, '', hash);
+                else history.pushState(state || null, '', hash);
+            } catch (err) {
+                location.hash = hash;   // file:// fallback
+            }
+        }
+        function goTo(course) {
+            setHash(course ? '#/' + course : '#/', 'push');
+            route();
+        }
+        function updateTitle() {
+            if (currentEntry) {
+                const e = journalDatabase[currentEntry];
+                const n = currentEntry.split('-m')[1];
+                document.title = COURSES[e.course].code + ' · Module ' + String(n).padStart(2, '0') + ' — the.madness.chamber';
+            } else if (currentView !== 'gateway-view') {
+                const code = Object.values(COURSES).find(c => c.view === currentView).code;
+                document.title = code + ' — the.madness.chamber';
+            } else {
+                document.title = BASE_TITLE;
             }
         }
 
-        function closePortal() {
-            document.getElementById('portal-modal-sheath').classList.remove('modal-open');
-            document.body.style.overflow = 'auto';
+        function showView(viewId) {
+            if (viewId === currentView && document.getElementById(viewId).classList.contains('active-view')) return;
+            document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active-view'));
+            document.getElementById(viewId).classList.add('active-view');
+            document.body.dataset.view = viewId;
+            currentView = viewId;
+            window.scrollTo({ top: 0, behavior: reduceMotion() ? 'auto' : 'smooth' });
         }
+
+        // ---------- Journal page ----------
+        const modal = document.getElementById('portal-modal-sheath');
+
+        function footerNav(entryId) {
+            const e = journalDatabase[entryId];
+            const keys = Object.keys(journalDatabase).filter(k => journalDatabase[k].course === e.course);
+            const next = keys[keys.indexOf(entryId) + 1];
+            let right = '<span></span>';
+            if (next) {
+                const nn = String(keys.indexOf(next) + 1).padStart(2, '0');
+                right = journalDatabase[next].locked
+                    ? '<span class="nav-sealed">Module ' + nn + ' · Sealed</span>'
+                    : '<button data-next="' + next + '">Next module →</button>';
+            }
+            return '<button data-action="close">← All modules</button>' + right;
+        }
+
+        function renderPortal(entryId) {
+            if (currentEntry === entryId) return;
+            const e = journalDatabase[entryId];
+            const n = entryId.split('-m')[1];
+            const label = COURSES[e.course].code + ' — Module ' + String(n).padStart(2, '0') + ' Reflection';
+
+            const hero = document.getElementById('modal-dynamic-hero');
+            const plaque = document.getElementById('modal-dynamic-plaque-target');
+            if (e.image) {
+                hero.innerHTML = '<img src="' + e.image + '" alt="' + attr(e.title + ', ' + e.artist) + '" onerror="this.closest(\'figure\').style.display=\'none\'">';
+                hero.style.display = '';
+                plaque.innerHTML =
+                    '<div class="modal-plaque-block">' +
+                        '<span class="modal-plaque-artist">' + e.artist + '</span>' +
+                        '<span class="modal-plaque-specs">' + e.title + '</span>' +
+                        '<span class="modal-plaque-detail">' + e.year + ' · ' + e.museum + '</span>' +
+                        '<p class="modal-plaque-caption">' + e.designCaption + '</p>' +
+                    '</div>';
+            } else {
+                hero.innerHTML = '';
+                plaque.innerHTML = '';
+            }
+
+            const body = e.essay && e.essay.trim()
+                ? '<div class="essay-text">' + e.essay + '</div>'
+                : '<p class="pending-note">This reflection is in preparation.</p>';
+            const outputs = e.outputs && e.outputs.trim()
+                ? '<section class="artifact-embed-box"><h3>Assignment output</h3>' + e.outputs + '</section>'
+                : '';
+            document.getElementById('modal-dynamic-target').innerHTML =
+                '<h1>' + e.heading + '</h1><p class="module-subtitle-meta">' + label + '</p>' + body + outputs;
+            document.getElementById('modal-footer-nav').innerHTML = footerNav(entryId);
+
+            if (!currentEntry) lastFocus = document.activeElement;
+            modal.classList.add('modal-open');
+            modal.setAttribute('aria-hidden', 'false');
+            modal.scrollTop = 0;
+            document.body.style.overflow = 'hidden';
+            currentEntry = entryId;
+            updateTitle();
+            const closeBtn = modal.querySelector('.close-modal-btn');
+            if (closeBtn) closeBtn.focus({ preventScroll: true });
+        }
+
+        function hidePortal() {
+            if (!currentEntry) return;
+            modal.classList.remove('modal-open');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+            currentEntry = null;
+            updateTitle();
+            if (lastFocus && document.contains(lastFocus) && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+            lastFocus = null;
+        }
+
+        function openPortal(entryId) {
+            const e = journalDatabase[entryId];
+            if (!e || e.locked) return;
+            setHash('#/' + entryId.replace('-', '/'), 'push', { portal: true });
+            route();
+        }
+        function closePortal() {
+            if (history.state && history.state.portal) {
+                history.back();                       // popstate -> route() closes it
+            } else {
+                const course = parseHash().course;
+                setHash(COURSES[course] ? '#/' + course : '#/', 'replace');
+                route();
+            }
+        }
+
+        function route() {
+            const h = parseHash();
+            const cfg = COURSES[h.course];
+            showView(cfg ? cfg.view : 'gateway-view');
+            const entryId = cfg && h.mod ? h.course + '-' + h.mod : null;
+            const e = entryId && journalDatabase[entryId];
+            if (e && !e.locked) {
+                renderPortal(entryId);
+            } else {
+                hidePortal();
+                if (entryId) setHash('#/' + h.course, 'replace');   // locked or unknown entry
+            }
+            updateTitle();
+        }
+
+        // ---------- Wiring ----------
+        document.addEventListener('click', ev => {
+            const go = ev.target.closest('[data-goto]');
+            if (go) { goTo(go.dataset.goto); return; }
+
+            const closeBtn = ev.target.closest('[data-action="close"]');
+            if (closeBtn) { closePortal(); return; }
+
+            const nextBtn = ev.target.closest('[data-next]');
+            if (nextBtn) {
+                setHash('#/' + nextBtn.dataset.next.replace('-', '/'), 'replace', history.state);
+                route();
+                return;
+            }
+
+            const card = ev.target.closest('.flip-card');
+            if (card && !card.classList.contains('card-locked')) openPortal(card.dataset.entry);
+        });
+        document.addEventListener('keydown', ev => {
+            if (ev.key === 'Escape' && currentEntry) { closePortal(); return; }
+            if ((ev.key === 'Enter' || ev.key === ' ') && ev.target.classList && ev.target.classList.contains('flip-card')) {
+                ev.preventDefault();
+                if (!ev.target.classList.contains('card-locked')) openPortal(ev.target.dataset.entry);
+            }
+        });
+        window.addEventListener('popstate', route);
+        window.addEventListener('hashchange', route);
+
+        buildCards();
+        route();
     </script>
 </body>
 </html>
