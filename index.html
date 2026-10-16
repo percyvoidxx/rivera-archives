@@ -746,6 +746,16 @@
             box-shadow: 0 2px 4px rgba(20, 12, 6, 0.25), 0 36px 70px -28px rgba(20, 12, 6, 0.6);
         }
         .embed-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; max-width: none; }
+        /* Fit-height embed: a page of ours (same site) that sizes itself, shown wider than the text column */
+        .embed-frame.fit { aspect-ratio: auto; }
+        .embed-frame.fit iframe { position: static; height: 1700px; }
+        .entry-part .essay-text > .output-embed.bleed {
+            max-width: none;
+            width: min(72rem, calc(100vw - 4.5rem));
+            margin-left: 50%;
+            margin-right: 0;
+            transform: translateX(-50%);
+        }
         .embed-actions {
             display: flex;
             justify-content: space-between;
@@ -934,6 +944,8 @@
             .portal-modal { padding: 1.5rem 1.1rem 4rem; }
             .essay-text { font-size: 1.15rem; }
             .embed-frame { aspect-ratio: 3 / 4; }
+            .embed-frame.fit { aspect-ratio: auto; }
+            .entry-part .essay-text > .output-embed.bleed { width: 100%; margin-left: auto; margin-right: auto; transform: none; }
             .embed-actions { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
             .case-grid { grid-template-columns: 1fr; }
             .branch-list > div { grid-template-columns: 1fr; gap: 0.3rem; }
@@ -1065,6 +1077,14 @@
                 '<div class="embed-actions"><span>' + t + '</span>' +
                 '<a href="' + u + '" target="_blank" rel="noopener">' + (linkLabel || 'Open in a new tab') + ' ↗</a></div></figure>';
         }
+        function embedFit(url, title, linkLabel) {
+            const u = String(url).replace(/"/g, '&quot;');
+            const t = String(title || 'Embedded output').replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+            return '<figure class="output-embed bleed"><div class="embed-frame fit">' +
+                '<iframe src="' + u + '" title="' + t + '" loading="lazy"></iframe></div>' +
+                '<div class="embed-actions"><span>' + t + '</span>' +
+                '<a href="' + u + '" target="_blank" rel="noopener">' + (linkLabel || 'Open in a new tab') + ' ↗</a></div></figure>';
+        }
         function image(src, alt, caption) {
             const s = String(src).replace(/"/g, '&quot;');
             const a = String(alt || '').replace(/"/g, '&quot;');
@@ -1166,15 +1186,65 @@
                 `
             },
             'idt111-m2': {
-                course: 'idt111', locked: true,
+                course: 'idt111', locked: false,
                 tag: 'Theory Base',
                 cardTitle: 'Learning Theory, Instructional Theory, & ID Model',
-                summary: 'An examination of structural ordering frameworks and macro-views of instructional system design.',
+                summary: 'Separating what learning theory, instructional theory, and an ID model each do, and how they connect.',
                 heading: 'Learning Theory, Instructional Theory, &amp; <i>ID Model</i>',
                 image: 'salvator.JPG',
                 artist: 'Leonardo da Vinci (Attributed)', title: 'Salvator Mundi', year: 'c. 1500', museum: 'Private Collection',
                 designCaption: 'An iconic image of order holding a crystal orb representing the cosmos. Ideal for sections addressing high-level project governance, comprehensive needs assessment, or the macro-view of instructional systems design.',
-                essay: ``, outputs: ``
+                outputs: embedFit('organizer-m2.html', 'Advance organizer: learning theory, instructional theory, and instructional design model', 'Open the organizer full size') + `
+                    <p class="output-caption"><span class="caption-label">Caption</span>People in education often use learning theory, instructional theory, and ID model as if they meant the same thing (Becker, 2015). The organizer separates them by what each one is for.</p>
+
+                    <h3 class="subhead">Disciplinary Distinctions</h3>
+
+                    <dl class="branch-list">
+                        <div>
+                            <dt>Layer 01</dt>
+                            <dd><span class="branch-name">Learning Theory</span>Describes what happens inside the learner. It explains how mental or behavioral change occurs, but it does not tell anyone how to teach (Reigeluth, 1999; Becker, 2015).</dd>
+                        </div>
+                        <div>
+                            <dt>Layer 02</dt>
+                            <dd><span class="branch-name">Instructional Theory</span>Prescriptive. It names the teaching methods to use and the conditions each one suits, so it looks outward at what an educator does for the learner. It raises the chance of learning but cannot guarantee it (Reigeluth, 1999; Becker, 2015).</dd>
+                        </div>
+                        <div>
+                            <dt>Layer 03</dt>
+                            <dd><span class="branch-name">Instructional Design Model</span>A recipe. It lays out the steps for planning, building, and evaluating instruction. Models like Dick and Carey adapt the generic ADDIE process to a specific context (Becker, 2015; Dousay, 2018).</dd>
+                        </div>
+                    </dl>
+
+                    <h3 class="subhead">Visual Interconnections</h3>
+
+                    <p>The arrows show the three working as a chain. Learning theory gives the research on how people learn, and instructional theory turns that into teaching methods (Raible, 2020). In my reading of the sources, a design model then gives those methods a place to land, because its phases stay generic until a designer fills them with strategies for a specific course (Dousay, 2018). Without learning theory, the methods have no reasoning behind them. Without a model, they have no plan for being built. The frame around all three is the linking science, the idea that design work turns research into practical solutions (Raible, 2020).</p>
+
+                    <h3 class="subhead">Professional Relevance</h3>
+
+                    <p>Knowing the difference matters because a designer's decisions depend on it. McDonald (2024) argues that studying theory is less about memorizing rules and more about building design muscle memory and judgment. Christensen (2021) adds that experienced designers use theory as a toolbox and pick what fits the problem instead of following one school. Being clear on which of the three you are using helps you diagnose what a learning problem needs and match it to the right strategy.</p>
+                `,
+                essay: `
+                    <h3 class="reflect-step"><span>01</span>What?</h3>
+                    <p>Module 2 made me look at the machinery behind my own degree. I had to separate the science of how people learn from the steps for building a course, and at first it all felt like jargon: empiricism, rationalism, taxonomies, recipes. Mapping everything on one advance organizer changed that for me. These three ideas are not competing with each other. They sit in a line, from what happens inside a learner, to how a teacher can respond to it, to the workflow that gets a course built.</p>
+
+                    <h3 class="reflect-step"><span>02</span>So what?</h3>
+                    <p>The pianist example from McDonald (2024) hit close to home. In my HR work, handling recruitment, onboarding, and L&amp;D, repetition is how we survive. When I run an orientation block for new hires, I practice it over and over until the delivery is second nature. I don't rehearse to memorize the slides. I do it so I can handle the room without stumbling over my words when a new hire asks something I didn't plan for. Theory works the same way. We don't study behaviorism, cognitivism, and constructivism just to recite them in a forum post. We study them to build judgment, so we can tell whether a performance gap needs a simple, specific fix, like threading a needle (Christensen, 2021), or a longer educational effort.</p>
+
+                    <h3 class="reflect-step"><span>03</span>Now what?</h3>
+                    <p>From here on, this changes how I defend our training designs when people at work doubt them. Business leaders often see L&amp;D as a simple recipe that any admin staff can copy. Knowing these three layers lets me treat our onboarding as designed work. I can explain why a microlearning piece leans on behaviorist reinforcement, or why a role-play scenario is built on social constructivist scaffolding. Deadlines and office politics will keep pushing us to ship quick, surface-level courses. Treating theory as a toolbox (Christensen, 2021) keeps our longer training plans solid and easy to justify.</p>
+                `,
+                references: `
+                    <p class="reference">Becker, K. (2015). Learning theory vs. instructional theory vs. instructional design model. <i>The Becker Blog</i>. <a href="https://minkhollow.ca/beckerblog/2015/07/07/learning-theory-vs-instructional-theory-vs-instructional-design-model/">https://minkhollow.ca/beckerblog/2015/07/07/learning-theory-vs-instructional-theory-vs-instructional-design-model/</a></p>
+
+                    <p class="reference">Christensen, T. K. (2021). The role of theory in instructional design: Some views of an ID practitioner. In J. K. McDonald &amp; R. E. West (Eds.), <i>Design for learning: Principles, processes, and praxis</i> (pp. 221–231). EdTech Books. <a href="https://edtechbooks.org/id/the_role_of_theory">https://edtechbooks.org/id/the_role_of_theory</a></p>
+
+                    <p class="reference">Dousay, T. A. (2018). Instructional design models. In R. E. West (Ed.), <i>Foundations of learning and instructional design technology</i>. EdTech Books. <a href="https://edtechbooks.org/lidtfoundations/instructional_design_models">https://edtechbooks.org/lidtfoundations/instructional_design_models</a></p>
+
+                    <p class="reference">McDonald, J. K. (2024). Using theory as a learning and instructional design professional. In J. K. McDonald &amp; R. E. West (Eds.), <i>Design for learning: Principles, processes, and praxis</i> (pp. 245–253). EdTech Books. <a href="https://edtechbooks.org/id/future_views_of_theory_in_learning_and_instructional_design">https://edtechbooks.org/id/future_views_of_theory_in_learning_and_instructional_design</a></p>
+
+                    <p class="reference">Raible, J. (2020). Learning theories. In <i>Introduction to instructional design</i>. Pressbooks. <a href="https://pressbooks.pub/itec51602/chapter/learning-theories/">https://pressbooks.pub/itec51602/chapter/learning-theories/</a></p>
+
+                    <p class="reference">Reigeluth, C. M. (1999). What is instructional-design theory and how is it changing? In C. M. Reigeluth (Ed.), <i>Instructional-design theories and models: A new paradigm of instructional theory</i> (Vol. 2, pp. 5–29). Lawrence Erlbaum Associates. <a href="https://yunus.hacettepe.edu.tr/~htuzun/courses/bte116-2021-spring/Kutuphane/InstrDesignTheoryCh1.pdf">https://yunus.hacettepe.edu.tr/~htuzun/courses/bte116-2021-spring/Kutuphane/InstrDesignTheoryCh1.pdf</a></p>
+                `
             },
             'idt111-m3': {
                 course: 'idt111', locked: true,
