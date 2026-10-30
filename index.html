@@ -756,6 +756,65 @@
             margin-right: 0;
             transform: translateX(-50%);
         }
+        /* Theory matrix tables (Part I of IDT 111 Module 3): wide dark plates hung on the cream page */
+        .entry-part .essay-text > .matrix {
+            max-width: none;
+            width: min(72rem, calc(100vw - 4.5rem));
+            margin: 3rem 0 3.4rem 50%;
+            transform: translateX(-50%);
+        }
+        .matrix-head { margin-bottom: 1.1rem; }
+        .matrix-head .caption-label { margin-bottom: 0.5rem; }
+        .essay-text h3.matrix-title {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-weight: 400;
+            font-size: 1.55rem;
+            line-height: 1.25;
+            margin: 0;
+            text-transform: none;
+            letter-spacing: 0;
+            color: var(--text-cream-dark);
+            text-wrap: balance;
+        }
+        .matrix-plate {
+            background: linear-gradient(180deg, #121214 0%, var(--bg-ink) 100%);
+            box-shadow: 0 2px 4px rgba(20, 12, 6, 0.25), 0 36px 70px -28px rgba(20, 12, 6, 0.6);
+        }
+        .theory-matrix { width: 100%; border-collapse: collapse; table-layout: fixed; color: var(--text-primary); }
+        .theory-matrix thead th {
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            font-weight: 600;
+            text-align: left;
+            color: var(--accent-brass);
+            padding: 1.15rem 1.4rem;
+            background: var(--bg-canvas);
+            border-bottom: 1px solid var(--border-strong);
+        }
+        .theory-matrix th:nth-child(1) { width: 17%; }
+        .theory-matrix th:nth-child(2) { width: 27%; }
+        .theory-matrix th:nth-child(3) { width: 29%; }
+        .theory-matrix th:nth-child(4) { width: 27%; }
+        .theory-matrix tbody th, .theory-matrix tbody td {
+            vertical-align: top;
+            text-align: left;
+            padding: 1.5rem 1.4rem;
+            border-top: 1px solid var(--border-muted);
+            font-size: 1.02rem;
+            line-height: 1.55;
+            font-weight: 400;
+        }
+        .theory-matrix tbody tr:first-child th, .theory-matrix tbody tr:first-child td { border-top: none; }
+        .theory-matrix tbody th { background: rgba(156, 127, 104, 0.07); }
+        .mx-num { display: block; font-family: var(--font-sans); font-size: 0.72rem; letter-spacing: 0.2em; color: var(--accent-rustic); margin-bottom: 0.7rem; }
+        .mx-name { display: block; font-family: var(--font-serif); font-size: 1.65rem; font-weight: 500; line-height: 1.1; color: var(--text-primary); text-wrap: balance; }
+        .mx-sub { display: block; margin-top: 0.5rem; font-style: italic; font-size: 0.95rem; line-height: 1.35; color: var(--text-dim); }
+        .mx-label { display: block; font-family: var(--font-sans); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; color: var(--accent-brass); margin-bottom: 0.3rem; }
+        .mx-text { display: block; margin-bottom: 1rem; }
+        .mx-text:last-child { margin-bottom: 0; }
         .embed-actions {
             display: flex;
             justify-content: space-between;
@@ -1247,15 +1306,50 @@
                 `
             },
             'idt111-m3': {
-                course: 'idt111', locked: true,
+                course: 'idt111', locked: false,
                 tag: 'Pedagogy',
                 cardTitle: 'Learning Theories and Instructional Design',
-                summary: 'Managing friction, pedagogical paradigm shifts, and configurations inside modern curriculum structures.',
+                summary: 'Comparing six learning theories side by side, and matching each one to the learner and task it suits.',
                 heading: 'Learning Theories and <i>Instructional Design</i>',
                 image: 'battle.jpg',
                 artist: 'Joachim Wtewael', title: 'The Battle between the Gods and the Giants', year: 'c. 1592', museum: 'Musée du Louvre, Paris',
                 designCaption: 'An intensely fluid, chaotic Mannerist portrayal of dynamic forces colliding. Represents systemic friction, pedagogical paradigm shifts, and managing overwhelming cognitive load in complex educational interventions.',
-                essay: ``, outputs: ``
+                outputs: `
+                    <p class="output-caption"><span class="caption-label">Caption</span>These two tables sum up six learning theories through an instructional design lens. The first covers the three fundamental theories, and the second covers three other theories that I found relevant to a designer's work.</p>
+
+                    <div class="matrix"><div class="matrix-head"><span class="caption-label">Fundamental theories</span><h3 class="matrix-title">A. Summary of fundamental principles of various learning theories from the instructional design lens</h3></div><div class="matrix-plate"><table class="theory-matrix"><thead><tr><th scope="col">Learning Theory</th><th scope="col">Key Concepts and Assumptions</th><th scope="col">Strengths and Weaknesses</th><th scope="col">Applications in Instructional Design</th></tr></thead><tbody><tr><th scope="row" data-label="Learning Theory"><span class="mx-num">01</span><span class="mx-name">Behaviorism</span><span class="mx-sub">Learning as conditioned response</span></th><td data-label="Key Concepts and Assumptions">Learning is a change in observable behavior that comes from stimuli in the environment, reinforcement, and punishment. The mind is treated as a black box that can't be observed, and the learner picks up habits passively through stimulus-response links (National University, 2023; Ertmer &amp; Newby, 2018).</td><td data-label="Strengths and Weaknesses"><span class="mx-label">Strength</span><span class="mx-text">Expectations are clear, routines are predictable, and basic skills improve quickly (National University, 2023).</span><span class="mx-label">Weakness</span><span class="mx-text">It ignores what happens inside the learner's head, depends on outside rewards, and doesn't help with creative problem-solving (National University, 2023).</span></td><td data-label="Applications in Instructional Design">Works best for novice learners on low-processing tasks like facts, discriminations, and basic step-by-step procedures (Ertmer &amp; Newby, 2018). Typical tools are clear behavioral objectives, breaking tasks into steps, shaping, token economies, and drill and practice (G. McLeod, 2003; National University, 2023).</td></tr><tr><th scope="row" data-label="Learning Theory"><span class="mx-num">02</span><span class="mx-name">Cognitivism</span><span class="mx-sub">Learning as information processing</span></th><td data-label="Key Concepts and Assumptions">Learning is an internal mental process. Information is received, organized, stored, and retrieved. Raw input moves from the sensory register into working memory, and it only sticks once it is coded into schemas in long-term memory (Michela, 2020).</td><td data-label="Strengths and Weaknesses"><span class="mx-label">Strength</span><span class="mx-text">It is good at organizing complex subject areas and supports rule-based problem-solving that connects to what the learner already knows (Ertmer &amp; Newby, 2018; G. McLeod, 2003).</span><span class="mx-label">Weakness</span><span class="mx-text">It breaks down when the learner lacks the prerequisite schemas, and working memory gets overloaded under high cognitive load (G. McLeod, 2003; Michela, 2020).</span></td><td data-label="Applications in Instructional Design">Suits intermediate learners who need to apply rules and build organized knowledge (Ertmer &amp; Newby, 2018). Tools include advance organizers, chunking, visual analogies, cognitive task analysis, and presenting material in both visual and audio form to ease the load (Michela, 2020).</td></tr><tr><th scope="row" data-label="Learning Theory"><span class="mx-num">03</span><span class="mx-name">Constructivism</span><span class="mx-sub">Learning as meaning-making</span></th><td data-label="Key Concepts and Assumptions">Learning is an active process where people build their own meaning from situated experience. Knowledge is not a fixed truth to be handed over. It develops when learners face a conflict with what they believed and rework their views to fit the context (Karagiorgi &amp; Symeou, 2005; Ertmer &amp; Newby, 2018).</td><td data-label="Strengths and Weaknesses"><span class="mx-label">Strength</span><span class="mx-text">It builds higher-order reflective thinking, expert-level problem-solving, and a strong sense of ownership over learning (Ertmer &amp; Newby, 2018; Karagiorgi &amp; Symeou, 2005).</span><span class="mx-label">Weakness</span><span class="mx-text">Standards are hard to apply uniformly, and an open, unstructured setup can overwhelm novices who can't regulate their own learning (Karagiorgi &amp; Symeou, 2005; G. McLeod, 2003).</span></td><td data-label="Applications in Instructional Design">Fits expert learners working in complex, ill-structured, real-world areas (Ertmer &amp; Newby, 2018). Typical designs are cognitive apprenticeships, situated learning, multiple-perspective simulations, and collaborative problem-solving (Karagiorgi &amp; Symeou, 2005).</td></tr></tbody></table></div></div>
+
+                    <div class="matrix"><div class="matrix-head"><span class="caption-label">Additional theories</span><h3 class="matrix-title">Other Relevant Learning Theories</h3></div><div class="matrix-plate"><table class="theory-matrix"><thead><tr><th scope="col">Other Theory</th><th scope="col">Key Concepts and Assumptions</th><th scope="col">Strengths and Weaknesses</th><th scope="col">Applications in Instructional Design</th></tr></thead><tbody><tr><th scope="row" data-label="Other Theory"><span class="mx-num">04</span><span class="mx-name">Social Cognitive Theory</span><span class="mx-sub">Albert Bandura</span></th><td data-label="Key Concepts and Assumptions">People learn in a social setting by watching and modeling others, picking up behaviors, attitudes, and outcomes. Observational learning runs through four steps: attention, retention, motor reproduction, and motivation (S. McLeod, 2025).</td><td data-label="Strengths and Weaknesses"><span class="mx-label">Strength</span><span class="mx-text">It links outside conditioning with inner mental processing. Bandura's follow-up study showed that reinforcement changes what people choose to perform, not what they have actually learned (S. McLeod, 2025).</span><span class="mx-label">Weakness</span><span class="mx-text">It depends a lot on how high-status and relatable the model is (S. McLeod, 2025).</span></td><td data-label="Applications in Instructional Design">Used to build learner self-efficacy and confidence (S. McLeod, 2025). Designers can set up peer modeling, step-by-step mastery milestones, and relatable role models, for example during software nesting.</td></tr><tr><th scope="row" data-label="Other Theory"><span class="mx-num">05</span><span class="mx-name">Humanism</span><span class="mx-sub">Carl Rogers and Abraham Maslow</span></th><td data-label="Key Concepts and Assumptions">Learning is driven by a basic human need for self-actualization, emotional security, and personal growth. It is tied to emotional communication and individual choice, which separates empty memorization from significant, experiential learning (Jingna, 2012).</td><td data-label="Strengths and Weaknesses"><span class="mx-label">Strength</span><span class="mx-text">It puts the learner's emotional state, inner motivation, and creative freedom first (Jingna, 2012).</span><span class="mx-label">Weakness</span><span class="mx-text">It can lead to unguided, chaotic training, works against pre-set structured curricula, and downplays the instructor's expert guidance (Jingna, 2012).</span></td><td data-label="Applications in Instructional Design">Useful for onboarding tracks and self-directed learning paths. The designer acts as a facilitator who offers choices, builds emotional safety, and makes room for self-chosen projects and self-evaluation (Jingna, 2012; Oyarzun &amp; Conklin, 2021).</td></tr><tr><th scope="row" data-label="Other Theory"><span class="mx-num">06</span><span class="mx-name">Connectivism</span><span class="mx-sub">George Siemens</span></th><td data-label="Key Concepts and Assumptions">Learning is spread across a network of people and non-human systems. Knowledge does not sit only inside one person. It lives in the connections between information sources, databases, and online communities (Siemens, 2017).</td><td data-label="Strengths and Weaknesses"><span class="mx-label">Strength</span><span class="mx-text">It copes well with fast-changing information and aims to keep knowledge current (Siemens, 2017).</span><span class="mx-label">Weakness</span><span class="mx-text">It asks for strong digital literacy, and learners can get overwhelmed by information without good filtering skills (Siemens, 2017).</span></td><td data-label="Applications in Instructional Design">Fits ongoing corporate learning and complex digital platforms. Designers teach network curation, build accessible databases, and treat search engines and AI tools as extensions of thinking for just-in-time performance support (Siemens, 2017).</td></tr></tbody></table></div></div>
+                `,
+                essay: `
+                    <h3 class="reflect-step"><span>01</span>What?</h3>
+                    <p>Building this map made me stop seeing the six frameworks as separate textbook chapters. Putting the core ideas into rows showed me that learning design doesn't mean picking one camp. The module lays out a spectrum: behaviorism covers basic habits and muscle memory, cognitivism handles how people process rules, and constructivism, humanism, and connectivism cover real-world choices, emotional safety, and fast-changing digital networks (Oyarzun &amp; Conklin, 2021). It is also how I went through the readings. I took them as one strategic set. I pick up a useful idea from one theory, use it, remember it, and then move on to the next. I never treated them like philosophy schools, where sticking with Nietzsche supposedly means you can't take anything from Kant or Plato.</p>
+
+                    <h3 class="reflect-step"><span>02</span>So what?</h3>
+                    <p>As an HR professional handling recruitment and L&amp;D, I can finally explain why some of our training works and some doesn't. Our default mistake is giving every employee problem the same kind of training. When new recruitment hires struggle with compliance rules, we usually drill them with repetition and tests, which is behaviorist. But when the same people face a messy, unscripted candidate situation or a system overhaul in Regal and Salesforce, they get stuck, because drilling never built the mental schemas or problem-solving skills they need. A novice agent needs tight prompting and clear steps, while an experienced lead needs a constructivist or connectivist sandbox to work out their own answers (Ertmer &amp; Newby, 2018). Seeing that changed how I think about our onboarding.</p>
+
+                    <h3 class="reflect-step"><span>03</span>Now what?</h3>
+                    <p>From here on, I want to apply systematic eclecticism (Ertmer &amp; Newby, 2018) to how we build our L&amp;D programs. For our nesting tracks, I would plan a sequence: behaviorist star charts and prompt guides for basic Salesforce inputs, cognitivist chunking for system rules, and constructivist role-play for customer negotiations. Tight timelines and traditional management expectations will keep pushing for fast, cheap compliance courses. Having these theories behind me gives me solid reasons to design tracks around how people actually process, adjust to, and keep what they learn.</p>
+                `,
+                references: `
+                    <p class="reference">Ertmer, P. A., &amp; Newby, T. (2018). Behaviorism, cognitivism, constructivism: Comparing critical features from an instructional design perspective. In R. E. West (Ed.), <i>Foundations of learning and instructional design technology</i>. EdTech Books. <a href="https://edtechbooks.org/lidtfoundations/behaviorism_cognitivism_constructivism">https://edtechbooks.org/lidtfoundations/behaviorism_cognitivism_constructivism</a></p>
+
+                    <p class="reference">Jingna, D. U. (2012). Application of humanism theory in the teaching approach. <i>Higher Education of Social Science, 3</i>(1), 32–36. <a href="https://doi.org/10.3968/j.hess.1927024020120301.1593">https://doi.org/10.3968/j.hess.1927024020120301.1593</a></p>
+
+                    <p class="reference">Karagiorgi, Y., &amp; Symeou, L. (2005). Translating constructivism into instructional design: Potential and limitations. <i>Educational Technology &amp; Society, 8</i>(1), 17–27. <a href="https://www.jstor.org/stable/jeductechsoci.8.1.17">https://www.jstor.org/stable/jeductechsoci.8.1.17</a></p>
+
+                    <p class="reference">McLeod, G. (2003). Learning theory and instructional design. <i>Learning Matters, 2</i>, 35–43. <a href="https://eddl.tru.ca/wp-content/uploads/2021/02/McLeod_from-learningmatters02durh.pdf">https://eddl.tru.ca/wp-content/uploads/2021/02/McLeod_from-learningmatters02durh.pdf</a></p>
+
+                    <p class="reference">McLeod, S. (2025, October 16). Albert Bandura's social learning theory. <i>SimplyPsychology</i>. <a href="https://www.simplypsychology.org/bandura.html">https://www.simplypsychology.org/bandura.html</a></p>
+
+                    <p class="reference">Michela, E. (2020). Cognitivism. In R. Kimmons &amp; S. Caskurlu (Eds.), <i>The students' guide to learning design and research</i>. EdTech Books. <a href="https://edtechbooks.org/studentguide/cognitivism">https://edtechbooks.org/studentguide/cognitivism</a></p>
+
+                    <p class="reference">National University. (2023, August 17). <i>Behaviorism in education: What is behavioral learning theory?</i> <a href="https://www.nu.edu/blog/behaviorism-in-education/">https://www.nu.edu/blog/behaviorism-in-education/</a></p>
+
+                    <p class="reference">Oyarzun, B., &amp; Conklin, S. (2021). Learning theories. In J. K. McDonald &amp; R. E. West (Eds.), <i>Design for learning: Principles, processes, and praxis</i>. EdTech Books. <a href="https://edtechbooks.org/id/learning_theories">https://edtechbooks.org/id/learning_theories</a></p>
+
+                    <p class="reference">Siemens, G. (2017). Connectivism. In R. E. West (Ed.), <i>Foundations of learning and instructional design technology</i>. Pressbooks. <a href="https://pressbooks.pub/lidtfoundations/chapter/connectivism-a-learning-theory-for-the-digital-age/">https://pressbooks.pub/lidtfoundations/chapter/connectivism-a-learning-theory-for-the-digital-age/</a></p>
+                `
             },
             'idt111-m4': {
                 course: 'idt111', locked: true,
